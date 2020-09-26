@@ -10,40 +10,14 @@
 
 $(document).ready(function() {
 
-
-    const MusicBrainzApi = require('musicbrainz-api').MusicBrainzApi;
-
-    const mbApi = new MusicBrainzApi(config);
-
-    const config = {
-        
-        // API base URL, default: 'https://musicbrainz.org' (optional)
-        baseUrl: 'https://musicbrainz.org',
-      
-        appName: 'deep-cuts',
-        appVersion: '0.1.0',
-            
-        // Your e-mail address, required for submitting ISRCs
-        appMail: "jondeavers@gmail.com"
-      }
-
-      console.log(mbApi);
-
-
-    // const mbApi = new MusicBrainzApi({
-    //   appName: 'my-app',
-    //   appVersion: '0.1.0',
-    //   appContactInfo: 'user@mail.org'
-
-      
-    // });
-
-    
-
-
-
-
-
-
-
+    $.ajax({ 
+        type: 'GET', 
+        url: 'https://www.musicbrainz.org/ws/2/artist/?query=artist:michael jackson',
+        dataType: 'xml', 
+        success: function(xml){ 
+           $("artist", xml).each(function(){
+               console.log($("gender", this).text());
+           });
+        }
+    });
 })
