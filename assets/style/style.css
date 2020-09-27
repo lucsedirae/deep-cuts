@@ -4,11 +4,27 @@ html{
 
 body{
     height: 100vh;
-    background-image: linear-gradient(rgb(97, 23, 97), white);
-    background-repeat: no-repeat;
+    
     color: black;
+    /* background-image:linear-gradient(purple, white); */
+    background-image: url(../images/record-cherry.jpg);
+    background-position: center;
+
     
 }
+
+.record{
+    width: 35%;
+    height: 50%;
+    margin-bottom: 0% !important;
+}
+
+/* .record-div{
+    padding: 0;
+    margin-bottom: 0;
+    text-align: center;
+    margin-top: 50px;
+} */
 
 h1{
     font-family: 'Lobster', cursive;
@@ -29,14 +45,20 @@ h1{
 }
 
 .search-btn{
-    background-color: darkslategrey !important;
+    background-color: rgb(29, 12, 12) !important;
     text-transform: none;
     border-radius: 15px;
+
     
 }
 
 .main-content{
     margin-top: 200px;
+    margin-right: 250px !important;
+    color: rgb(29, 12, 12);
+    
+   
+    
 }
 
 
