@@ -5,10 +5,10 @@ html{
 body{
     height: 100vh;
     
-    color: black;
     /* background-image:linear-gradient(purple, white); */
     background-image: url(../images/record-cherry.jpg);
     background-position: center;
+    background-size: stretch;
 
     
 }
@@ -27,7 +27,9 @@ body{
 } */
 
 h1{
-    font-family: 'Lobster', cursive;
+    font-family: 'Play', sans-serif;
+    font-size: 40px;
+    letter-spacing: 5px;
 }
 
 
@@ -40,25 +42,40 @@ h1{
     font-size: 20px;
     font-weight: bold;
     margin: 20px;
-    border-radius: 15px;
+    border-radius: 6px;
     
 }
 
 .search-btn{
-    background-color: rgb(29, 12, 12) !important;
+    background-color: black !important;
     text-transform: none;
-    border-radius: 15px;
+    border-radius: 25px;
+}
 
-    
+.search-btn:hover{
+    transform: scale(1.2);
 }
 
 .main-content{
-    margin-top: 200px;
+    margin-top: 175px;
     margin-right: 250px !important;
     color: rgb(29, 12, 12);
     
    
     
+}
+
+@media only screen and (min-height: 800px){
+    .main-content{
+        margin-top: 250px;
+    }
+
+}
+
+@media only screen and (max-height: 500px){
+    .main-content{
+        margin-top: 50px;
+    }
 }
 
 
