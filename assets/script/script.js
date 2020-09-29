@@ -51,7 +51,7 @@ function populateInfoCard() {
   //***ISSUE*** currentArtistName is now being correctly printed to the DOM
   //***ISSUE*** not sure if it's a timing issue since the ajax call takes some time to respond
   console.log(artistObj.artist);
-  $("#info-card-title").val(currentArtistName);
+  $("#info-card-title").append(currentArtistName);
 }
 
 function storeArtist() {
