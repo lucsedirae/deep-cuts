@@ -20,7 +20,6 @@ $(document).ready(function () {
   //clicker function for search button//
   $(".search-btn").on("click", function (event) {
     event.preventDefault();
-    //JD changed var artist to currentArtistName
     //var currentArtistName stores user input
     //NOTE: this var is declared and initially defined in the api-calls.js
     currentArtistName = $(".searchTerm").val();
@@ -30,17 +29,36 @@ $(document).ready(function () {
     artistHistory.push(currentArtistName);
     storeArtist();
 
-    //JD added function populateInfoCard 9/28
-    populateInfoCard();
+    //calling populateMainInfo()
+    //At this point populateInfoCard can be deprecated and so I am removing the function call and replacing
+    populateMainInfo();
 
-    //JD added input clear 9/28
     $("#input").val("");
     console.log(artistHistory);
   });
-
 });
 
-//JD added function populateInfoCard 9/28
+//populateMainInfo
+//The idea of this function is to replace existing data in the main-content class with dynamic information
+//from the API calls instead of calling a completely separate element. Leaving populateCardInfo() in place
+//for now until this function is working correctly
+function populateMainInfo() {
+  $(".main-content").empty();
+  callMusicBrainzAPI();
+  wikipediaSearch();
+  $(".main-content")
+    .hide()
+    .append(
+      "<h1 class='card-title' type='text' id='info-card-title'>" +
+        currentArtistName +
+        "</h1>",
+      "<a href='#'><i class='fab fa-youtube fa-3x'></i></a>",
+      "<a href='#'><i class='fas fa-info-circle fa-3x'></i></a>",
+      "<a href='#'><i class='fab fa-spotify fa-3x'></i></a>"
+    )
+    .fadeIn(800);
+}
+
 //populateInfoCard() changes the visibility of the hidden card element in html using an 800ms fadeIn
 function populateInfoCard() {
   $("#info-card").hide().css("visibility", "visible").fadeIn(800);
@@ -57,8 +75,6 @@ function populateInfoCard() {
 function storeArtist() {
   localStorage.setItem("artistHistory", JSON.stringify(artistHistory));
 }
-
-
 
 //temporarily commented out, will re-implement in pop ups
 //function renderButtons() {
