@@ -13,58 +13,61 @@
 //$('#search-btn').on('click', function (event) {...//
 //above == rought pseudo code//
 
-
-// var artistName = $('.searchTerm').val();
-var artistHistory = []
-
+var artistHistory = [];
 
 $(document).ready(function () {
-    $('.search-btn').on('click', function (event) {
-        event.preventDefault();
-        var artist = $('.searchTerm').val();
-        if (artist === '') {
-            return;
-        }
-        artistHistory.push(artist)
-        storeArtist();
-        renderButtons();
-        findArtist(artist);
-        // console.log(artistHistory)
-    });
+  // defaultSearch();
+  //clicker function for search button//
+  $(".search-btn").on("click", function (event) {
+    event.preventDefault();
+    //JD changed var artist to currentArtistName
+    //var currentArtistName stores user input
+    //NOTE: this var is declared and initially defined in the api-calls.js
+    currentArtistName = $(".searchTerm").val();
+    if (currentArtistName === "") {
+      return;
+    }
+    artistHistory.push(currentArtistName);
+    storeArtist();
+
+    //JD added function populateInfoCard 9/28
+    populateInfoCard();
+
+    //JD added input clear 9/28
+    $("#input").val("");
+    console.log(artistHistory);
+  });
+
 });
 
+//JD added function populateInfoCard 9/28
+//populateInfoCard() changes the visibility of the hidden card element in html using an 800ms fadeIn
+function populateInfoCard() {
+  $("#info-card").hide().css("visibility", "visible").fadeIn(800);
+  callMusicBrainzAPI();
+
+  //writes data from artistObj to #info-card
+  //NOTE: artistObj is initially declared and defined in the api-calls.js
+  //***ISSUE*** currentArtistName is now being correctly printed to the DOM
+  //***ISSUE*** not sure if it's a timing issue since the ajax call takes some time to respond
+  console.log(artistObj.artist);
+  $("#info-card-title").val(currentArtistName);
+}
+
 function storeArtist() {
-    localStorage.setItem('artistHistory', JSON.stringify(artistHistory));
+  localStorage.setItem("artistHistory", JSON.stringify(artistHistory));
 }
 
-function renderButtons() {
-    $('.searchHistory').html('');
-    for (var i = 0; i < artistHistory.length; i++) {
-        var artists = artistHistory[i];
-        var historyBtn = $(
-            '<button type="button" class="btn btn-lg btn-block historyBtn text-white">'
-        ).text(artists);
-        $('.searchHistory').append(historyBtn);
-    }
 }
 
-function findArtist() {
-    var artist = $('.searchTerm').val();
-
-    $.ajax({
-        url: "http://musicbrainz.org/ws/2/artist/?query=artist:"+artist+"&fmt=json",
-        method: "GET"
-    }).then(function(results){
-        //Index of results.artists can be iterated through at a later date to improve dynamics
-        var resArt = results.artists[0];
-    
-        artistObj = {
-            artist: resArt['name'],
-            activeFrom: resArt['life-span'].begin,
-            activeTo: resArt['life-span'].end,
-            genre: resArt.tags[0]
-        }
-        console.log(results);
-        console.log(artistObj);
-    });
+//temporarily commented out, will re-implement in pop ups
+//function renderButtons() {
+//    $('.searchHistory').html('');
+//    for (var i = 0; i < artistHistory.length; i++) {
+//        var artists = artistHistory[i];
+//        var historyBtn = $(
+//            '<button type="button" class="btn btn-lg btn-block historyBtn text-white">'
+//        ).text(artists);
+//        $('.searchHistory').append(historyBtn);
+//    }
 }

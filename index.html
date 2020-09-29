@@ -1,36 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Deep Cuts</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="assets/style/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="assets/style/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
+  <body>
+    //Testing, testing, 1, 2 ,3
 
-  
-  
-  <div class="container">
-    <div class="row">
-        <div class="col 12 s12 center-align main-content">
-          <h1>Pitch <span><i class="fas fa-headphones"></i></span></h1>
+    <div class="container">
+      <div class="row">
+        <div class="col m12 center-align main-content">
+          <h1>Deep Cuts</h1>
           <h6>An intuitive guide to help you navigate the world of music</h6>
-          <input type="text" class="searchTerm" id="input">
-          <br>
-          <a class="waves-effect waves-light btn-large search-btn">Find a Band!</a>
+          <!-- JD added placeholder 9/28 -->
+          <input
+            type="text"
+            class="searchTerm"
+            id="input"
+            placeholder="Enter Artist Name"
+          />
+          <br />
+          <a class="waves-effect waves-light btn-large search-btn"
+            >Find Your Band!</a
+          >
+        </div>
+      </div>
+    </div>
+    <!--JD Added new row , col and card element to HTML 9/28
+NOTE: this element is styled with a default visibility value of "hidden" in style.css
+It is dynamically made visible in the script.js on search-btn click-->
+    <div class="row">
+      <div class="col s12 m6">
+        <div class="card blue-grey darken-1" id="info-card">
+          <div class="card-content white-text">
+            <!-- The span value of currentArtistName below is just placeholder text identifying where 
+            ***ISSUE*** noted in script.js should be printing the object's artist value to DOM 
+            Same is true for the paragraph value. p to be replaced with an ordered list once jquery is corrected-->
+            <span class="card-title" type="text" id="info-card-title"
+              >currentArtistName</span
+            >
+            <p>
+              I love cheese, especially smelly cheese cheddar. Bavarian bergkase
+              cauliflower cheese rubber cheese manchego cheddar boursin feta
+              stilton. Queso cauliflower cheese pepper jack halloumi jarlsberg
+              cheese triangles cheesy feet the big cheese. Bavarian bergkase st.
+              agur blue cheese chalk and cheese boursin cheese and biscuits
+              everyone loves red leicester jarlsberg. Cauliflower cheese danish
+              fontina danish fontina cheese and biscuits cow manchego lancashire
+              queso. Blue castello edam danish fontina dolcelatte boursin smelly
+              cheese mascarpone fromage. Cut the cheese fromage blue castello
+              pecorino the big cheese queso airedale mozzarella. Edam when the
+              cheese comes out everybody's happy cream cheese squirty cheese
+              stinking bishop stilton.
+            </p>
+          </div>
+          <div class="card-action">
+            <a href="#">This is a link</a>
+            <a href="#">This is a link</a>
+          </div>
         </div>
       </div>
     </div>
 
-    
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script src="./assets/script/api-calls.js"></script>
-  <script src="./assets/script/script.js" async defer></script>
-</body>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+    <!-- JD removed old bootstrap script calls 9/28 -->
+
+    <!--JD linked api-calls.js to HTML body 9/28
+  NOTE: This load order of script files is important to maintain. 
+  script.js can refer to variables living in api-calls.js -->
+    <script src="./assets/script/api-calls.js"></script>
+    <script src="./assets/script/script.js" async defer></script>
+  </body>
 </html>
+
