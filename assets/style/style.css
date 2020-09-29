@@ -6,7 +6,8 @@ body {
   height: 100vh;
 
   /* background-image:linear-gradient(purple, white); */
-  background-image: url(../images/back.jpg);
+  /* JD reduced img quality to improve load time 9/29. New version is back3.jpg. Original back.jpg still in assets */
+  background-image: url(../images/back3.jpg);
   background-position: center;
   background-size: cover;
 }
