@@ -16,6 +16,8 @@
 var artistHistory = [];
 
 $(document).ready(function () {
+  //calls function that appends default HTML to DOM
+  populateMainSearch();
   // defaultSearch();
   //clicker function for search button//
   $(".search-btn").on("click", function (event) {
@@ -40,6 +42,22 @@ $(document).ready(function () {
   });
 });
 
+//JD 9/29 Created populateMainSearch()
+//populateMainSearch() populates the search section of the site. This is the default view on load and so
+//function is called during page initialization as well as on nav click
+function populateMainSearch() {
+  $(".main-content").empty();
+  $(".main-content")
+    .hide()
+    .append(
+      "<h1 id='site-header'>pitch<span><i class='fas fa-compact-disc'></i></span></h1>",
+      "<h6>An intuitive guide to help you navigate the world of music</h6>",
+      "<input type='text' class='searchTerm' id='input' placeholder='Enter Artist Name'/><br />",
+      "<a class='waves-effect waves-light btn-large search-btn'>Find Your Band!</a>"
+    )
+    .fadeIn(800);
+}
+
 //populateMainInfo
 //The idea of this function is to replace existing data in the main-content class with dynamic information
 //from the API calls instead of calling a completely separate element. Leaving populateCardInfo() in place
@@ -56,7 +74,9 @@ function populateMainInfo() {
         "</h1>",
       "<a href='#'><i class='fab fa-youtube fa-3x'></i></a>",
       "<a href='#'><i class='fas fa-info-circle fa-3x'></i></a>",
-      "<a href='#'><i class='fab fa-spotify fa-3x'></i></a>"
+      "<a href='#'><i class='fab fa-spotify fa-3x'></i></a>",
+      "<a href='#'><i class='fas fa-list-alt fa-3x'></i></a>",
+      "<a href='#'><i class='fas fa-search fa-3x'></i></a>"
     )
     .fadeIn(800);
 }
