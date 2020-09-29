@@ -12,26 +12,46 @@
 //when album info button is clicked, api is called to populate album info//
 //$('#search-btn').on('click', function (event) {...//
 
-var artistHistory = []
-
+var artistHistory = [];
 
 $(document).ready(function () {
-    // defaultSearch();
-    //clicker function for search button//
-    $('.search-btn').on('click', function (event) {
-        event.preventDefault();
-        var artist = $('.searchTerm').val();
-        if (artist === '') {
-            return;
-        }
-        artistHistory.push(artist)
-        storeArtist();
-        // renderButtons();
-        // weatherGenerator(city);
-        console.log(artistHistory)
-    });
+  // defaultSearch();
+  //clicker function for search button//
+  $(".search-btn").on("click", function (event) {
+    event.preventDefault();
+    //JD changed var artist to currentArtistName
+    //var currentArtistName stores user input
+    //NOTE: this var is declared and initially defined in the api-calls.js
+    currentArtistName = $(".searchTerm").val();
+    if (currentArtistName === "") {
+      return;
+    }
+    artistHistory.push(currentArtistName);
+    storeArtist();
+
+    //JD added function populateInfoCard 9/28
+    populateInfoCard();
+
+    //JD added input clear 9/28
+    $("#input").val("");
+    console.log(artistHistory);
+  });
 });
 
+//JD added function populateInfoCard 9/28
+//populateInfoCard() changes the visibility of the hidden card element in html using an 800ms fadeIn
+function populateInfoCard() {
+  $("#info-card").hide().css("visibility", "visible").fadeIn(800);
+  callMusicBrainzAPI();
+
+  //writes data from artistObj to #info-card
+  //NOTE: artistObj is initially declared and defined in the api-calls.js
+  //***ISSUE*** currentArtistName is now being correctly printed to the DOM
+  //***ISSUE*** not sure if it's a timing issue since the ajax call takes some time to respond
+  console.log(artistObj.artist);
+  $("#info-card-title").val(currentArtistName);
+}
+
 function storeArtist() {
-    localStorage.setItem('artistHistory', JSON.stringify(artistHistory));
+  localStorage.setItem("artistHistory", JSON.stringify(artistHistory));
 }
