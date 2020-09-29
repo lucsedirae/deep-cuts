@@ -33,6 +33,8 @@ $(document).ready(function () {
     //JD added function populateInfoCard 9/28
     populateInfoCard();
 
+    youtubeAPI()
+
     //JD added input clear 9/28
     $("#input").val("");
     console.log(artistHistory);
