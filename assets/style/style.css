@@ -2,16 +2,21 @@ html {
   height: 100%;
 }
 
-body {
+body{
   height: 100vh;
-  background-image: linear-gradient(rgb(97, 23, 97), white);
-  background-repeat: no-repeat;
-  color: black;
+  
+  /* background-image:linear-gradient(purple, white); */
+  background-image: url(../images/record.jpg);
+  background-position: center;
+  background-size: stretch;
 }
+
+
+
 
 /* JD added site-header id to increase specificity and correct font style not loading 9/28 */
 #site-header {
-  font-family: "Lobster", cursive;
+  font-family: 'DM Serif Display', serif;
 }
 
 #input {
@@ -33,19 +38,11 @@ Sets default value of card class to hidden */
 }
 
 .search-btn {
-  background-color: darkslategrey !important;
+  background-color: black !important;
   text-transform: none;
   border-radius: 15px;
   }
 
-body{
-    height: 100vh;
-    
-    /* background-image:linear-gradient(purple, white); */
-    background-image: url(../images/record.jpg);
-    background-position: center;
-    background-size: stretch;
-}
 
 .record{
     width: 35%;
@@ -61,6 +58,7 @@ body{
 } */
 
 h1{
+    /* TK changed font 9/29 */
     font-family: 'Play', sans-serif;
     font-size: 40px;
     letter-spacing: 5px;
@@ -78,22 +76,16 @@ h1{
     
 }
 
-.search-btn{
-    background-color: black !important;
-    text-transform: none;
-    border-radius: 25px;
-}
+
 
 .search-btn:hover{
     transform: scale(1.2);
 }
 
 .main-content{
-    margin-top: 175px;
+    margin-top: 16rem !important;
     margin-right: 250px !important;
     color: rgb(29, 12, 12);
-    
-   
     
 }
 
@@ -111,6 +103,3 @@ h1{
   
 }
 
-.main-content {
-  margin-top: 200px;
-}
