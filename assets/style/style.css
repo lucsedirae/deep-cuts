@@ -9,7 +9,8 @@ body {
   color: black;
 }
 
-h1 {
+/* JD added site-header id to increase specificity and correct font style not loading 9/28 */
+#site-header {
   font-family: "Lobster", cursive;
 }
 
@@ -28,6 +29,7 @@ h1 {
 Sets default value of card class to hidden */
 .card {
   visibility: hidden;
+  z-index: 10;
 }
 
 .search-btn {
@@ -40,7 +42,7 @@ body{
     height: 100vh;
     
     /* background-image:linear-gradient(purple, white); */
-    background-image: url(../images/record-cherry.jpg);
+    background-image: url(../images/record.jpg);
     background-position: center;
     background-size: stretch;
 }
