@@ -13,6 +13,7 @@ var artistObj = {};
 //call url https://musicbrainz.org/ws/2/
 //docs https://musicbrainz.org/doc/MusicBrainz_API/Search
 //musicbrainz api call
+
 function callMusicBrainzAPI() {
   $.ajax({
     url:

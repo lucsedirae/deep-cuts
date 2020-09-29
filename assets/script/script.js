@@ -11,6 +11,7 @@
 //$('#search-btn').on('click', function (event) {...//
 //when album info button is clicked, api is called to populate album info//
 //$('#search-btn').on('click', function (event) {...//
+//above == rought pseudo code//
 
 var artistHistory = [];
 
@@ -36,6 +37,7 @@ $(document).ready(function () {
     $("#input").val("");
     console.log(artistHistory);
   });
+
 });
 
 //JD added function populateInfoCard 9/28
@@ -54,4 +56,18 @@ function populateInfoCard() {
 
 function storeArtist() {
   localStorage.setItem("artistHistory", JSON.stringify(artistHistory));
+}
+
+}
+
+//temporarily commented out, will re-implement in pop ups
+//function renderButtons() {
+//    $('.searchHistory').html('');
+//    for (var i = 0; i < artistHistory.length; i++) {
+//        var artists = artistHistory[i];
+//        var historyBtn = $(
+//            '<button type="button" class="btn btn-lg btn-block historyBtn text-white">'
+//        ).text(artists);
+//        $('.searchHistory').append(historyBtn);
+//    }
 }
