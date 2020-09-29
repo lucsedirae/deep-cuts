@@ -43,7 +43,7 @@ function callMusicBrainzAPI() {
 //YOUTUBE API
 //Google credentials API key: AIzaSyAWvi6Cb4U2R4VzJSEPftX7y3xVUJESaIw
 //<script src="https://apis.google.com/js/api.js"></script>//
-
+function youtubeAPI() {
 function authenticate() {
   return gapi.auth2.getAuthInstance()
       .signIn({scope: "https://www.googleapis.com/auth/youtube.force-ssl"})
@@ -51,7 +51,7 @@ function authenticate() {
             function(err) { console.error("Error signing in", err); });
 }
 function loadClient() {
-  gapi.client.setApiKey("YOUR_API_KEY");
+  gapi.client.setApiKey("AIzaSyAWvi6Cb4U2R4VzJSEPftX7y3xVUJESaI");
   return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
       .then(function() { console.log("GAPI client loaded for API"); },
             function(err) { console.error("Error loading GAPI client for API", err); });
@@ -72,8 +72,9 @@ function execute() {
             function(err) { console.error("Execute error", err); });
 }
 gapi.load("client:auth2", function() {
-  gapi.auth2.init({client_id: "YOUR_CLIENT_ID"});
+  gapi.auth2.init({client_id: "http://127.0.0.1:5501/index.html"});
 });
+}
 
 
 //SPOTIFY/SHAZAM API
