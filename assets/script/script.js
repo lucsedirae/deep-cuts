@@ -58,7 +58,7 @@ function storeArtist() {
   localStorage.setItem("artistHistory", JSON.stringify(artistHistory));
 }
 
-}
+
 
 //temporarily commented out, will re-implement in pop ups
 //function renderButtons() {
@@ -70,4 +70,3 @@ function storeArtist() {
 //        ).text(artists);
 //        $('.searchHistory').append(historyBtn);
 //    }
-}
