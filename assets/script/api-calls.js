@@ -16,7 +16,7 @@ var artistObj = {};
 function callMusicBrainzAPI() {
   $.ajax({
     url:
-      "http://musicbrainz.org/ws/2/artist/?query=artist:" +
+      "https://musicbrainz.org/ws/2/artist/?query=artist:" +
       currentArtistName +
       "&fmt=json",
     method: "GET",
@@ -89,7 +89,7 @@ function execute() {
     );
 }
 gapi.load("client:auth2", function () {
-  gapi.auth2.init({ client_id: "YOUR_CLIENT_ID" });
+  gapi.auth2.init({ client_id: "http://127.0.0.1:5501/index.html" });
 });
 
 function youtubeAPI() {
