@@ -2,22 +2,17 @@ html {
   height: 100%;
 }
 
-body{
+body {
   height: 100vh;
-  
+
   /* background-image:linear-gradient(purple, white); */
-  background-image: url(../images/back.jpg);
+  /* JD reduced img quality to improve load time 9/29. New version is back3.jpg. Original back.jpg still in assets */
+  background-image: url(../images/back3.jpg);
   background-position: center;
   background-size: cover;
-  
 }
 
-
-
-
-/* JD added site-header id to increase specificity and correct font style not loading 9/28 */
 #site-header {
-  
 }
 
 #input {
@@ -31,24 +26,32 @@ body{
   border-radius: 15px;
 }
 
-/* JD added .card class to css file 9/28
-Sets default value of card class to hidden */
+/*Sets default value of card class to hidden */
 .card {
   visibility: hidden;
   z-index: 10;
+}
+
+.fas {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.fab {
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .search-btn {
   background-color: rgba(233, 159, 49, 0.904) !important;
   text-transform: none;
   border-radius: 15px;
-  }
+}
 
-
-.record{
-    width: 35%;
-    height: 50%;
-    margin-bottom: 0% !important;
+.record {
+  width: 35%;
+  height: 50%;
+  margin-bottom: 0% !important;
 }
 
 /* .record-div{
@@ -58,40 +61,35 @@ Sets default value of card class to hidden */
     margin-top: 50px;
 } */
 
-h1{
-    /* TK changed font 9/29 */
-    font-family: 'Orbitron', sans-serif;
-    font-size: 40px;
-    letter-spacing: 5px;
+h1 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 40px;
+  letter-spacing: 5px;
 }
 
-#input{
-    background-color: white;
-    border-bottom: none;
-    width:40%;
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-    margin: 20px;
-    border-radius: 6px;
-    
+#input {
+  background-color: white;
+  border-bottom: none;
+  width: 40%;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 20px;
+  border-radius: 6px;
 }
 
-
-
-.search-btn:hover{
-    transform: scale(1.1);
+.search-btn:hover {
+  transform: scale(1.1);
 }
 
-.main-content{
-    margin-top: 16rem !important;
-    color: rgb(29, 12, 12);
-    background-color: rgba(226, 218, 210, 0.801);
-    padding: 20px !important;
-    border-radius: 10px;
-    /* border: 2px solid grey; */
-    box-shadow: 0px 0px 20px 8px rgba(10, 10, 9, 0.37);
-    
+.main-content {
+  margin-top: 16rem !important;
+  color: rgb(29, 12, 12);
+  background-color: rgba(226, 218, 210, 0.801);
+  padding: 20px !important;
+  border-radius: 10px;
+  /* border: 2px solid grey; */
+  box-shadow: 0px 0px 20px 8px rgba(10, 10, 9, 0.37);
 }
 
 /* @media only screen and (min-height: 800px){
@@ -107,4 +105,3 @@ h1{
     }
   
 } */
-
