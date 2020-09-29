@@ -33,6 +33,10 @@ function callMusicBrainzAPI() {
     };
     // console.log(results);
     console.log(artistObj);
+    console.log(results)
+
+    $("#info-card-title").empty()
+    $("#info-card-title").append(resArt["name"] + " : " + resArt.tags[0].name)
   });
 }
 
@@ -46,3 +50,31 @@ function callMusicBrainzAPI() {
 //youtube api key AIzaSyAWvi6Cb4U2R4VzJSEPftX7y3xVUJESaIw
 //call url https://www.googleapis.com/youtube/v3/search
 //documentation https://developers.google.com/youtube/v3/docs
+
+
+//mediawiki API call//
+
+function wikipediaSearch() {
+
+var url = "https://en.wikipedia.org/w/api.php"; 
+
+var params = {
+    action: "query",
+    list: "search",
+    srsearch: $(".searchTerm").val(),
+    format: "json"
+};
+
+url = url + "?origin=*";
+Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
+
+fetch(url)
+    .then(function(response){return response.json();})
+    .then(function(response) {
+        console.log(response)
+        var infoSnippet = response.query.search[0].snippet
+        $('#card-info').empty()
+        $('#card-info').append(infoSnippet)
+    })
+    .catch(function(error){console.log(error);});
+  }
