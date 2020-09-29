@@ -45,13 +45,13 @@ $(document).ready(function () {
 function populateInfoCard() {
   $("#info-card").hide().css("visibility", "visible").fadeIn(800);
   callMusicBrainzAPI();
-
+  wikipediaSearch();
   //writes data from artistObj to #info-card
   //NOTE: artistObj is initially declared and defined in the api-calls.js
   //***ISSUE*** currentArtistName is now being correctly printed to the DOM
   //***ISSUE*** not sure if it's a timing issue since the ajax call takes some time to respond
   console.log(artistObj.artist);
-  $("#info-card-title").append(currentArtistName);
+  // $("#info-card-title").append(currentArtistName);
 }
 
 function storeArtist() {
