@@ -45,7 +45,7 @@ function callMusicBrainzAPI() {
 
 function youtubeAPI () {
   $.ajax({
-    url: "https://www.googleapis.com/youtube/v3/search?q=nirvana&key=AIzaSyAYrNxKe4mIXCg9zDRqt9hw6wT8fW6oGYc",
+    url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=5&q=Nirvana&key=AIzaSyAYrNxKe4mIXCg9zDRqt9hw6wT8fW6oGYc",
     method: "GET"
 }).then(function (response) {
   console.log(response)
