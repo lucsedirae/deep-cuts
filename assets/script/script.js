@@ -1,4 +1,6 @@
-var artistHistory = [];
+/* var artistHistory = []; */
+// TK 9/30
+var artistHistory = JSON.parse(localStorage.getItem("artistHistory")) || [];
 
 //initialization function
 $(document).ready(function () {
@@ -14,9 +16,12 @@ $(document).ready(function () {
     currentArtistName = $(".searchTerm").val();
     if (currentArtistName === "") {
       return;
+      // TK 9/30: else if statement checking to see if artist name is already in the array.  If not, it will be added. 
+    } else if (artistHistory.indexOf(currentArtistName) === -1){
+      artistHistory.push(currentArtistName);
+      storeArtist();
     }
-    artistHistory.push(currentArtistName);
-    storeArtist();
+    
 
     //calling populateMainInfo()
     //At this point populateInfoCard can be deprecated and so I am removing the function call and replacing
