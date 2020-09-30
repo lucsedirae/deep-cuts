@@ -84,11 +84,15 @@ $(document).ready(function () {
     callYoutubeAPI();
     $(".main-content").empty();
     populateMenu();
+    
     $(".main-content").append(
       "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
         videoId +
         "'></iframe>"
     );
+      // TK 9/30 -- added a style attribute to knock the .main-content DIV up a bit 
+    $(".main-content").attr("style", "margin-top: 9rem !important");
+
   }
 
   function storeArtist() {
