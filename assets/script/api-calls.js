@@ -88,9 +88,9 @@ function execute() {
       }
     );
 }
-gapi.load("client:auth2", function () {
-  gapi.auth2.init({ client_id: "YOUR_CLIENT_ID" });
-});
+  // gapi.load("client:auth2", function () {
+  //   gapi.auth2.init({ client_id: "YOUR_CLIENT_ID" });
+  // });
 
 function youtubeAPI() {
 function authenticate() {

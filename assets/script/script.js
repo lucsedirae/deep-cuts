@@ -34,12 +34,12 @@ $(document).ready(function () {
     //calling populateMainInfo()
     //At this point populateInfoCard can be deprecated and so I am removing the function call and replacing
     populateMainInfo();
-    youtubeAPI()
 
-    //JD added input clear 9/28
     $("#input").val("");
     console.log(artistHistory);
   });
+
+  $("#youtube-btn").on("click", populateMainYoutube);
 });
 
 //JD 9/29 Created populateMainSearch()
@@ -72,26 +72,35 @@ function populateMainInfo() {
       "<h1 class='card-title' type='text' id='info-card-title'>" +
         currentArtistName +
         "</h1>",
-      "<a href='#'><i class='fab fa-youtube fa-3x'></i></a>",
-      "<a href='#'><i class='fas fa-info-circle fa-3x'></i></a>",
-      "<a href='#'><i class='fab fa-spotify fa-3x'></i></a>",
-      "<a href='#'><i class='fas fa-list-alt fa-3x'></i></a>",
-      "<a href='#'><i class='fas fa-search fa-3x'></i></a>"
+      "<i class='fab fa-youtube fa-3x' id='youtube-btn'></i></a>",
+      "<i class='fas fa-info-circle fa-3x' id='info-btn'></i></a>",
+      "<i class='fab fa-spotify fa-3x' id='spotify-btn'></i></a>",
+      "<i class='fas fa-list-alt fa-3x' id='history-btn'></i></a>",
+      "<i class='fas fa-search fa-3x' id='search-nav-btn'></i></a>"
     )
     .fadeIn(800);
 }
 
-//populateInfoCard() changes the visibility of the hidden card element in html using an 800ms fadeIn
-function populateInfoCard() {
-  $("#info-card").hide().css("visibility", "visible").fadeIn(800);
-  callMusicBrainzAPI();
-  wikipediaSearch();
-  //writes data from artistObj to #info-card
-  //NOTE: artistObj is initially declared and defined in the api-calls.js
-  //***ISSUE*** currentArtistName is now being correctly printed to the DOM
-  //***ISSUE*** not sure if it's a timing issue since the ajax call takes some time to respond
-  console.log(artistObj.artist);
-  // $("#info-card-title").append(currentArtistName);
+function populateMainYoutube() {
+  $(".main-content").empty();
+  //***Insert function for YouTube api call***
+
+  $(".main-content")
+    .hide()
+    .append(
+      "<h1 class='card-title' type='text' id='info-card-title'>" +
+        currentArtistName +
+        "</h1>",
+      "<iframe id='ytplayer' type='text/html' width='640' height='360' src='https://www.youtube.com/embed?listType=search&list=" +
+        currentArtistName +
+        "' frameborder='0'></iframe>",
+      "<i class='fab fa-youtube fa-3x' id='youtube-btn'></i></a>",
+      "<i class='fas fa-info-circle fa-3x' id='info-btn'></i></a>",
+      "<i class='fab fa-spotify fa-3x' id='spotify-btn'></i></a>",
+      "<i class='fas fa-list-alt fa-3x' id='history-btn'></i></a>",
+      "<i class='fas fa-search fa-3x' id='search-nav-btn'></i></a>"
+    )
+    .fadeIn(800);
 }
 
 function storeArtist() {
