@@ -58,7 +58,7 @@ function authenticate() {
     );
 }
 function loadClient() {
-  gapi.client.setApiKey("YOUR_API_KEY");
+  gapi.client.setApiKey("AIzaSyAWvi6Cb4U2R4VzJSEPftX7y3xVUJESaIw");
   return gapi.client
     .load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
     .then(

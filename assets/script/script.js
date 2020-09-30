@@ -34,13 +34,15 @@ $(document).ready(function () {
     //calling populateMainInfo()
     //At this point populateInfoCard can be deprecated and so I am removing the function call and replacing
     populateMainInfo();
+    // populateMainYoutube();
 
     $("#input").val("");
     console.log(artistHistory);
   });
 
-  $("#youtube-btn").on("click", populateMainYoutube);
-});
+  //replace this idea with scrollTo links
+  // $("#youtube-btn").on("click", populateMainYoutube);
+
 
 //JD 9/29 Created populateMainSearch()
 //populateMainSearch() populates the search section of the site. This is the default view on load and so
@@ -107,6 +109,7 @@ function storeArtist() {
   localStorage.setItem("artistHistory", JSON.stringify(artistHistory));
 }
 
+});
 //temporarily commented out, will re-implement in pop ups
 //function renderButtons() {
 //    $('.searchHistory').html('');
