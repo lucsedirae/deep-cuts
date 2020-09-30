@@ -1,6 +1,7 @@
-var currentArtistName = "nirvana";
+var currentArtistName = "";
 var artistList = [];
 var artistObj = {};
+var videoId = "";
 
 //BANDSINTOWN API
 //bandsintown api url, api key & documentation link
@@ -43,13 +44,20 @@ function callMusicBrainzAPI() {
 //Google credentials API key: AIzaSyAWvi6Cb4U2R4VzJSEPftX7y3xVUJESaIw
 //<script src="https://apis.google.com/js/api.js"></script>//
 
-function youtubeAPI () {
+function callYoutubeAPI() {
   $.ajax({
-    url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=5&q=Nirvana&key=AIzaSyAYrNxKe4mIXCg9zDRqt9hw6wT8fW6oGYc",
-    method: "GET"
-}).then(function (response) {
-  console.log(response)
-})}
+    //***ISSUE!!*** url has nirvana hardcoded in and so the results are always nirvana no matter what the currentArtistName is
+    url:
+      "https://www.googleapis.com/youtube/v3/search?video?maxResults=5&q=nirvana&key=AIzaSyAYrNxKe4mIXCg9zDRqt9hw6wT8fW6oGYc",
+    method: "GET",
+  }).then(function (response) {
+    //JD 9/29
+    //retrieves video id from response obj
+    videoId = response.items[1].id.videoId;
+    console.log(response);
+    console.log("videoId: " + videoId);
+  });
+}
 // function authenticate() {
 //   return gapi.auth2
 //     .getAuthInstance()
@@ -94,9 +102,9 @@ function execute() {
       }
     );
 }
-  // gapi.load("client:auth2", function () {
-  //   gapi.auth2.init({ client_id: "YOUR_CLIENT_ID" });
-  // });
+// gapi.load("client:auth2", function () {
+//   gapi.auth2.init({ client_id: "YOUR_CLIENT_ID" });
+// });
 
 // function youtubeAPI() {
 // function authenticate() {
