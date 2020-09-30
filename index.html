@@ -1,15 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css">
-  <link rel="stylesheet" href="style.css">
- 
-  <title>Deep Cuts</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- JD 9/29 spiced up the title a bit and replaced "Deep Cuts" -->
+    <title>Pitch - listening with knowledge</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="assets/style/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+  </head>
 
+<<<<<<< HEAD
    <div class="column">
      <div class="columns is-mobile is-centered">
        <div class="column is-three-quarters">
@@ -95,8 +113,57 @@
       </article>
     </div>
   </div>
+=======
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="offset-l3 col l7 center-align main-content">
+          <!-- <h1 id="site-header">
+            pitch<span><i class="fas fa-compact-disc"></i></span>
+          </h1>
+          <h6>An intuitive guide to help you navigate the world of music</h6>
+          <input
+            type="text"
+            class="searchTerm"
+            id="input"
+            placeholder="Enter Artist Name"
+          />
+          <br />
+          <a class="waves-effect waves-light btn-large search-btn"
+            >Find Your Band!</a
+          > -->
+        </div>
+      </div>
+    </div>
 
+    <!-- NOTE: this element is styled with a default visibility value of "hidden" in style.css
+    It is dynamically made visible in the script.js on search-btn click-->
+    <!-- <div class="row">
+      <div class="col s12 m6">
+        <div class="card blue-grey darken-1" id="info-card">
+          <div class="card-content white-text">
+            <!-- The span value of currentArtistName below is just placeholder text identifying where 
+            ***ISSUE*** noted in script.js should be printing the object's artist value to DOM 
+            Same is true for the paragraph value. p to be replaced with an ordered list once jquery is corrected-->
+    <!-- <span class="card-title" type="text" id="info-card-title"></span>
+            <p id="card-info"></p>
+          </div>
+          <div class="card-action">
+            <a href="#">This is a link</a>
+            <a href="#">This is a link</a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+>>>>>>> f5a9ca4b1e5389b3dc71602ca21da53c542a2156
 
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+
+<<<<<<< HEAD
 
 
 
@@ -115,3 +182,13 @@
   <script src="./assets/script/script.js" async defer></script>
 </body>
 </html>
+=======
+    <!-- NOTE: This load order of script files is important to maintain.  -->
+    <!-- script.js can refer to variables living in api-calls.js -->
+    -->
+    <script src="./assets/script/api-calls.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="./assets/script/script.js" async defer></script>
+  </body>
+</html>
+>>>>>>> f5a9ca4b1e5389b3dc71602ca21da53c542a2156
