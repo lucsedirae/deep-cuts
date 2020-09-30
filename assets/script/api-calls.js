@@ -16,7 +16,7 @@ var artistObj = {};
 function callMusicBrainzAPI() {
   $.ajax({
     url:
-      "http://musicbrainz.org/ws/2/artist/?query=artist:" +
+      "https://musicbrainz.org/ws/2/artist/?query=artist:" +
       currentArtistName +
       "&fmt=json",
     method: "GET",
