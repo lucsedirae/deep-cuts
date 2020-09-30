@@ -1,8 +1,9 @@
-var currentArtistName = "";
+var currentArtistName = $(".searchTerm").val();
 var artistList = [];
 var artistObj = {};
 var videoId = "";
-
+//api keys: AIzaSyAYrNxKe4mIXCg9zDRqt9hw6wT8fW6oGYc, AIzaSyBs1UbG6uKN4uWlNo0WeK40hCXno9YmAjI//
+var youtubeURL = "https://www.googleapis.com/youtube/v3/search?video?maxResults=5&q=" + currentArtistName + "&key=AIzaSyBs1UbG6uKN4uWlNo0WeK40hCXno9YmAjI"
 //BANDSINTOWN API
 //bandsintown api url, api key & documentation link
 //call url https://rest.bandsintown.com/artists/{{artist_name}}/?app_id=yOUrSuP3r3ven7aPp-id
@@ -47,8 +48,7 @@ function callMusicBrainzAPI() {
 function callYoutubeAPI() {
   $.ajax({
     //***ISSUE!!*** url has nirvana hardcoded in and so the results are always nirvana no matter what the currentArtistName is
-    url:
-      "https://www.googleapis.com/youtube/v3/search?video?maxResults=5&q=nirvana&key=AIzaSyAYrNxKe4mIXCg9zDRqt9hw6wT8fW6oGYc",
+    url: youtubeURL,
     method: "GET",
   }).then(function (response) {
     //JD 9/29
