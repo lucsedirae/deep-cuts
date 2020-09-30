@@ -34,8 +34,7 @@ $(document).ready(function () {
     //calling populateMainInfo()
     //At this point populateInfoCard can be deprecated and so I am removing the function call and replacing
     populateMainInfo();
-    // populateMainYoutube();
-
+    youtubeAPI()
     $("#input").val("");
     console.log(artistHistory);
   });
