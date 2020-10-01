@@ -104,6 +104,14 @@ h1 {
   box-shadow: 0px 0px 18px 2px #f2a441;
 }
 
+button {
+  display: inline-block;
+  cursor: pointer; 
+  border: 0px solid #3498db; 
+  background-color: transparent; 
+}
+
+
 /* @media only screen and (min-height: 800px){
     .main-content{
         margin-top: 250px;

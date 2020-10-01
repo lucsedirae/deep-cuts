@@ -27,7 +27,7 @@ $(document).ready(function () {
     );
     for (var i = 0; i < artistHistoryCache.length; i++) {
       $("#history-list").append(
-        "<li class='prev-search'>" + artistHistoryCache[i] + "</li>"
+        "<li class='prev-search'>" + artistHistoryCache[i] + "<span><button class='trash'><i class='fa fa-trash' aria-hidden='true'></i></buton></span>" + "</li>"
       );
     }
     $(".prev-search").on("click", function () {
@@ -95,8 +95,8 @@ $(document).ready(function () {
     activateListeners();
     $(".main-content").append(
       "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
-        videoId +
-        "'></iframe>"
+      videoId +
+      "'></iframe>"
     );
     // TK 9/30 -- added a style attribute to knock the .main-content DIV up a bit
     $(".main-content").attr("style", "margin-top: 9rem !important");
@@ -122,3 +122,10 @@ $(document).ready(function () {
     localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache));
   }
 });
+
+
+$(".trash").on("click", function () {
+  $("li").empty()
+})
+
+
