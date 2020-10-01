@@ -13,59 +13,10 @@ var youtubeURL =
 //call url https://rest.bandsintown.com/artists/{{artist_name}}/?app_id=yOUrSuP3r3ven7aPp-id
 //docs https://artists.bandsintown.com/support/public-api?_ga=2.110307469.924392.1601057589-666678079.1600528655
 
-//MUSICBRAINZ API
-//musicbrainz documentation link and call url (no api key required)
-//call url https://musicbrainz.org/ws/2/
-//docs https://musicbrainz.org/doc/MusicBrainz_API/Search
-//musicbrainz api call
-function callMusicBrainzAPI() {
-  $.ajax({
-    url:
-      "https://musicbrainz.org/ws/2/artist/?query=artist:" +
-      currentArtistName +
-      "&fmt=json",
-    method: "GET",
-  }).then(function (results) {
-    //Index of results.artists can be iterated through at a later date to improve dynamics
-    var resArt = results.artists[0];
+function callBandsInTownAPI() {
 
-    artistObj.artist = resArt["name"];
-    artistObj.activeFrom = resArt["life-span"].begin;
-    artistObj.activeTo = resArt["life-span"].end;
-    artistObj.genre = resArt.tags[0].name;
-    artistObj.origin = resArt.area.name;
-
-    // artistObj = {
-    //   artist: resArt["name"],
-    //   activeFrom: resArt["life-span"].begin,
-    //   activeTo: resArt["life-span"].end,
-    //   genre: resArt.tags[0],
-    // };
-
-    $(".main-content").append(
-      "<br><div class='row'></div><div class='col s12' id='info-box'>Name: " +
-        artistObj.artist +
-        "</div>"
-    );
-    $(".main-content").append(
-      "<br><div class='row'></div><div class='col s12' id='info-box'>Years active: " +
-        artistObj.activeFrom +
-        " until " +
-        artistObj.activeTo +
-        "</div>"
-    );
-    $(".main-content").append(
-      "<br><div class='row'></div><div class='col s12' id='info-box'>Genre: " +
-        artistObj.genre +
-        "</div>"
-    );
-    $(".main-content").append(
-      "<br><div class='row'></div><div class='col s12' id='info-box'>Origin: " +
-        artistObj.origin +
-        "</div>"
-    );
-  });
 }
+
 
 //YOUTUBE API
 //Google credentials API key: AIzaSyAWvi6Cb4U2R4VzJSEPftX7y3xVUJESaIw
