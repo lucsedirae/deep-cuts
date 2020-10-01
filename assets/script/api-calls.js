@@ -13,6 +13,7 @@ var youtubeURL =
 //call url https://rest.bandsintown.com/artists/{{artist_name}}/?app_id=yOUrSuP3r3ven7aPp-id
 //docs https://artists.bandsintown.com/support/public-api?_ga=2.110307469.924392.1601057589-666678079.1600528655
 
+<<<<<<< HEAD
 //MUSICBRAINZ API
 //musicbrainz documentation link and call url (no api key required)
 //call url https://musicbrainz.org/ws/2/
@@ -70,7 +71,12 @@ function callMusicBrainzAPI() {
         "</div>"
     );
   });
+=======
+function callBandsInTownAPI() {
+
+>>>>>>> 949799a4f83da4855ae90eae04f665bc031a5d62
 }
+
 
 //YOUTUBE API
 //Google credentials API key: AIzaSyAWvi6Cb4U2R4VzJSEPftX7y3xVUJESaIw
