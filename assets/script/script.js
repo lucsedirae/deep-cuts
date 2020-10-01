@@ -26,11 +26,13 @@ $(document).ready(function () {
       "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>"
     );
     for (var i = 0; i < artistHistoryCache.length; i++) {
-      $("#history-list").append("<li class='prev-search'>" + artistHistoryCache[i] + "</li>");
+      $("#history-list").append(
+        "<li class='prev-search'>" + artistHistoryCache[i] + "</li>"
+      );
     }
-    $(".prev-search").on("click", function(){
+    $(".prev-search").on("click", function () {
       currentArtistName = $(this).text();
-      console.log("test"+currentArtistName)
+      console.log("test" + currentArtistName);
       populateMainInfo();
     });
   }
@@ -42,7 +44,9 @@ $(document).ready(function () {
     wikipediaSearch();
     populateMenu();
     activateListeners();
-    $(".main-content").append("<br><div class='col s3'></div><div class='col s6' id='info-box'>Test</div>");
+    $(".main-content").append(
+      "<br><div class='col s3'></div><div class='col s6' id='info-box'>Test</div>"
+    );
   }
 
   //populateMainSearch() populates the search section of the site. This is the default view on load and so

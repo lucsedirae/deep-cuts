@@ -36,8 +36,8 @@ function callMusicBrainzAPI() {
       genre: resArt.tags[0],
     };
     // console.log(results);
-    console.log("artistObj: "+artistObj);
-    console.log("raw ajax results: "+results);
+    console.log("artistObj: " + artistObj);
+    console.log("raw ajax results: " + results);
 
     $("#info-card-title").empty();
     $("#info-card-title").append(resArt["name"] + " : " + resArt.tags[0].name);
