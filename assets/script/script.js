@@ -1,4 +1,6 @@
-var artistHistory = [];
+/* var artistHistory = []; */
+// TK 9/30
+var artistHistory = JSON.parse(localStorage.getItem("artistHistory")) || [];
 
 //JD 9/30 Reorganized functions by alphabetical order to make searching them easier for reader
 //initialization function
@@ -79,6 +81,9 @@ $(document).ready(function () {
         videoId +
         "'></iframe>"
     );
+      // TK 9/30 -- added a style attribute to knock the .main-content DIV up a bit 
+    $(".main-content").attr("style", "margin-top: 9rem !important");
+
   }
 
   //Appends nav icons to DOM
