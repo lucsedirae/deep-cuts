@@ -13,6 +13,16 @@ var youtubeURL =
 //call url https://rest.bandsintown.com/artists/{{artist_name}}/?app_id=yOUrSuP3r3ven7aPp-id
 //docs https://artists.bandsintown.com/support/public-api?_ga=2.110307469.924392.1601057589-666678079.1600528655
 
+function callBandsInTownAPI() {
+
+}
+
+
+
+
+
+
+
 //MUSICBRAINZ API
 //musicbrainz documentation link and call url (no api key required)
 //call url https://musicbrainz.org/ws/2/
@@ -34,6 +44,9 @@ function callMusicBrainzAPI() {
     artistObj.activeTo = resArt["life-span"].end;
     artistObj.genre = resArt.tags[0].name;
     artistObj.origin = resArt.area.name;
+
+
+    // return artistObj;
 
     // artistObj = {
     //   artist: resArt["name"],
