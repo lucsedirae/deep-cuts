@@ -12,9 +12,6 @@ body {
   background-size: cover;
 }
 
-#site-header {
-}
-
 #history-list {
   margin-top: 2rem;
   background-color: whitesmoke;
@@ -22,6 +19,10 @@ body {
   height: 10rem;
   overflow-y: scroll;
   overflow-x: auto;
+}
+
+#info-box {
+  margin-top: 2rem;
 }
 
 #input {
@@ -51,8 +52,17 @@ body {
   margin-right: 1rem;
 }
 
+/* JD 9/30 Added cursor:pointer to nav-btns */
+.nav-btn {
+  cursor: pointer;
+}
+
+.prev-search {
+  cursor: pointer;
+}
+
 .search-btn {
-  background-color: #F2A441 !important;
+  background-color: #f2a441 !important;
   text-transform: none;
   border-radius: 15px;
 }
@@ -62,8 +72,6 @@ body {
   height: 50%;
   margin-bottom: 0% !important;
 }
-
-
 
 h1 {
   font-family: "Orbitron", sans-serif;
@@ -86,18 +94,15 @@ h1 {
   transform: scale(1.1);
 }
 
-.main-content{
-    margin-top: 16rem !important;
-    color: rgb(29, 12, 12);
-    background-color: rgba(226, 218, 210, 0.801);
-    padding: 20px !important;
-    border-radius: 10px;
-    /* border: 2px solid #F2A441; */
-    box-shadow: 0px 0px 18px 2px #F2A441;
+.main-content {
+  margin-top: 16rem !important;
+  color: rgb(29, 12, 12);
+  background-color: rgba(226, 218, 210, 0.801);
+  padding: 20px !important;
+  border-radius: 10px;
+  /* border: 2px solid #F2A441; */
+  box-shadow: 0px 0px 18px 2px #f2a441;
 }
-
-
-    
 
 /* @media only screen and (min-height: 800px){
     .main-content{
