@@ -1,8 +1,12 @@
-var currentArtistName = "";
+var currentArtistName = $(".searchTerm").val();
 var artistList = [];
 var artistObj = {};
 var videoId = "";
-
+//api keys: AIzaSyAYrNxKe4mIXCg9zDRqt9hw6wT8fW6oGYc, AIzaSyBs1UbG6uKN4uWlNo0WeK40hCXno9YmAjI//
+var youtubeURL =
+  "https://www.googleapis.com/youtube/v3/search?video?maxResults=5&q=" +
+  currentArtistName +
+  "&key=AIzaSyBs1UbG6uKN4uWlNo0WeK40hCXno9YmAjI";
 //BANDSINTOWN API
 //bandsintown api url, api key & documentation link
 //call url https://rest.bandsintown.com/artists/{{artist_name}}/?app_id=yOUrSuP3r3ven7aPp-id
@@ -32,8 +36,8 @@ function callMusicBrainzAPI() {
       genre: resArt.tags[0],
     };
     // console.log(results);
-    console.log(artistObj);
-    console.log(results);
+    console.log("artistObj: "+artistObj);
+    console.log("raw ajax results: "+results);
 
     $("#info-card-title").empty();
     $("#info-card-title").append(resArt["name"] + " : " + resArt.tags[0].name);
@@ -47,8 +51,7 @@ function callMusicBrainzAPI() {
 function callYoutubeAPI() {
   $.ajax({
     //***ISSUE!!*** url has nirvana hardcoded in and so the results are always nirvana no matter what the currentArtistName is
-    url:
-      "https://www.googleapis.com/youtube/v3/search?video?maxResults=5&q=nirvana&key=AIzaSyAYrNxKe4mIXCg9zDRqt9hw6wT8fW6oGYc",
+    url: youtubeURL,
     method: "GET",
   }).then(function (response) {
     //JD 9/29
@@ -102,6 +105,39 @@ function execute() {
       }
     );
 }
+
+//mediawiki API call//
+
+function wikipediaSearch() {
+  var url = "https://en.wikipedia.org/w/api.php";
+
+  var params = {
+    action: "query",
+    list: "search",
+    srsearch: $(".searchTerm").val(),
+    format: "json",
+  };
+
+  url = url + "?origin=*";
+  Object.keys(params).forEach(function (key) {
+    url += "&" + key + "=" + params[key];
+  });
+
+  fetch(url)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (response) {
+      console.log(response);
+      var infoSnippet = response.query.search[0].snippet;
+      $("#card-info").empty();
+      $("#card-info").append(infoSnippet);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
 // gapi.load("client:auth2", function () {
 //   gapi.auth2.init({ client_id: "YOUR_CLIENT_ID" });
 // });
@@ -146,35 +182,3 @@ function execute() {
 //youtube api key AIzaSyAWvi6Cb4U2R4VzJSEPftX7y3xVUJESaIw
 //call url https://www.googleapis.com/youtube/v3/search
 //documentation https://developers.google.com/youtube/v3/docs
-
-//mediawiki API call//
-
-function wikipediaSearch() {
-  var url = "https://en.wikipedia.org/w/api.php";
-
-  var params = {
-    action: "query",
-    list: "search",
-    srsearch: $(".searchTerm").val(),
-    format: "json",
-  };
-
-  url = url + "?origin=*";
-  Object.keys(params).forEach(function (key) {
-    url += "&" + key + "=" + params[key];
-  });
-
-  fetch(url)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (response) {
-      console.log(response);
-      var infoSnippet = response.query.search[0].snippet;
-      $("#card-info").empty();
-      $("#card-info").append(infoSnippet);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-}
