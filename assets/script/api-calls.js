@@ -2,7 +2,8 @@ var currentArtistName = $(".searchTerm").val();
 var artistList = [];
 var artistObj = {};
 var videoId = "";
-//api keys: AIzaSyAYrNxKe4mIXCg9zDRqt9hw6wT8fW6oGYc, AIzaSyBs1UbG6uKN4uWlNo0WeK40hCXno9YmAjI//
+
+//api keys: AIzaSyAYrNxKe4mIXCg9zDRqt9hw6wT8fW6oGYc, AIzaSyBs1UbG6uKN4uWlNo0WeK40hCXno9YmAjI, //
 var youtubeURL =
   "https://www.googleapis.com/youtube/v3/search?video?maxResults=5&q=" +
   currentArtistName +
@@ -17,7 +18,6 @@ var youtubeURL =
 //call url https://musicbrainz.org/ws/2/
 //docs https://musicbrainz.org/doc/MusicBrainz_API/Search
 //musicbrainz api call
-
 function callMusicBrainzAPI() {
   $.ajax({
     url:
@@ -29,18 +29,41 @@ function callMusicBrainzAPI() {
     //Index of results.artists can be iterated through at a later date to improve dynamics
     var resArt = results.artists[0];
 
-    artistObj = {
-      artist: resArt["name"],
-      activeFrom: resArt["life-span"].begin,
-      activeTo: resArt["life-span"].end,
-      genre: resArt.tags[0],
-    };
-    // console.log(results);
-    console.log("artistObj: "+artistObj);
-    console.log("raw ajax results: "+results);
+    artistObj.artist = resArt["name"];
+    artistObj.activeFrom = resArt["life-span"].begin;
+    artistObj.activeTo = resArt["life-span"].end;
+    artistObj.genre = resArt.tags[0].name;
+    artistObj.origin = resArt.area.name;
 
-    $("#info-card-title").empty();
-    $("#info-card-title").append(resArt["name"] + " : " + resArt.tags[0].name);
+    // artistObj = {
+    //   artist: resArt["name"],
+    //   activeFrom: resArt["life-span"].begin,
+    //   activeTo: resArt["life-span"].end,
+    //   genre: resArt.tags[0],
+    // };
+
+    $(".main-content").append(
+      "<br><div class='row'></div><div class='col s12' id='info-box'>Name: " +
+        artistObj.artist +
+        "</div>"
+    );
+    $(".main-content").append(
+      "<br><div class='row'></div><div class='col s12' id='info-box'>Years active: " +
+        artistObj.activeFrom +
+        " until " +
+        artistObj.activeTo +
+        "</div>"
+    );
+    $(".main-content").append(
+      "<br><div class='row'></div><div class='col s12' id='info-box'>Genre: " +
+        artistObj.genre +
+        "</div>"
+    );
+    $(".main-content").append(
+      "<br><div class='row'></div><div class='col s12' id='info-box'>Origin: " +
+        artistObj.origin +
+        "</div>"
+    );
   });
 }
 
@@ -49,16 +72,20 @@ function callMusicBrainzAPI() {
 //<script src="https://apis.google.com/js/api.js"></script>//
 
 function callYoutubeAPI() {
+  var currentArtistName = $(".searchTerm").val();
+
   $.ajax({
     //***ISSUE!!*** url has nirvana hardcoded in and so the results are always nirvana no matter what the currentArtistName is
-    url: youtubeURL,
+    url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=5&q=" +
+    currentArtistName +
+    "&key=AIzaSyBs1UbG6uKN4uWlNo0WeK40hCXno9YmAjI",
     method: "GET",
   }).then(function (response) {
     //JD 9/29
     //retrieves video id from response obj
     videoId = response.items[1].id.videoId;
-    console.log(response);
-    console.log("videoId: " + videoId);
+    // console.log(response);
+    // console.log("videoId: " + videoId);
   });
 }
 // function authenticate() {
@@ -98,10 +125,10 @@ function execute() {
     .then(
       function (response) {
         // Handle the results here (response.result has the parsed body).
-        console.log("Response", response);
+        // console.log("Response", response);
       },
       function (err) {
-        console.error("Execute error", err);
+        // console.error("Execute error", err);
       }
     );
 }
@@ -128,13 +155,13 @@ function wikipediaSearch() {
       return response.json();
     })
     .then(function (response) {
-      console.log(response);
+      // console.log(response);
       var infoSnippet = response.query.search[0].snippet;
       $("#card-info").empty();
       $("#card-info").append(infoSnippet);
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
 }
 

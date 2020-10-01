@@ -26,11 +26,13 @@ $(document).ready(function () {
       "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>"
     );
     for (var i = 0; i < artistHistoryCache.length; i++) {
-      $("#history-list").append("<li class='prev-search'>" + artistHistoryCache[i] + "</li>");
+      $("#history-list").append(
+        "<li class='prev-search'>" + artistHistoryCache[i] + "</li>"
+      );
     }
-    $(".prev-search").on("click", function(){
+    $(".prev-search").on("click", function () {
       currentArtistName = $(this).text();
-      console.log("test"+currentArtistName)
+      // console.log("test" + currentArtistName);
       populateMainInfo();
     });
   }
@@ -39,10 +41,15 @@ $(document).ready(function () {
   //populateMainInfo replaces search html with Info html. Also called from nav icons
   function populateMainInfo() {
     $(".main-content").empty();
+    callMusicBrainzAPI();
     wikipediaSearch();
     populateMenu();
     activateListeners();
-    $(".main-content").append("<br><div class='col s3'></div><div class='col s6' id='info-box'>Test</div>");
+
+    // The HTML appends are not functioning in this function.
+    // $(".main-content").append(
+    //   "<br><div class='col s3'></div><div class='col s6' id='info-box'>Name: "+artistObj.artist+"</div>",
+    // );
   }
 
   //populateMainSearch() populates the search section of the site. This is the default view on load and so
@@ -79,12 +86,10 @@ $(document).ready(function () {
       
       
 
-      //calling populateMainInfo()
-      callMusicBrainzAPI();
       callYoutubeAPI();
       populateMainInfo();
       $("#input").val("");
-      console.log("history" + artistHistory);
+      // console.log("history" + artistHistory);
     });
   }
 
