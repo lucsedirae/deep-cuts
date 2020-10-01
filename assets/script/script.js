@@ -18,7 +18,7 @@ $(document).ready(function () {
   //populates main-content with a scrollable history list of previously searched artists
   function populateMainHistory() {
     $(".main-content").empty();
-
+    //Pass in "My Artists" as header for History Page : TK 10/1 
     populateMenu(currentArtistName = "My Artists");
     activateListeners();
     $(".main-content").append(
