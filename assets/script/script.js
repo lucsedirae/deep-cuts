@@ -20,7 +20,8 @@ $(document).ready(function () {
   //populates main-content with a scrollable history list of previously searched artists
   function populateMainHistory() {
     $(".main-content").empty();
-    populateMenu();
+
+    populateMenu(currentArtistName = "My Artists");
     activateListeners();
     $(".main-content").append(
       "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>"
