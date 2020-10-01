@@ -3,7 +3,7 @@ var artistList = [];
 var artistObj = {};
 var videoId = "";
 
-//api keys: AIzaSyAYrNxKe4mIXCg9zDRqt9hw6wT8fW6oGYc, AIzaSyBs1UbG6uKN4uWlNo0WeK40hCXno9YmAjI//
+//api keys: AIzaSyAYrNxKe4mIXCg9zDRqt9hw6wT8fW6oGYc, AIzaSyBs1UbG6uKN4uWlNo0WeK40hCXno9YmAjI, //
 var youtubeURL =
   "https://www.googleapis.com/youtube/v3/search?video?maxResults=5&q=" +
   currentArtistName +
@@ -72,9 +72,13 @@ function callMusicBrainzAPI() {
 //<script src="https://apis.google.com/js/api.js"></script>//
 
 function callYoutubeAPI() {
+  var currentArtistName = $(".searchTerm").val();
+
   $.ajax({
     //***ISSUE!!*** url has nirvana hardcoded in and so the results are always nirvana no matter what the currentArtistName is
-    url: youtubeURL,
+    url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=5&q=" +
+    currentArtistName +
+    "&key=AIzaSyBs1UbG6uKN4uWlNo0WeK40hCXno9YmAjI",
     method: "GET",
   }).then(function (response) {
     //JD 9/29
