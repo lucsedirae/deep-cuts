@@ -189,16 +189,26 @@ $(document).ready(function () {
       //retrieves video id from response obj
       videoId = response.items[1].id.videoId;
       // console.log(response);
-      // console.log("videoId: " + videoId);
+      console.log("videoId: " + videoId);
+      $(".main-content").empty();
+      populateMenu();
+      activateListeners();
+      console.log("videoId: " + videoId);
+      $(".main-content").append(
+        "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
+        videoId +
+        "'></iframe>"
+      );
     });
-    $(".main-content").empty();
-    populateMenu();
-    activateListeners();
-    $(".main-content").append(
-      "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
-      videoId +
-      "'></iframe>"
-    );
+    // $(".main-content").empty();
+    // populateMenu();
+    // activateListeners();
+    // console.log("videoId: " + videoId);
+    // $(".main-content").append(
+    //   "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
+    //   videoId +
+    //   "'></iframe>"
+    // );
     // TK 9/30 -- added a style attribute to knock the .main-content DIV up a bit
     $(".main-content").attr("style", "margin-top: 9rem !important");
   }
