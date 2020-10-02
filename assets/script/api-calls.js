@@ -18,9 +18,9 @@ var youtubeURL =
 function callBandsInTownAPI() {
   $.ajax({
     url:
-    "https://rest.bandsintown.com/artists/" +
-    currentArtistName +
-    "/events/?app_id=451417d0c04a068bd2475d36b0555961",
+      "https://rest.bandsintown.com/artists/" +
+      currentArtistName +
+      "/events/?app_id=451417d0c04a068bd2475d36b0555961",
 
     // "https://cors-anywhere.herokuapp.com/https://rest.bandsintown.com/artists/" +
     // currentArtistName +
@@ -160,10 +160,7 @@ function wikipediaSearch() {
 //               console.log("Response", response);
 //             },
 //             function(err) { console.error("Execute error", err); });
-// }
-// gapi.load("client:auth2", function() {
-//   gapi.auth2.init({client_id: "http://127.0.0.1:5501/index.html"});
-// });
+// }+ i +"
 // }
 
 //SPOTIFY/SHAZAM API

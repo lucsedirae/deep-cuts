@@ -53,7 +53,7 @@ body {
 }
 
 /* JD 9/30 Added cursor:pointer to nav-btns */
-.nav-btn {
+.navi-btn {
   cursor: pointer;
 }
 
@@ -77,6 +77,10 @@ h1 {
   font-family: "Orbitron", sans-serif;
   font-size: 40px;
   letter-spacing: 5px;
+}
+
+h4 {
+  font-family: "Orbitron", sans-serif;
 }
 
 #input {
@@ -104,6 +108,41 @@ h1 {
   box-shadow: 0px 0px 18px 2px #f2a441;
 }
 
+.trash {
+  display: inline-block;
+  cursor: pointer;
+  border: 0px solid #3498db;
+  background-color: transparent;
+}
+
+.home-btn {
+  font-size: 25px;
+  transition: ease-in 0.2s;
+}
+
+.home-btn:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  color: #f2a441;
+}
+
+#youtube-btn,
+#info-btn,
+#search-nav-btn,
+#history-btn
+#tour-btn {
+  transition: ease-in 0.2s;
+}
+
+#youtube-btn:hover,
+#info-btn:hover,
+#search-nav-btn:hover,
+#history-btn:hover,
+#tour-btn {
+  transform: scale(1.1);
+  color: #f2a441;
+}
+
 /* @media only screen and (min-height: 800px){
     .main-content{
         margin-top: 250px;
@@ -117,3 +156,109 @@ h1 {
     }
   
 } */
+
+/* This is the hamburger Menu CSS 10/1 */
+
+.nav {
+  -webkit-transition: left 0.5s ease;
+  -moz-transition: left 0.5s ease;
+  -ms-transition: left 0.5s ease;
+  -o-transition: left 0.5s ease;
+  transition: left 0.5s ease;
+  background: black;
+  color: white;
+  cursor: pointer;
+  font-size: 2rem;
+  height: 100vh;
+  left: -20rem;
+  padding: 6rem 2rem 2rem 2rem;
+  position: fixed;
+  top: 0;
+  width: 20rem;
+  z-index: 1;
+}
+
+.nav.expanded {
+  left: 0;
+}
+
+.nav ul {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-toggle {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  height: 2rem;
+  left: 2rem;
+  position: fixed;
+  top: 2rem;
+  width: 3.6rem;
+  z-index: 2;
+}
+
+.nav-toggle:hover {
+  opacity: 0.8;
+}
+
+.nav-toggle .nav-toggle-bar,
+.nav-toggle .nav-toggle-bar::after,
+.nav-toggle .nav-toggle-bar::before {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  background: white;
+  content: "";
+  height: 0.4rem;
+  width: 100%;
+}
+
+.nav-toggle .nav-toggle-bar {
+  margin-top: 0;
+}
+
+.nav-toggle .nav-toggle-bar::after {
+  margin-top: 0.8rem;
+}
+
+.nav-toggle .nav-toggle-bar::before {
+  margin-top: -0.8rem;
+}
+
+.nav-toggle.expanded .nav-toggle-bar {
+  background: transparent;
+}
+
+.nav-toggle.expanded .nav-toggle-bar::after,
+.nav-toggle.expanded .nav-toggle-bar::before {
+  background: white;
+  margin-top: 0;
+}
+
+.nav-toggle.expanded .nav-toggle-bar::after {
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.nav-toggle.expanded .nav-toggle-bar::before {
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
