@@ -63,12 +63,13 @@ $(document).ready(function () {
   
   
   
-  
+          //these can be used for a clear all button//
         // localStorage.clear()
         // $("#history-list").empty
-        // artistHistoryCache.splice("jQuery.data('i')", 1)
       });
     }
+
+    
   //JD 9/30 Moved menu population into it's own function to dry out code
   //populateMainInfo replaces search html with Info html. Also called from nav icons
   function populateMainInfo() {
