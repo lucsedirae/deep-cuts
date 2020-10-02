@@ -196,10 +196,7 @@ function wikipediaSearch() {
 //               console.log("Response", response);
 //             },
 //             function(err) { console.error("Execute error", err); });
-// }
-// gapi.load("client:auth2", function() {
-//   gapi.auth2.init({client_id: "http://127.0.0.1:5501/index.html"});
-// });
+// }+ i +"
 // }
 
 //SPOTIFY/SHAZAM API

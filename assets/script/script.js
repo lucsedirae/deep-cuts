@@ -27,9 +27,29 @@ $(document).ready(function () {
     );
     for (var i = 0; i < artistHistoryCache.length; i++) {
       $("#history-list").append(
-        "<li class='prev-search'>" + artistHistoryCache[i] + "<span><button class='trash'><i class='fa fa-trash' aria-hidden='true'></i></buton></span>" + "</li>"
+        "<li class='prev-search'>" + artistHistoryCache[i] +"</li>" + "<span><button class='trash' data-i=" +i+ "><i class='fa fa-trash' aria-hidden='true'></i></buton></span>"
       );
+      $(".trash").on("click", function() {
+        // alert("foo")
+        // console.log("foo")
+        var searchHistory = jQuery.data(artistHistoryCache,'i')
+        console.log(searchHistory)
+        // artistHistoryCache.splice("jQuery.data('i')", 1)
+      });
     }
+
+    // $(".trash").on("click", function() {
+    //   alert("foo")
+    //   console.log("foo")
+    //   var searchHistory = jQuery.data('i')
+    //   console.log(searchHistory)
+    //   artistHistoryCache.splice(searchHistory, 1)
+    // });
+    
+
+    // $("data-button").on("click", function() {
+    //   jQuery.data('delete', artistHistoryCache.splice(i))
+    //  });
     $(".prev-search").on("click", function () {
       currentArtistName = $(this).text();
       // console.log("test" + currentArtistName);
@@ -124,8 +144,5 @@ $(document).ready(function () {
 });
 
 
-$(".trash").on("click", function () {
-  $("li").empty()
-})
 
 
