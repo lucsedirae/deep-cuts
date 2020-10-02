@@ -180,35 +180,40 @@ $(document).ready(function () {
 
     $.ajax({
       //***ISSUE!!*** url has nirvana hardcoded in and so the results are always nirvana no matter what the currentArtistName is
-      url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&q=" +
+      url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&kind=video&q=" +
       currentArtistName +
       "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
       method: "GET",
     }).then(function (response) {
+      console.log(response);
       //JD 9/29
       //retrieves video id from response obj
       videoId = response.items[1].id.videoId;
-      // console.log(response);
+      console.log(response);
       console.log("videoId: " + videoId);
       $(".main-content").empty();
       populateMenu();
       activateListeners();
       console.log("videoId: " + videoId);
+      if (videoId === undefined) {
+        $(".main-content").append("<p>We apologize, no videos are returning for this artist</p>")
+      } else {
+
       $(".main-content").append(
         "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
         videoId +
         "'></iframe>"
       );
-    });
-    $(".main-content").empty();
-    populateMenu();
-    activateListeners();
-    console.log("videoId: " + videoId);
-    $(".main-content").append(
-      "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
-      videoId +
-      "'></iframe>"
-    );
+    };})
+    // $(".main-content").empty();
+    // populateMenu();
+    // activateListeners();
+    // console.log("videoId: " + videoId);
+    // $(".main-content").append(
+    //   "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
+    //   videoId +
+    //   "'></iframe>"
+    // );
     // TK 9/30 -- added a style attribute to knock the .main-content DIV up a bit
     $(".main-content").attr("style", "margin-top: 9rem !important");
   }
