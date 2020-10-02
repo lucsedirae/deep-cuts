@@ -167,7 +167,7 @@ $(document).ready(function () {
       
       
 
-      callYoutubeAPI();
+      // callYoutubeAPI();
       populateMainInfo();
       $("#input").val("");
       // console.log("history" + artistHistory);
@@ -176,7 +176,21 @@ $(document).ready(function () {
 
   //populates a YouTube player in the main-content space
   function populateMainYoutube() {
-    callYoutubeAPI();
+    // callYoutubeAPI();
+
+    $.ajax({
+      //***ISSUE!!*** url has nirvana hardcoded in and so the results are always nirvana no matter what the currentArtistName is
+      url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&q=" +
+      currentArtistName +
+      "&key=AIzaSyAWvi6Cb4U2R4VzJSEPftX7y3xVUJESaIw",
+      method: "GET",
+    }).then(function (response) {
+      //JD 9/29
+      //retrieves video id from response obj
+      videoId = response.items[1].id.videoId;
+      // console.log(response);
+      // console.log("videoId: " + videoId);
+    });
     $(".main-content").empty();
     populateMenu();
     activateListeners();
