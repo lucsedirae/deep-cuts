@@ -167,7 +167,6 @@ $(document).ready(function () {
       
       
 
-      // callYoutubeAPI();
       populateMainInfo();
       $("#input").val("");
       // console.log("history" + artistHistory);
@@ -176,10 +175,8 @@ $(document).ready(function () {
 
   //populates a YouTube player in the main-content space
   function populateMainYoutube() {
-    // callYoutubeAPI();
 
     $.ajax({
-      //***ISSUE!!*** url has nirvana hardcoded in and so the results are always nirvana no matter what the currentArtistName is
       url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&kind=video&q=" +
       currentArtistName +
       "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
