@@ -49,7 +49,6 @@ $(document).ready(function () {
     });
   }
 
-<<<<<<< HEAD
     function appendArtist() {
       for (var i = 0; i < artistHistoryCache.length; i++) {
         $("#history-list").append(
@@ -75,10 +74,8 @@ $(document).ready(function () {
 
     
   //JD 9/30 Moved menu population into it's own function to dry out code
-=======
   //JD 10/1 integrated musicBrainzAPI() into populateMainInfo(). musicBrainzAPI() has now been 
   //deprecated from api-calls.js and script.js
->>>>>>> 4c16bcf456d84d6bb635a154225fbc3c277d7fd3
   //populateMainInfo replaces search html with Info html. Also called from nav icons
   function populateMainInfo() {
     $(".main-content").empty();
@@ -213,8 +210,6 @@ $(document).ready(function () {
   }
 });
 
-<<<<<<< HEAD
-=======
 
 
 
@@ -238,4 +233,3 @@ $(document).ready(function () {
   hamburger.nav.addEventListener('click', function(e) { hamburger.doToggle(e); });
 
 }());
->>>>>>> 4c16bcf456d84d6bb635a154225fbc3c277d7fd3
