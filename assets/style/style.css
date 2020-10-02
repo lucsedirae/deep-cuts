@@ -104,6 +104,33 @@ h1 {
   box-shadow: 0px 0px 18px 2px #f2a441;
 }
 
+.home-btn{
+  font-size: 25px;
+  transition: ease-in .2s
+}
+
+.home-btn:hover{
+  cursor: pointer;
+  transform: scale(1.2);
+  color: #f2a441;
+}
+
+#youtube-btn, #info-btn, #search-nav-btn, #history-btn{
+  transition: ease-in .2s;
+}
+
+#youtube-btn:hover, #info-btn:hover, #search-nav-btn:hover, #history-btn:hover{
+  transform:scale(1.1);
+  color:#f2a441;
+}
+
+
+
+
+
+
+
+
 /* @media only screen and (min-height: 800px){
     .main-content{
         margin-top: 250px;
