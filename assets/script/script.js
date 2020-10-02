@@ -25,9 +25,7 @@ $(document).ready(function () {
     $(".main-content").attr("style", "margin-top: 16rem !important");
     //Pass in "My Artists" as header for History Page : TK 10/1
     /* populateMenu(); */
-    $(".main-content")
-      .prepend("<h1>My Artists</h1>")
-      .append("<i class='fas fa-3x fa-home home-btn'></i>");
+    $(".main-content").prepend("<h1>My Artists</h1>", "<i class='fas fa-home home-btn'></i>","<p>This is your artist log.  Every artist that you search for will be saved to this page.  Click on the artist to view their information or delete the artist from the log by clicking the trash can icon.</p>");
     activateListeners();
     $(".main-content").append(
       "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>"
@@ -52,16 +50,27 @@ $(document).ready(function () {
     });
   }
 
-  function appendArtist() {
-    for (var i = 0; i < artistHistoryCache.length; i++) {
-      $("#history-list").append(
-        "<li class='prev-search'>" +
-          artistHistoryCache[i] +
-          "</li>" +
-          "<span><button class='trash fa fa-trash' data-i=" +
-          i +
-          "><i class='' aria-hidden='true'></i></buton></span>"
-      );
+    function appendArtist() {
+      for (var i = 0; i < artistHistoryCache.length; i++) {
+        $("#history-list").append(
+          "<li class='prev-search'>" + artistHistoryCache[i] +"</li>" + "<span><button class='trash fa fa-trash' data-i=" +i+ "><i class='' aria-hidden='true'></i></button></span>"
+        );
+      }
+      $(".trash").on("click", function() {
+        // alert("foo")
+        console.log($(this).data("i"))
+        console.log("foo")
+        // var storage = JSON.parse(localStorage.getItem("artistHistory"))
+        artistHistoryCache.splice($(this).data("i"), 1)
+        localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache))
+        populateMainHistory()
+  
+  
+  
+          //these can be used for a clear all button//
+        // localStorage.clear()
+        // $("#history-list").empty
+      });
     }
     $(".trash").on("click", function () {
       // alert("foo")
@@ -76,7 +85,7 @@ $(document).ready(function () {
       // localStorage.clear()
       // $("#history-list").empty
     });
-  }
+
 
   //populateMainInfo replaces search html with Info html. Also called from nav icons
   function populateMainInfo() {
@@ -99,15 +108,23 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (results) {
       //Index of results.artists can be iterated through at a later date to improve dynamics
+      
       var resArt = results.artists[0];
-
+      console.log(resArt);
+      
+  
       artistObj = {
         artist: resArt["name"],
         activeFrom: resArt["life-span"].begin,
         activeTo: resArt["life-span"].end,
         genre: resArt.tags[0].name,
-        origin: resArt.area.name,
+        origin: resArt["begin-area"].name + "," + resArt.area.name  
+        
       };
+
+      console.log(artistObj);
+
+      
 
       $(".main-content").append(
         "<br><div class='row'></div><div class='col s12' id='info-box'>Name: " +
@@ -246,36 +263,40 @@ $(document).ready(function () {
 
     $.ajax({
       //***ISSUE!!*** url has nirvana hardcoded in and so the results are always nirvana no matter what the currentArtistName is
-      url:
-        "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&q=" +
-        currentArtistName +
-        "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
+      url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&kind=video&q=" +
+      currentArtistName +
+      "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
       method: "GET",
     }).then(function (response) {
+      console.log(response);
       //JD 9/29
       //retrieves video id from response obj
       videoId = response.items[1].id.videoId;
-      // console.log(response);
+      console.log(response);
       console.log("videoId: " + videoId);
       $(".main-content").empty();
       populateMenu();
       activateListeners();
       console.log("videoId: " + videoId);
+      if (videoId === undefined) {
+        $(".main-content").append("<p>We apologize, no videos are returning for this artist</p>")
+      } else {
+
       $(".main-content").append(
         "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
           videoId +
           "'></iframe>"
       );
-    });
-    $(".main-content").empty();
-    populateMenu();
-    activateListeners();
-    console.log("videoId: " + videoId);
-    $(".main-content").append(
-      "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
-        videoId +
-        "'></iframe>"
-    );
+    };})
+    // $(".main-content").empty();
+    // populateMenu();
+    // activateListeners();
+    // console.log("videoId: " + videoId);
+    // $(".main-content").append(
+    //   "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
+    //   videoId +
+    //   "'></iframe>"
+    // );
     // TK 9/30 -- added a style attribute to knock the .main-content DIV up a bit
     $(".main-content").attr("style", "margin-top: 9rem !important");
   }
@@ -321,4 +342,4 @@ $(document).ready(function () {
   hamburger.nav.addEventListener("click", function (e) {
     hamburger.doToggle(e);
   });
-})();
+});
