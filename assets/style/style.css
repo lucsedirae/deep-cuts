@@ -13,13 +13,43 @@ body {
 }
 
 #history-list {
-  margin-top: 2rem;
-  background-color: whitesmoke;
-  border-radius: 15px;
+  /* margin-top: 2rem; */
+  background-color: transparent;
+  font-size: 20px;
+  border-radius: 5px;
   height: 10rem;
   overflow-y: scroll;
   overflow-x: auto;
+  padding: 20px;
+  text-align: center;
+  
 }
+
+.trash {
+  white-space: nowrap;
+  cursor: pointer; 
+  border: 0px solid #3498db; 
+  background-color: transparent;
+  
+}
+
+.prev-search {
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 5px;
+  white-space: nowrap;
+  display: inline-block;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 15px;
+}
+
+.prev-search:hover{
+  background-color: #f1b667;
+  
+}
+
 
 #info-box {
   margin-top: 2rem;
@@ -34,6 +64,7 @@ body {
   font-weight: bold;
   margin: 20px;
   border-radius: 15px;
+  
 }
 
 /*Sets default value of card class to hidden */
@@ -53,13 +84,11 @@ body {
 }
 
 /* JD 9/30 Added cursor:pointer to nav-btns */
-.nav-btn {
+.navi-btn {
   cursor: pointer;
 }
 
-.prev-search {
-  cursor: pointer;
-}
+
 
 .search-btn {
   background-color: #f2a441 !important;
@@ -77,6 +106,10 @@ h1 {
   font-family: "Orbitron", sans-serif;
   font-size: 40px;
   letter-spacing: 5px;
+}
+
+h4 {
+  font-family: "Orbitron", sans-serif;
 }
 
 #input {
@@ -106,37 +139,44 @@ h1 {
 
 .trash {
   display: inline-block;
-  cursor: pointer; 
-  border: 0px solid #3498db; 
-  background-color: transparent; 
+  cursor: pointer;
+  border: 0px solid #3498db;
+  background-color: transparent;
 }
 
-.home-btn{
-  font-size: 25px;
-  transition: ease-in .2s
+.home-btn {
+  font-size: 35px;
+  transition: ease-in 0.2s;
 }
 
-.home-btn:hover{
+.home-btn:hover {
   cursor: pointer;
   transform: scale(1.2);
   color: #f2a441;
 }
 
-#youtube-btn, #info-btn, #search-nav-btn, #history-btn{
-  transition: ease-in .2s;
+.thumbnail {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 1rem;
 }
 
-#youtube-btn:hover, #info-btn:hover, #search-nav-btn:hover, #history-btn:hover{
-  transform:scale(1.1);
-  color:#f2a441;
+#youtube-btn,
+#info-btn,
+#search-nav-btn,
+#history-btn
+#tour-btn {
+  transition: ease-in 0.2s;
 }
 
-
-
-
-
-
-
+#youtube-btn:hover,
+#info-btn:hover,
+#search-nav-btn:hover,
+#history-btn:hover,
+#tour-btn {
+  transform: scale(1.1);
+  color: #f2a441;
+}
 
 /* @media only screen and (min-height: 800px){
     .main-content{
@@ -160,7 +200,7 @@ h1 {
   -ms-transition: left 0.5s ease;
   -o-transition: left 0.5s ease;
   transition: left 0.5s ease;
-  background: black;
+  background: rgba(226, 218, 210, 0.801);
   color: white;
   cursor: pointer;
   font-size: 2rem;
@@ -169,11 +209,19 @@ h1 {
   padding: 6rem 2rem 2rem 2rem;
   position: fixed;
   top: 0;
-  width: 20rem;
+  width: 15rem;
   z-index: 1;
 }
 
-.nav.expanded { left: 0; }
+.nav.expanded { 
+  left: 0;
+  background-color: rgba(226, 218, 210, 0.801);
+
+}
+
+.nav.expanded a{
+  color: black;
+}
 
 .nav ul {
   position: absolute;
@@ -186,6 +234,10 @@ h1 {
   padding: 0;
 }
 
+.nav-toggle expanded{
+  color: black;
+}
+
 .nav-toggle {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -195,13 +247,17 @@ h1 {
   left: 2rem;
   position: fixed;
   top: 2rem;
-  width: 3.6rem;
+  width: 2rem;
   z-index: 2;
 }
 
-.nav-toggle:hover { opacity: 0.8; }
+.nav-toggle:hover {
+  opacity: 0.8;
+}
 
-.nav-toggle .nav-toggle-bar,  .nav-toggle .nav-toggle-bar::after,  .nav-toggle .nav-toggle-bar::before {
+.nav-toggle .nav-toggle-bar,
+.nav-toggle .nav-toggle-bar::after,
+.nav-toggle .nav-toggle-bar::before {
   position: absolute;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -213,20 +269,29 @@ h1 {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
   background: white;
-  content: '';
+  content: "";
   height: 0.4rem;
   width: 100%;
 }
 
-.nav-toggle .nav-toggle-bar { margin-top: 0; }
+.nav-toggle .nav-toggle-bar {
+  margin-top: 0;
+}
 
-.nav-toggle .nav-toggle-bar::after { margin-top: 0.8rem; }
+.nav-toggle .nav-toggle-bar::after {
+  margin-top: 0.8rem;
+}
 
-.nav-toggle .nav-toggle-bar::before { margin-top: -0.8rem; }
+.nav-toggle .nav-toggle-bar::before {
+  margin-top: -0.8rem;
+}
 
-.nav-toggle.expanded .nav-toggle-bar { background: transparent; }
+.nav-toggle.expanded .nav-toggle-bar {
+  background: transparent;
+}
 
-.nav-toggle.expanded .nav-toggle-bar::after, .nav-toggle.expanded .nav-toggle-bar::before {
+.nav-toggle.expanded .nav-toggle-bar::after,
+.nav-toggle.expanded .nav-toggle-bar::before {
   background: white;
   margin-top: 0;
 }
