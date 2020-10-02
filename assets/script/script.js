@@ -1,10 +1,10 @@
 /* var artistHistory = []; */
 var artistHistoryCache = [];
 var artistHistory = JSON.parse(localStorage.getItem("artistHistory")) || [];
+var tourObj = {};
 
 //initialization function
 $(document).ready(function () {
-  callBandsInTownAPI();
   //calls function that appends default HTML to DOM
   populateMainSearch();
 
@@ -172,12 +172,72 @@ $(document).ready(function () {
   }
 
   function populateMainTour() {
-    callBandsInTownAPI();
     $(".main-content").empty();
     populateMenu();
     activateListeners();
 
-    $(".main-content").append("<br><h4>Upcoming Performances</h2>");
+    $.ajax({
+      url:
+        "https://rest.bandsintown.com/artists/" +
+        currentArtistName +
+        "/events/?app_id=451417d0c04a068bd2475d36b0555961",
+
+      // "https://cors-anywhere.herokuapp.com/https://rest.bandsintown.com/artists/" +
+      // currentArtistName +
+      // "/?app_id=451417d0c04a068bd2475d36b0555961",
+      method: "GET",
+    }).then(function (response) {
+      console.log(response);
+
+      $(".main-content").append(
+        "<br><h4>Upcoming Performances</h2><br><div id='artist-tour-pic'></div>",
+        $("#artist-tour-pic").empty()
+      );
+      if (response !== undefined) {
+        for (var i = 0; i < response.length; i++) {
+          tourObj = {
+            image: response[0].artist.thumb_url,
+            lineup: response[i].lineup[0],
+            locationVenue: response[i].venue.name,
+            locationCity: response[i].venue.location,
+            date: response[i].datetime,
+            ticketStatus: response[i].offers[0].status,
+            ticketLink: response[i].offers[0].url,
+          };
+          console.log("Link: " + tourObj.locationVenue);
+
+          $(".main-content").append(
+            "<br><hr><span>Lineup: " + tourObj.lineup + "</span>"
+          );
+          $(".main-content").append(
+            "<br><span>Location: " +
+              tourObj.locationVenue +
+              "</span><br><span>" +
+              tourObj.locationCity +
+              "</span>"
+          );
+          $(".main-content").append(
+            "<br><span>Date: " + tourObj.date + "</span>"
+          );
+          $(".main-content").append(
+            "<br><span>Tickets: " +
+              tourObj.ticketStatus +
+              "</span><br><span><a href='" +
+              tourObj.ticketLink +
+              "'>Buy Tickets</a></span>"
+          );
+        }
+
+        $("#artist-tour-pic").append(
+          "<img class='thumbnail' src='" + tourObj.image + "'>"
+        );
+      }else{
+      $(".main-content").append(
+        "<br><span>Sorry, no performances currently scheduled.</span>"
+      );
+      $("#artist-tour-pic").empy();
+      }
+    });
   }
 
   //populates a YouTube player in the main-content space
@@ -186,9 +246,10 @@ $(document).ready(function () {
 
     $.ajax({
       //***ISSUE!!*** url has nirvana hardcoded in and so the results are always nirvana no matter what the currentArtistName is
-      url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&q=" +
-      currentArtistName +
-      "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
+      url:
+        "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&q=" +
+        currentArtistName +
+        "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
       method: "GET",
     }).then(function (response) {
       //JD 9/29
@@ -202,8 +263,8 @@ $(document).ready(function () {
       console.log("videoId: " + videoId);
       $(".main-content").append(
         "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
-        videoId +
-        "'></iframe>"
+          videoId +
+          "'></iframe>"
       );
     });
     $(".main-content").empty();
@@ -212,8 +273,8 @@ $(document).ready(function () {
     console.log("videoId: " + videoId);
     $(".main-content").append(
       "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
-      videoId +
-      "'></iframe>"
+        videoId +
+        "'></iframe>"
     );
     // TK 9/30 -- added a style attribute to knock the .main-content DIV up a bit
     $(".main-content").attr("style", "margin-top: 9rem !important");

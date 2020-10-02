@@ -126,6 +126,12 @@ h4 {
   color: #f2a441;
 }
 
+.thumbnail {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 1rem;
+}
+
 #youtube-btn,
 #info-btn,
 #search-nav-btn,
