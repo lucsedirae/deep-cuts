@@ -25,7 +25,7 @@ $(document).ready(function () {
     $(".main-content").prepend("<h1>My Artists</h1>", "<i class='fas fa-home home-btn'></i>","<p>This is your artist log.  Every artist that you search for will be saved to this page.  Click on the artist to view their information or delete the artist from the log by clicking the trash can icon.</p>");
     activateListeners();
     $(".main-content").append(
-      "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>",
+      "<br><div class='col s4'></div><ul class='col s10' id='history-list'></ul>",
       
     );
       
