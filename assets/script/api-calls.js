@@ -1,4 +1,6 @@
-var currentArtistName = $(".searchTerm").val();
+// var currentArtistName = $(".searchTerm").val();
+var currentArtistName = "Keller Williams";
+
 var artistList = [];
 var artistObj = {};
 var videoId = "";
@@ -8,66 +10,26 @@ var youtubeURL =
   "https://www.googleapis.com/youtube/v3/search?video?maxResults=5&q=" +
   currentArtistName +
   "&key=AIzaSyBs1UbG6uKN4uWlNo0WeK40hCXno9YmAjI";
+
 //BANDSINTOWN API
 //bandsintown api url, api key & documentation link
 //call url https://rest.bandsintown.com/artists/{{artist_name}}/?app_id=yOUrSuP3r3ven7aPp-id
 //docs https://artists.bandsintown.com/support/public-api?_ga=2.110307469.924392.1601057589-666678079.1600528655
+// function callBandsInTownAPI() {
+//   $.ajax({
+//     url:
+//       "https://rest.bandsintown.com/artists/" +
+//       currentArtistName +
+//       "/events/?app_id=451417d0c04a068bd2475d36b0555961",
 
-//MUSICBRAINZ API
-//musicbrainz documentation link and call url (no api key required)
-//call url https://musicbrainz.org/ws/2/
-//docs https://musicbrainz.org/doc/MusicBrainz_API/Search
-//musicbrainz api call
-function callMusicBrainzAPI() {
-  $.ajax({
-    url:
-      "https://musicbrainz.org/ws/2/artist/?query=artist:" +
-      currentArtistName +
-      "&fmt=json",
-    method: "GET",
-  }).then(function (results) {
-    //Index of results.artists can be iterated through at a later date to improve dynamics
-    console.log(results);
-    var resArt = results.artists[0];
-
-    artistObj.artist = resArt["name"];
-    artistObj.activeFrom = resArt["life-span"].begin;
-    artistObj.activeTo = resArt["life-span"].end;
-    artistObj.genre = resArt.tags[0].name;
-    artistObj.origin = resArt.area.name;
-
-    // artistObj = {
-    //   artist: resArt["name"],
-    //   activeFrom: resArt["life-span"].begin,
-    //   activeTo: resArt["life-span"].end,
-    //   genre: resArt.tags[0],
-    // };
-
-    $(".main-content").append(
-      "<br><div class='row'></div><div class='col s12' id='info-box'>Name: " +
-        artistObj.artist +
-        "</div>"
-    );
-
-    $(".main-content").append(
-      "<br><div class='row'></div><div class='col s12' id='info-box'>Years active: " +
-        artistObj.activeFrom +
-        " until " +
-        artistObj.activeTo +
-        "</div>"
-    );
-    $(".main-content").append(
-      "<br><div class='row'></div><div class='col s12' id='info-box'>Genre: " +
-        artistObj.genre +
-        "</div>"
-    );
-    $(".main-content").append(
-      "<br><div class='row'></div><div class='col s12' id='info-box'>Origin: " +
-        artistObj.origin +
-        "</div>"
-    );
-  });
-}
+//     // "https://cors-anywhere.herokuapp.com/https://rest.bandsintown.com/artists/" +
+//     // currentArtistName +
+//     // "/?app_id=451417d0c04a068bd2475d36b0555961",
+//     method: "GET",
+//   }).then(function (response) {
+//     console.log(response);
+//   });
+// }
 
 //YOUTUBE API
 //Google credentials API key: AIzaSyAWvi6Cb4U2R4VzJSEPftX7y3xVUJESaIw, AIzaSyBs1UbG6uKN4uWlNo0WeK40hCXno9YmAjI, AIzaSyBL_PaJEvT9kGdgDHBjaGKiJgmXuYpvuag
@@ -136,7 +98,6 @@ function execute() {
 }
 
 //mediawiki API call//
-
 function wikipediaSearch() {
   var url = "https://en.wikipedia.org/w/api.php";
 

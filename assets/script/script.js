@@ -1,6 +1,7 @@
 /* var artistHistory = []; */
 var artistHistoryCache = [];
 var artistHistory = JSON.parse(localStorage.getItem("artistHistory")) || [];
+var tourObj = {};
 
 //initialization function
 $(document).ready(function () {
@@ -13,23 +14,24 @@ $(document).ready(function () {
     $("#info-btn").on("click", populateMainInfo);
     $("#search-nav-btn").on("click", populateMainSearch);
     $("#history-btn").on("click", populateMainHistory);
+    $("#tour-btn").on("click", populateMainTour);
     $(".home-btn").on("click", populateMainSearch);
   }
 
   //populates main-content with a scrollable history list of previously searched artists
   function populateMainHistory() {
     $(".main-content").empty();
+
     $(".main-content").attr("style", "margin-top: 16rem !important");
-    //Pass in "My Artists" as header for History Page : TK 10/1 
+    //Pass in "My Artists" as header for History Page : TK 10/1
     /* populateMenu(); */
     $(".main-content").prepend("<h1>My Artists</h1>", "<i class='fas fa-home home-btn'></i>","<p>This is your artist log.  Every artist that you search for will be saved to this page.  Click on the artist to view their information or delete the artist from the log by clicking the trash can icon.</p>");
     activateListeners();
     $(".main-content").append(
-      "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>",
-      
+      "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>"
     );
-      
-    appendArtist()
+
+    appendArtist();
     // $(".trash").on("click", function() {
     //   alert("foo")
     //   console.log("foo")
@@ -37,7 +39,6 @@ $(document).ready(function () {
     //   console.log(searchHistory)
     //   artistHistoryCache.splice(searchHistory, 1)
     // });
-    
 
     // $("data-button").on("click", function() {
     //   jQuery.data('delete', artistHistoryCache.splice(i))
@@ -71,11 +72,21 @@ $(document).ready(function () {
         // $("#history-list").empty
       });
     }
+    $(".trash").on("click", function () {
+      // alert("foo")
+      console.log($(this).data("i"));
+      console.log("foo");
+      // var storage = JSON.parse(localStorage.getItem("artistHistory"))
+      artistHistoryCache.splice($(this).data("i"), 1);
+      localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache));
+      populateMainHistory();
 
-    
-  //JD 9/30 Moved menu population into it's own function to dry out code
-  //JD 10/1 integrated musicBrainzAPI() into populateMainInfo(). musicBrainzAPI() has now been 
-  //deprecated from api-calls.js and script.js
+      //these can be used for a clear all button//
+      // localStorage.clear()
+      // $("#history-list").empty
+    });
+
+
   //populateMainInfo replaces search html with Info html. Also called from nav icons
   function populateMainInfo() {
     $(".main-content").empty();
@@ -116,28 +127,28 @@ $(document).ready(function () {
       
 
       $(".main-content").append(
-      "<br><div class='row'></div><div class='col s12' id='info-box'>Name: " +
-        artistObj.artist +
-        "</div>"
-    );
-    $(".main-content").append(
-      "<br><div class='row'></div><div class='col s12' id='info-box'>Years active: " +
-        artistObj.activeFrom +
-        " until " +
-        artistObj.activeTo +
-        "</div>"
-    );
-    $(".main-content").append(
-      "<br><div class='row'></div><div class='col s12' id='info-box'>Genre: " +
-        artistObj.genre +
-        "</div>"
-    );
-    $(".main-content").append(
-      "<br><div class='row'></div><div class='col s12' id='info-box'>Origin: " +
-        artistObj.origin +
-        "</div>"
-    );
-  });
+        "<br><div class='row'></div><div class='col s12' id='info-box'>Name: " +
+          artistObj.artist +
+          "</div>"
+      );
+      $(".main-content").append(
+        "<br><div class='row'></div><div class='col s12' id='info-box'>Years active: " +
+          artistObj.activeFrom +
+          " until " +
+          artistObj.activeTo +
+          "</div>"
+      );
+      $(".main-content").append(
+        "<br><div class='row'></div><div class='col s12' id='info-box'>Genre: " +
+          artistObj.genre +
+          "</div>"
+      );
+      $(".main-content").append(
+        "<br><div class='row'></div><div class='col s12' id='info-box'>Origin: " +
+          artistObj.origin +
+          "</div>"
+      );
+    });
   }
 
   //populateMainSearch() populates the search section of the site. This is the default view on load and so
@@ -154,8 +165,6 @@ $(document).ready(function () {
         "<a class='waves-effect waves-light btn-large search-btn'>Find Your Band!</a>"
       )
       .fadeIn(800);
-    //JD 9/30 Moved search function inside populateMainSearch() so that it also functions
-    // when navigated to not just on load
     $(".search-btn").on("click", function (event) {
       event.preventDefault();
 
@@ -165,20 +174,86 @@ $(document).ready(function () {
       if (currentArtistName === "") {
         return;
       }
-      
+
       artistHistoryCache = artistHistory;
       //validation to ensure there are no duplicates in artistHistory array
-      if(artistHistoryCache.indexOf(currentArtistName) === -1){
+      if (artistHistoryCache.indexOf(currentArtistName) === -1) {
         artistHistoryCache.push(currentArtistName);
         storeArtist();
       }
-      
-      
 
       // callYoutubeAPI();
       populateMainInfo();
       $("#input").val("");
-      // console.log("history" + artistHistory);
+    });
+  }
+
+  function populateMainTour() {
+    $(".main-content").empty();
+    populateMenu();
+    activateListeners();
+
+    $.ajax({
+      url:
+        "https://rest.bandsintown.com/artists/" +
+        currentArtistName +
+        "/events/?app_id=451417d0c04a068bd2475d36b0555961",
+
+      // "https://cors-anywhere.herokuapp.com/https://rest.bandsintown.com/artists/" +
+      // currentArtistName +
+      // "/?app_id=451417d0c04a068bd2475d36b0555961",
+      method: "GET",
+    }).then(function (response) {
+      console.log(response);
+
+      $(".main-content").append(
+        "<br><h4>Upcoming Performances</h2><br><div id='artist-tour-pic'></div>",
+        $("#artist-tour-pic").empty()
+      );
+      if (response !== undefined) {
+        for (var i = 0; i < response.length; i++) {
+          tourObj = {
+            image: response[0].artist.thumb_url,
+            lineup: response[i].lineup[0],
+            locationVenue: response[i].venue.name,
+            locationCity: response[i].venue.location,
+            date: response[i].datetime,
+            ticketStatus: response[i].offers[0].status,
+            ticketLink: response[i].offers[0].url,
+          };
+          console.log("Link: " + tourObj.locationVenue);
+
+          $(".main-content").append(
+            "<br><hr><span>Lineup: " + tourObj.lineup + "</span>"
+          );
+          $(".main-content").append(
+            "<br><span>Location: " +
+              tourObj.locationVenue +
+              "</span><br><span>" +
+              tourObj.locationCity +
+              "</span>"
+          );
+          $(".main-content").append(
+            "<br><span>Date: " + tourObj.date + "</span>"
+          );
+          $(".main-content").append(
+            "<br><span>Tickets: " +
+              tourObj.ticketStatus +
+              "</span><br><span><a href='" +
+              tourObj.ticketLink +
+              "'>Buy Tickets</a></span>"
+          );
+        }
+
+        $("#artist-tour-pic").append(
+          "<img class='thumbnail' src='" + tourObj.image + "'>"
+        );
+      }else{
+      $(".main-content").append(
+        "<br><span>Sorry, no performances currently scheduled.</span>"
+      );
+      $("#artist-tour-pic").empy();
+      }
     });
   }
 
@@ -209,8 +284,8 @@ $(document).ready(function () {
 
       $(".main-content").append(
         "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
-        videoId +
-        "'></iframe>"
+          videoId +
+          "'></iframe>"
       );
     };})
     // $(".main-content").empty();
@@ -232,11 +307,11 @@ $(document).ready(function () {
       .hide()
       .append(
         "<h1>" + currentArtistName + "</h1>",
-        "<i class='fab fa-youtube fa-3x nav-btn' id='youtube-btn'></i></a>",
-        "<i class='fas fa-info-circle fa-3x nav-btn' id='info-btn'></i></a>",
-        "<i class='fab fa-spotify fa-3x nav-btn' id='spotify-btn'></i></a>",
-        "<i class='fas fa-list-alt fa-3x nav-btn' id='history-btn'></i></a>",
-        "<i class='fas fa-search fa-3x nav-btn' id='search-nav-btn'></i></a>"
+        "<i class='fab fa-youtube fa-3x navi-btn' id='youtube-btn'></i></a>",
+        "<i class='fas fa-info-circle fa-3x navi-btn' id='info-btn'></i></a>",
+        "<i class='fas fa-calendar-alt fa-3x navi-btn' id='tour-btn'></i></a>",
+        "<i class='fas fa-list-alt fa-3x navi-btn' id='history-btn'></i></a>",
+        "<i class='fas fa-search fa-3x navi-btn' id='search-nav-btn'></i></a>"
       )
       .fadeIn(800);
   }
@@ -247,26 +322,24 @@ $(document).ready(function () {
   }
 });
 
-
-
-
-
 // THIS IS JAVACRIPT FOR THE NAV MENTI
 
-(function() {
-
+(function () {
   var hamburger = {
-    navToggle: document.querySelector('.nav-toggle'),
-    nav: document.querySelector('nav'),
+    navToggle: document.querySelector(".nav-toggle"),
+    nav: document.querySelector("nav"),
 
-    doToggle: function(e) {
+    doToggle: function (e) {
       e.preventDefault();
-      this.navToggle.classList.toggle('expanded');
-      this.nav.classList.toggle('expanded');
-    }
+      this.navToggle.classList.toggle("expanded");
+      this.nav.classList.toggle("expanded");
+    },
   };
 
-  hamburger.navToggle.addEventListener('click', function(e) { hamburger.doToggle(e); });
-  hamburger.nav.addEventListener('click', function(e) { hamburger.doToggle(e); });
-
-}());
+  hamburger.navToggle.addEventListener("click", function (e) {
+    hamburger.doToggle(e);
+  });
+  hamburger.nav.addEventListener("click", function (e) {
+    hamburger.doToggle(e);
+  });
+});
