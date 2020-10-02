@@ -188,7 +188,7 @@ $(document).ready(function () {
       console.log(response);
       //JD 9/29
       //retrieves video id from response obj
-      videoId = response.items[1].id.videoId;
+      videoId = response.items[2].id.videoId;
       console.log(response);
       console.log("videoId: " + videoId);
       $(".main-content").empty();
