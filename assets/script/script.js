@@ -4,6 +4,7 @@ var artistHistory = JSON.parse(localStorage.getItem("artistHistory")) || [];
 
 //initialization function
 $(document).ready(function () {
+  callBandsInTownAPI();
   //calls function that appends default HTML to DOM
   populateMainSearch();
 
@@ -19,6 +20,7 @@ $(document).ready(function () {
   function populateMainHistory() {
     $(".main-content").empty();
     populateMenu();
+
     activateListeners();
     $(".main-content").append(
       "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>"
@@ -125,6 +127,13 @@ $(document).ready(function () {
       $("#input").val("");
       // console.log("history" + artistHistory);
     });
+  }
+
+  function populateMainTour() {
+    callBandsInTownAPI();
+    $(".main-content").empty();
+    populateMenu();
+    activateListeners();
   }
 
   //populates a YouTube player in the main-content space
