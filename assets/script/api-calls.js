@@ -32,7 +32,7 @@ function callBandsInTownAPI() {
 }
 
 //YOUTUBE API
-//Google credentials API key: AIzaSyAWvi6Cb4U2R4VzJSEPftX7y3xVUJESaIw
+//Google credentials API key: AIzaSyAWvi6Cb4U2R4VzJSEPftX7y3xVUJESaIw, AIzaSyBs1UbG6uKN4uWlNo0WeK40hCXno9YmAjI, AIzaSyBL_PaJEvT9kGdgDHBjaGKiJgmXuYpvuag
 //<script src="https://apis.google.com/js/api.js"></script>//
 
 function callYoutubeAPI() {
@@ -40,10 +40,9 @@ function callYoutubeAPI() {
 
   $.ajax({
     //***ISSUE!!*** url has nirvana hardcoded in and so the results are always nirvana no matter what the currentArtistName is
-    url:
-      "https://www.googleapis.com/youtube/v3/search?video?maxResults=5&q=" +
-      currentArtistName +
-      "&key=AIzaSyBs1UbG6uKN4uWlNo0WeK40hCXno9YmAjI",
+    url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&q=" +
+    currentArtistName +
+    "&key=AIzaSyAWvi6Cb4U2R4VzJSEPftX7y3xVUJESaIw",
     method: "GET",
   }).then(function (response) {
     //JD 9/29
