@@ -27,6 +27,7 @@ function callMusicBrainzAPI() {
     method: "GET",
   }).then(function (results) {
     //Index of results.artists can be iterated through at a later date to improve dynamics
+    console.log(results);
     var resArt = results.artists[0];
 
     artistObj.artist = resArt["name"];
@@ -47,6 +48,7 @@ function callMusicBrainzAPI() {
         artistObj.artist +
         "</div>"
     );
+
     $(".main-content").append(
       "<br><div class='row'></div><div class='col s12' id='info-box'>Years active: " +
         artistObj.activeFrom +

@@ -2,7 +2,6 @@
 var artistHistoryCache = [];
 var artistHistory = JSON.parse(localStorage.getItem("artistHistory")) || [];
 
-//JD 9/30 Reorganized functions by alphabetical order to make searching them easier for reader
 //initialization function
 $(document).ready(function () {
   //calls function that appends default HTML to DOM
@@ -14,16 +13,20 @@ $(document).ready(function () {
     $("#info-btn").on("click", populateMainInfo);
     $("#search-nav-btn").on("click", populateMainSearch);
     $("#history-btn").on("click", populateMainHistory);
+    $(".home-btn").on("click", populateMainSearch);
   }
 
-  //JD 9/30 Added function to populate artist history list
   //populates main-content with a scrollable history list of previously searched artists
   function populateMainHistory() {
     $(".main-content").empty();
-    populateMenu();
+    $(".main-content").attr("style", "margin-top: 16rem !important");
+    //Pass in "My Artists" as header for History Page : TK 10/1 
+    /* populateMenu(); */
+    $(".main-content").prepend("<h1>My Artists</h1>").append("<i class='fas fa-home home-btn'></i>");
     activateListeners();
     $(".main-content").append(
-      "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>"
+      "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>",
+      
     );
       
     appendArtist()
@@ -46,6 +49,7 @@ $(document).ready(function () {
     });
   }
 
+<<<<<<< HEAD
     function appendArtist() {
       for (var i = 0; i < artistHistoryCache.length; i++) {
         $("#history-list").append(
@@ -71,24 +75,71 @@ $(document).ready(function () {
 
     
   //JD 9/30 Moved menu population into it's own function to dry out code
+=======
+  //JD 10/1 integrated musicBrainzAPI() into populateMainInfo(). musicBrainzAPI() has now been 
+  //deprecated from api-calls.js and script.js
+>>>>>>> 4c16bcf456d84d6bb635a154225fbc3c277d7fd3
   //populateMainInfo replaces search html with Info html. Also called from nav icons
   function populateMainInfo() {
     $(".main-content").empty();
-    callMusicBrainzAPI();
+    $(".main-content").attr("style", "margin-top: 16rem !important");
     wikipediaSearch();
     populateMenu();
     activateListeners();
 
-    // The HTML appends are not functioning in this function.
-    // $(".main-content").append(
-    //   "<br><div class='col s3'></div><div class='col s6' id='info-box'>Name: "+artistObj.artist+"</div>",
-    // );
+    //MUSICBRAINZ API
+    //musicbrainz documentation link and call url (no api key required)
+    //call url https://musicbrainz.org/ws/2/
+    //docs https://musicbrainz.org/doc/MusicBrainz_API/Search
+    //musicbrainz api call
+    $.ajax({
+      url:
+        "https://musicbrainz.org/ws/2/artist/?query=artist:" +
+        currentArtistName +
+        "&fmt=json",
+      method: "GET",
+    }).then(function (results) {
+      //Index of results.artists can be iterated through at a later date to improve dynamics
+      var resArt = results.artists[0];
+  
+      artistObj = {
+        artist: resArt["name"],
+        activeFrom: resArt["life-span"].begin,
+        activeTo: resArt["life-span"].end,
+        genre: resArt.tags[0].name,
+        origin: resArt.area.name
+      };
+
+      $(".main-content").append(
+      "<br><div class='row'></div><div class='col s12' id='info-box'>Name: " +
+        artistObj.artist +
+        "</div>"
+    );
+    $(".main-content").append(
+      "<br><div class='row'></div><div class='col s12' id='info-box'>Years active: " +
+        artistObj.activeFrom +
+        " until " +
+        artistObj.activeTo +
+        "</div>"
+    );
+    $(".main-content").append(
+      "<br><div class='row'></div><div class='col s12' id='info-box'>Genre: " +
+        artistObj.genre +
+        "</div>"
+    );
+    $(".main-content").append(
+      "<br><div class='row'></div><div class='col s12' id='info-box'>Origin: " +
+        artistObj.origin +
+        "</div>"
+    );
+  });
   }
 
   //populateMainSearch() populates the search section of the site. This is the default view on load and so
   //function is called during page initialization as well as on nav click
   function populateMainSearch() {
     $(".main-content").empty();
+    $(".main-content").attr("style", "margin-top: 16rem !important");
     $(".main-content")
       .hide()
       .append(
@@ -109,9 +160,15 @@ $(document).ready(function () {
       if (currentArtistName === "") {
         return;
       }
+      
       artistHistoryCache = artistHistory;
-      artistHistoryCache.push(currentArtistName);
-      storeArtist();
+      //validation to ensure there are no duplicates in artistHistory array
+      if(artistHistoryCache.indexOf(currentArtistName) === -1){
+        artistHistoryCache.push(currentArtistName);
+        storeArtist();
+      }
+      
+      
 
       callYoutubeAPI();
       populateMainInfo();
@@ -156,3 +213,29 @@ $(document).ready(function () {
   }
 });
 
+<<<<<<< HEAD
+=======
+
+
+
+
+// THIS IS JAVACRIPT FOR THE NAV MENTI
+
+(function() {
+
+  var hamburger = {
+    navToggle: document.querySelector('.nav-toggle'),
+    nav: document.querySelector('nav'),
+
+    doToggle: function(e) {
+      e.preventDefault();
+      this.navToggle.classList.toggle('expanded');
+      this.nav.classList.toggle('expanded');
+    }
+  };
+
+  hamburger.navToggle.addEventListener('click', function(e) { hamburger.doToggle(e); });
+  hamburger.nav.addEventListener('click', function(e) { hamburger.doToggle(e); });
+
+}());
+>>>>>>> 4c16bcf456d84d6bb635a154225fbc3c277d7fd3
