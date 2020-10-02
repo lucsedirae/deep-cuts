@@ -13,15 +13,20 @@ $(document).ready(function () {
     $("#info-btn").on("click", populateMainInfo);
     $("#search-nav-btn").on("click", populateMainSearch);
     $("#history-btn").on("click", populateMainHistory);
+    $(".home-btn").on("click", populateMainSearch);
   }
 
   //populates main-content with a scrollable history list of previously searched artists
   function populateMainHistory() {
     $(".main-content").empty();
-    populateMenu();
+    $(".main-content").attr("style", "margin-top: 16rem !important");
+    //Pass in "My Artists" as header for History Page : TK 10/1 
+    /* populateMenu(); */
+    $(".main-content").prepend("<h1>My Artists</h1>").append("<i class='fas fa-home home-btn'></i>");
     activateListeners();
     $(".main-content").append(
-      "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>"
+      "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>",
+      
     );
     for (var i = 0; i < artistHistoryCache.length; i++) {
       $("#history-list").append(
@@ -40,6 +45,7 @@ $(document).ready(function () {
   //populateMainInfo replaces search html with Info html. Also called from nav icons
   function populateMainInfo() {
     $(".main-content").empty();
+    $(".main-content").attr("style", "margin-top: 16rem !important");
     wikipediaSearch();
     populateMenu();
     activateListeners();
@@ -96,6 +102,7 @@ $(document).ready(function () {
   //function is called during page initialization as well as on nav click
   function populateMainSearch() {
     $(".main-content").empty();
+    $(".main-content").attr("style", "margin-top: 16rem !important");
     $(".main-content")
       .hide()
       .append(
@@ -116,9 +123,15 @@ $(document).ready(function () {
       if (currentArtistName === "") {
         return;
       }
+      
       artistHistoryCache = artistHistory;
-      artistHistoryCache.push(currentArtistName);
-      storeArtist();
+      //validation to ensure there are no duplicates in artistHistory array
+      if(artistHistoryCache.indexOf(currentArtistName) === -1){
+        artistHistoryCache.push(currentArtistName);
+        storeArtist();
+      }
+      
+      
 
       callYoutubeAPI();
       populateMainInfo();
