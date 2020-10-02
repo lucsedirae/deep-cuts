@@ -22,7 +22,7 @@ $(document).ready(function () {
     $(".main-content").attr("style", "margin-top: 16rem !important");
     //Pass in "My Artists" as header for History Page : TK 10/1 
     /* populateMenu(); */
-    $(".main-content").prepend("<h1>My Artists</h1>").append("<i class='fas fa-home home-btn'></i>");
+    $(".main-content").prepend("<h1>My Artists</h1>", "<i class='fas fa-home home-btn'></i>","<p>This is your artist log.  Every artist that you search for will be saved to this page.  Click on the artist to view their information or delete the artist from the log by clicking the trash can icon.</p>");
     activateListeners();
     $(".main-content").append(
       "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>",
@@ -52,7 +52,7 @@ $(document).ready(function () {
     function appendArtist() {
       for (var i = 0; i < artistHistoryCache.length; i++) {
         $("#history-list").append(
-          "<li class='prev-search'>" + artistHistoryCache[i] +"</li>" + "<span><button class='trash fa fa-trash' data-i=" +i+ "><i class='' aria-hidden='true'></i></buton></span>"
+          "<li class='prev-search'>" + artistHistoryCache[i] +"</li>" + "<span><button class='trash fa fa-trash' data-i=" +i+ "><i class='' aria-hidden='true'></i></button></span>"
         );
       }
       $(".trash").on("click", function() {
@@ -97,15 +97,23 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (results) {
       //Index of results.artists can be iterated through at a later date to improve dynamics
+      
       var resArt = results.artists[0];
+      console.log(resArt);
+      
   
       artistObj = {
         artist: resArt["name"],
         activeFrom: resArt["life-span"].begin,
         activeTo: resArt["life-span"].end,
         genre: resArt.tags[0].name,
-        origin: resArt.area.name
+        origin: resArt["begin-area"].name + "," + resArt.area.name  
+        
       };
+
+      console.log(artistObj);
+
+      
 
       $(".main-content").append(
       "<br><div class='row'></div><div class='col s12' id='info-box'>Name: " +

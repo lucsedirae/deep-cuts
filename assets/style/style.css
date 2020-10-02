@@ -13,13 +13,43 @@ body {
 }
 
 #history-list {
-  margin-top: 2rem;
-  background-color: whitesmoke;
-  border-radius: 15px;
+  /* margin-top: 2rem; */
+  background-color: transparent;
+  font-size: 20px;
+  border-radius: 5px;
   height: 10rem;
   overflow-y: scroll;
   overflow-x: auto;
+  padding: 20px;
+  text-align: center;
+  
 }
+
+.trash {
+  white-space: nowrap;
+  cursor: pointer; 
+  border: 0px solid #3498db; 
+  background-color: transparent;
+  
+}
+
+.prev-search {
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 5px;
+  white-space: nowrap;
+  display: inline-block;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 15px;
+}
+
+.prev-search:hover{
+  background-color: #f1b667;
+  
+}
+
 
 #info-box {
   margin-top: 2rem;
@@ -34,6 +64,7 @@ body {
   font-weight: bold;
   margin: 20px;
   border-radius: 15px;
+  
 }
 
 /*Sets default value of card class to hidden */
@@ -57,9 +88,7 @@ body {
   cursor: pointer;
 }
 
-.prev-search {
-  cursor: pointer;
-}
+
 
 .search-btn {
   background-color: #f2a441 !important;
@@ -104,15 +133,9 @@ h1 {
   box-shadow: 0px 0px 18px 2px #f2a441;
 }
 
-.trash {
-  display: inline-block;
-  cursor: pointer; 
-  border: 0px solid #3498db; 
-  background-color: transparent; 
-}
 
 .home-btn{
-  font-size: 25px;
+  font-size: 35px;
   transition: ease-in .2s
 }
 
@@ -160,7 +183,7 @@ h1 {
   -ms-transition: left 0.5s ease;
   -o-transition: left 0.5s ease;
   transition: left 0.5s ease;
-  background: black;
+  background: rgba(226, 218, 210, 0.801);
   color: white;
   cursor: pointer;
   font-size: 2rem;
@@ -169,11 +192,19 @@ h1 {
   padding: 6rem 2rem 2rem 2rem;
   position: fixed;
   top: 0;
-  width: 20rem;
+  width: 15rem;
   z-index: 1;
 }
 
-.nav.expanded { left: 0; }
+.nav.expanded { 
+  left: 0;
+  background-color: rgba(226, 218, 210, 0.801);
+
+}
+
+.nav.expanded a{
+  color: black;
+}
 
 .nav ul {
   position: absolute;
@@ -186,6 +217,10 @@ h1 {
   padding: 0;
 }
 
+.nav-toggle expanded{
+  color: black;
+}
+
 .nav-toggle {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -195,7 +230,7 @@ h1 {
   left: 2rem;
   position: fixed;
   top: 2rem;
-  width: 3.6rem;
+  width: 2rem;
   z-index: 2;
 }
 
