@@ -28,11 +28,20 @@ $(document).ready(function () {
       "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>",
       
     );
-    for (var i = 0; i < artistHistoryCache.length; i++) {
-      $("#history-list").append(
-        "<li class='prev-search'>" + artistHistoryCache[i] + "</li>"
-      );
-    }
+      
+    appendArtist()
+    // $(".trash").on("click", function() {
+    //   alert("foo")
+    //   console.log("foo")
+    //   var searchHistory = jQuery.data('i')
+    //   console.log(searchHistory)
+    //   artistHistoryCache.splice(searchHistory, 1)
+    // });
+    
+
+    // $("data-button").on("click", function() {
+    //   jQuery.data('delete', artistHistoryCache.splice(i))
+    //  });
     $(".prev-search").on("click", function () {
       currentArtistName = $(this).text();
       // console.log("test" + currentArtistName);
@@ -40,6 +49,31 @@ $(document).ready(function () {
     });
   }
 
+    function appendArtist() {
+      for (var i = 0; i < artistHistoryCache.length; i++) {
+        $("#history-list").append(
+          "<li class='prev-search'>" + artistHistoryCache[i] +"</li>" + "<span><button class='trash fa fa-trash' data-i=" +i+ "><i class='' aria-hidden='true'></i></buton></span>"
+        );
+      }
+      $(".trash").on("click", function() {
+        // alert("foo")
+        console.log($(this).data("i"))
+        console.log("foo")
+        // var storage = JSON.parse(localStorage.getItem("artistHistory"))
+        artistHistoryCache.splice($(this).data("i"), 1)
+        localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache))
+        populateMainHistory()
+  
+  
+  
+          //these can be used for a clear all button//
+        // localStorage.clear()
+        // $("#history-list").empty
+      });
+    }
+
+    
+  //JD 9/30 Moved menu population into it's own function to dry out code
   //JD 10/1 integrated musicBrainzAPI() into populateMainInfo(). musicBrainzAPI() has now been 
   //deprecated from api-calls.js and script.js
   //populateMainInfo replaces search html with Info html. Also called from nav icons
@@ -148,8 +182,8 @@ $(document).ready(function () {
     activateListeners();
     $(".main-content").append(
       "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
-        videoId +
-        "'></iframe>"
+      videoId +
+      "'></iframe>"
     );
     // TK 9/30 -- added a style attribute to knock the .main-content DIV up a bit
     $(".main-content").attr("style", "margin-top: 9rem !important");
