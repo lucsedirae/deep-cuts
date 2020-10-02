@@ -188,7 +188,7 @@ $(document).ready(function () {
       //***ISSUE!!*** url has nirvana hardcoded in and so the results are always nirvana no matter what the currentArtistName is
       url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&q=" +
       currentArtistName +
-      "&key=AIzaSyAWvi6Cb4U2R4VzJSEPftX7y3xVUJESaIw",
+      "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
       method: "GET",
     }).then(function (response) {
       //JD 9/29
@@ -206,15 +206,15 @@ $(document).ready(function () {
         "'></iframe>"
       );
     });
-    // $(".main-content").empty();
-    // populateMenu();
-    // activateListeners();
-    // console.log("videoId: " + videoId);
-    // $(".main-content").append(
-    //   "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
-    //   videoId +
-    //   "'></iframe>"
-    // );
+    $(".main-content").empty();
+    populateMenu();
+    activateListeners();
+    console.log("videoId: " + videoId);
+    $(".main-content").append(
+      "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
+      videoId +
+      "'></iframe>"
+    );
     // TK 9/30 -- added a style attribute to knock the .main-content DIV up a bit
     $(".main-content").attr("style", "margin-top: 9rem !important");
   }
