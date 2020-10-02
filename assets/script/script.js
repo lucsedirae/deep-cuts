@@ -52,7 +52,7 @@ $(document).ready(function () {
     function appendArtist() {
       for (var i = 0; i < artistHistoryCache.length; i++) {
         $("#history-list").append(
-          "<li class='prev-search'>" + artistHistoryCache[i] +"</li>" + "<span><button class='trash fa fa-trash' data-i=" +i+ "><i class='' aria-hidden='true'></i></buton></span>"
+          "<li class='prev-search'>" + artistHistoryCache[i] +"</li>" + "<span><button class='trash fa fa-trash' data-i=" +i+ "><i class='' aria-hidden='true'></i></button></span>"
         );
       }
       $(".trash").on("click", function() {
