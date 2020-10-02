@@ -25,19 +25,8 @@ $(document).ready(function () {
     $(".main-content").append(
       "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>"
     );
-    for (var i = 0; i < artistHistoryCache.length; i++) {
-      $("#history-list").append(
-        "<li class='prev-search'>" + artistHistoryCache[i] +"</li>" + "<span><button class='trash' data-i=" +i+ "><i class='fa fa-trash' aria-hidden='true'></i></buton></span>"
-      );
-      $(".trash").on("click", function() {
-        // alert("foo")
-        // console.log("foo")
-        var searchHistory = jQuery.data(artistHistoryCache,'i')
-        console.log(searchHistory)
-        // artistHistoryCache.splice("jQuery.data('i')", 1)
-      });
-    }
-
+      
+    appendArtist()
     // $(".trash").on("click", function() {
     //   alert("foo")
     //   console.log("foo")
@@ -57,6 +46,29 @@ $(document).ready(function () {
     });
   }
 
+    function appendArtist() {
+      for (var i = 0; i < artistHistoryCache.length; i++) {
+        $("#history-list").append(
+          "<li class='prev-search'>" + artistHistoryCache[i] +"</li>" + "<span><button class='trash fa fa-trash' data-i=" +i+ "><i class='' aria-hidden='true'></i></buton></span>"
+        );
+      }
+      $(".trash").on("click", function() {
+        // alert("foo")
+        console.log($(this).data("i"))
+        console.log("foo")
+        // var storage = JSON.parse(localStorage.getItem("artistHistory"))
+        artistHistoryCache.splice($(this).data("i"), 1)
+        localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache))
+        populateMainHistory()
+  
+  
+  
+  
+        // localStorage.clear()
+        // $("#history-list").empty
+        // artistHistoryCache.splice("jQuery.data('i')", 1)
+      });
+    }
   //JD 9/30 Moved menu population into it's own function to dry out code
   //populateMainInfo replaces search html with Info html. Also called from nav icons
   function populateMainInfo() {
@@ -142,7 +154,4 @@ $(document).ready(function () {
     localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache));
   }
 });
-
-
-
 
