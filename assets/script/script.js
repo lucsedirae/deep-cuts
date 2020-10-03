@@ -255,7 +255,7 @@ $(document).ready(function () {
   //populates a YouTube player in the main-content space
   function populateMainYoutube() {
     $.ajax({
-      url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&kind=video&q=" +
+      url: "https://www.googleapis.com/youtube/v3/search?type=video&maxResults=5&q=" +
       artistObj.artist +
       "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
 
