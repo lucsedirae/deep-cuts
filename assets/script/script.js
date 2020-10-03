@@ -27,55 +27,61 @@ $(document).ready(function () {
     $(".main-content").attr("style", "margin-top: 16rem !important");
     //Pass in "My Artists" as header for History Page : TK 10/1
     /* populateMenu(); */
-    $(".main-content").prepend("<h1>My Artists</h1>", "<i class='fas fa-home home-btn'></i>","<p>This is your artist log.  Every artist that you search for will be saved to this page.  Click on the artist to view their information or delete the artist from the log by clicking the trash can icon.</p>");
+    $(".main-content").prepend(
+      "<h1>My Artists</h1>",
+      "<i class='fas fa-home home-btn'></i>",
+      "<p>This is your artist log.  Every artist that you search for will be saved to this page.  Click on the artist to view their information or delete the artist from the log by clicking the trash can icon.</p>"
+    );
     activateListeners();
     $(".main-content").append(
       "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>"
     );
-
     appendArtist();
-    // $(".trash").on("click", function() {
-    //   alert("foo")
-    //   console.log("foo")
-    //   var searchHistory = jQuery.data('i')
-    //   console.log(searchHistory)
-    //   artistHistoryCache.splice(searchHistory, 1)
-    // });
-
-    // $("data-button").on("click", function() {
-    //   jQuery.data('delete', artistHistoryCache.splice(i))
-    //  });
     $(".prev-search").on("click", function () {
       currentArtistName = $(this).text();
-      // console.log("test" + currentArtistName);
       populateMainInfo();
     });
   }
 
-    function appendArtist() {
-      for (var i = 0; i < artistHistoryCache.length; i++) {
-        $("#history-list").append(
-          "<li class='prev-search'>" + artistHistoryCache[i] +"</li>" + "<span><button class='trash fa fa-trash' data-i=" +i+ "><i class='' aria-hidden='true'></i></button></span>"
-        );
-      }
-      $(".trash").on("click", function() {
-        // alert("foo")
-        console.log($(this).data("i"))
-        console.log("foo")
-        // var storage = JSON.parse(localStorage.getItem("artistHistory"))
-        artistHistoryCache.splice($(this).data("i"), 1)
-        localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache))
-        populateMainHistory()
-  
-  
-  
-          //these can be used for a clear all button//
-        // localStorage.clear()
-        // $("#history-list").empty
-      });
+  function appendArtist() {
+    for (var i = 0; i < artistHistoryCache.length; i++) {
+      $("#history-list").append(
+        "<li class='prev-search'>" +
+          artistHistoryCache[i] +
+          "</li>" +
+          "<span><button class='trash fa fa-trash' data-i=" +
+          i +
+          "><i class='' aria-hidden='true'></i></button></span>"
+      );
     }
+    $(".trash").on("click", function () {
+      // alert("foo")
+      console.log($(this).data("i"));
+      console.log("foo");
+      // var storage = JSON.parse(localStorage.getItem("artistHistory"))
+      artistHistoryCache.splice($(this).data("i"), 1);
+      localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache));
+      populateMainHistory();
+
+      //these can be used for a clear all button//
+      // localStorage.clear()
+      // $("#history-list").empty
+    });
+  }
+  // $(".trash").on("click", function () {
+  //   // alert("foo")
+  //   console.log($(this).data("i"));
+  //   console.log("foo");
+  //   // var storage = JSON.parse(localStorage.getItem("artistHistory"))
+  //   artistHistoryCache.splice($(this).data("i"), 1);
+  //   localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache));
+  //   populateMainHistory();
    
 
+    //these can be used for a clear all button//
+    // localStorage.clear()
+    // $("#history-list").empty
+  // });
 
   //populateMainInfo replaces search html with Info html. Also called from nav icons
   function populateMainInfo() {
@@ -93,7 +99,7 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (results) {
       //Index of results.artists can be iterated through at a later date to improve dynamics
-      
+
       var resArt = results.artists[0];
     
       artistObj = {
@@ -102,7 +108,6 @@ $(document).ready(function () {
         activeTo: resArt["life-span"].end,
         genre: resArt.tags[0].name,
         origin: resArt["begin-area"].name + "," + " " +  resArt.area.name  
-        
       };
       //Moved these functions below the API call so I could grab the artistObj to pass into populateMenu function in order to have access to the artist name
       $(".main-content").empty();
@@ -171,11 +176,16 @@ $(document).ready(function () {
     });
   }
 
+  //JD 10/2 added MainTour function
+  //Populates main-content with upcoming tour date information
   function populateMainTour() {
     $(".main-content").empty();
     populateMenu();
     activateListeners();
 
+    //BANDSINTOWN API
+    //call url https://rest.bandsintown.com/artists/{{artist_name}}/?app_id=yOUrSuP3r3ven7aPp-id
+    //docs https://artists.bandsintown.com/support/public-api?_ga=2.110307469.924392.1601057589-666678079.1600528655
     $.ajax({
       url:
         "https://rest.bandsintown.com/artists/" +
@@ -194,7 +204,8 @@ $(document).ready(function () {
       $(".main-content").append(
         "<br><h4 id='tour-header'>Upcoming Performances</h2><br><div id='artist-tour-pic'></div>",
         $("#artist-tour-pic").empty()
-      ); if (response.length < 1) {
+      );
+      if (response.length < 1) {
         $(".main-content").append(
           "<br><span>Sorry, no performances currently scheduled.</span>"
         );
@@ -243,11 +254,11 @@ $(document).ready(function () {
 
   //populates a YouTube player in the main-content space
   function populateMainYoutube() {
-
     $.ajax({
       url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&kind=video&q=" +
       artistObj.artist +
       "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
+
       method: "GET",
     }).then(function (response) {
       console.log(response);
@@ -261,15 +272,17 @@ $(document).ready(function () {
       activateListeners();
       console.log("videoId: " + videoId);
       if (videoId === undefined) {
-        $(".main-content").append("<p>We apologize, no videos are returning for this artist</p>")
+        $(".main-content").append(
+          "<p>We apologize, no videos are returning for this artist</p>"
+        );
       } else {
-
-      $(".main-content").append(
-        "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
-          videoId +
-          "'></iframe>"
-      );
-    };})
+        $(".main-content").append(
+          "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
+            videoId +
+            "'></iframe>"
+        );
+      }
+    });
     // $(".main-content").empty();
     // populateMenu();
     // activateListeners();
