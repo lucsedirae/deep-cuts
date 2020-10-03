@@ -2,13 +2,19 @@
 var artistHistoryCache = [];
 var artistHistory = JSON.parse(localStorage.getItem("artistHistory")) || [];
 var tourObj = {};
-var artistObj = {};
-
+var artistObj = {}; 
 
 //initialization function
 $(document).ready(function () {
   //calls function that appends default HTML to DOM
   populateMainSearch();
+  populateNav();
+    $("#youtube-drop-btn").on("click", populateMainYoutube);
+    $("#info-drop-btn").on("click", populateMainInfo);
+    $("#search-drop-btn").on("click", populateMainSearch);
+    $("#artist-drop-btn").on("click", populateMainHistory);
+    $("#calender-drop-btn").on("click", populateMainTour);
+  populateMainSearch(artistObj);
 
   //when called, it sets a set of event listeners in place allowing the nav icons to fucntion
   function activateListeners() {
@@ -54,6 +60,8 @@ $(document).ready(function () {
           "><i class='' aria-hidden='true'></i></button></span>"
       );
     }
+
+    console.log(artistHistoryCache);
     $(".trash").on("click", function () {
       // alert("foo")
       console.log($(this).data("i"));
@@ -76,16 +84,14 @@ $(document).ready(function () {
   //   artistHistoryCache.splice($(this).data("i"), 1);
   //   localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache));
   //   populateMainHistory();
-   
 
-    //these can be used for a clear all button//
-    // localStorage.clear()
-    // $("#history-list").empty
+  //these can be used for a clear all button//
+  // localStorage.clear()
+  // $("#history-list").empty
   // });
 
   //populateMainInfo replaces search html with Info html. Also called from nav icons
   function populateMainInfo() {
-    
     //MUSICBRAINZ API
     //musicbrainz documentation link and call url (no api key required)
     //call url https://musicbrainz.org/ws/2/
@@ -101,13 +107,13 @@ $(document).ready(function () {
       //Index of results.artists can be iterated through at a later date to improve dynamics
 
       var resArt = results.artists[0];
-    
+
       artistObj = {
         artist: resArt["name"],
         activeFrom: resArt["life-span"].begin,
         activeTo: resArt["life-span"].end,
         genre: resArt.tags[0].name,
-        origin: resArt["begin-area"].name + "," + " " +  resArt.area.name  
+        origin: resArt["begin-area"].name + "," + " " + resArt.area.name,
       };
       //Moved these functions below the API call so I could grab the artistObj to pass into populateMenu function in order to have access to the artist name
       $(".main-content").empty();
@@ -115,8 +121,16 @@ $(document).ready(function () {
       populateMenu(artistObj);
       activateListeners();
 
+      artistHistoryCache = artistHistory;
+      //validation to ensure there are no duplicates in artistHistory array
+      if (artistHistoryCache.indexOf(artistObj.artist) === -1) {
+        artistHistoryCache.push(artistObj.artist);
+        console.log(artistHistoryCache);
+        storeArtist();
+      }
+
       //conditional for artists that are still active
-      if(resArt["life-span"].end === undefined){
+      if (resArt["life-span"].end === undefined) {
         artistObj.activeTo = "Current";
       }
 
@@ -164,12 +178,13 @@ $(document).ready(function () {
         return;
       }
 
-      artistHistoryCache = artistHistory;
+      /* artistHistoryCache = artistHistory;
       //validation to ensure there are no duplicates in artistHistory array
-      if (artistHistoryCache.indexOf(currentArtistName) === -1) {
-        artistHistoryCache.push(currentArtistName);
+      if (artistHistoryCache.indexOf(artistObj.artist) === -1) {
+        artistHistoryCache.push(artistObj.artist);
+        console.log(artistHistoryCache);
         storeArtist();
-      }
+      } */
 
       populateMainInfo();
       $("#input").val("");
@@ -255,7 +270,7 @@ $(document).ready(function () {
   //populates a YouTube player in the main-content space
   function populateMainYoutube() {
     $.ajax({
-      url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&kind=video&q=" +
+      url: "https://www.googleapis.com/youtube/v3/search?type=video&maxResults=5&q=" +
       artistObj.artist +
       "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
 
@@ -315,9 +330,14 @@ $(document).ready(function () {
   function storeArtist() {
     localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache));
   }
+});
 
-  // THIS IS JAVACRIPT FOR THE NAV MENTI
-  (function () {
+// THIS IS JAVACRIPT FOR THE NAV MENTI
+function populateNav() {
+  $("body").prepend("<div id='dropDownMenu' class='row'></div>");
+  $("#dropDownMenu").append(
+    "<div class='col s3'><div class='nav-toggle'><div class='nav-toggle-bar'></div></div><nav class='nav'> <ul class='col s12'><li id='youtube-drop-btn' class='fab fa-youtube'> YouTube</li><br/><li id='info-drop-btn'class='fas fa-info-circle'> Artist Info</li><br/><li id='calender-drop-btn' class='fas fa-calendar-alt'> Tour Dates</li><br/><li id='artist-drop-btn' class='fas fa-list-alt'> My Artists</li><br/><li id='search-drop-btn' class='fas fa-search'> Search</li></ul></nav></div>");
+  
     var hamburger = {
       navToggle: document.querySelector(".nav-toggle"),
       nav: document.querySelector("nav"),
@@ -332,10 +352,5 @@ $(document).ready(function () {
     hamburger.navToggle.addEventListener("click", function (e) {
       hamburger.doToggle(e);
     });
-    hamburger.nav.addEventListener("click", function (e) {
-      hamburger.doToggle(e);
-    });
-  });
-});
-
-
+    // hamburger.nav.addEventListener('click', function(e) { hamburger.doToggle(e); });
+}
