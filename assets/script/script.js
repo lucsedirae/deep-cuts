@@ -2,7 +2,7 @@
 var artistHistoryCache = [];
 var artistHistory = JSON.parse(localStorage.getItem("artistHistory")) || [];
 var tourObj = {};
-var artistObj = {};
+var artistObj = {}; 
 
 //initialization function
 $(document).ready(function () {
@@ -14,6 +14,7 @@ $(document).ready(function () {
     $("#search-drop-btn").on("click", populateMainSearch);
     $("#artist-drop-btn").on("click", populateMainHistory);
     $("#calender-drop-btn").on("click", populateMainTour);
+  populateMainSearch(artistObj);
 
   //when called, it sets a set of event listeners in place allowing the nav icons to fucntion
   function activateListeners() {
@@ -59,6 +60,8 @@ $(document).ready(function () {
           "><i class='' aria-hidden='true'></i></button></span>"
       );
     }
+
+    console.log(artistHistoryCache);
     $(".trash").on("click", function () {
       // alert("foo")
       console.log($(this).data("i"));
@@ -118,6 +121,14 @@ $(document).ready(function () {
       populateMenu(artistObj);
       activateListeners();
 
+      artistHistoryCache = artistHistory;
+      //validation to ensure there are no duplicates in artistHistory array
+      if (artistHistoryCache.indexOf(artistObj.artist) === -1) {
+        artistHistoryCache.push(artistObj.artist);
+        console.log(artistHistoryCache);
+        storeArtist();
+      }
+
       //conditional for artists that are still active
       if (resArt["life-span"].end === undefined) {
         artistObj.activeTo = "Current";
@@ -167,12 +178,13 @@ $(document).ready(function () {
         return;
       }
 
-      artistHistoryCache = artistHistory;
+      /* artistHistoryCache = artistHistory;
       //validation to ensure there are no duplicates in artistHistory array
-      if (artistHistoryCache.indexOf(currentArtistName) === -1) {
-        artistHistoryCache.push(currentArtistName);
+      if (artistHistoryCache.indexOf(artistObj.artist) === -1) {
+        artistHistoryCache.push(artistObj.artist);
+        console.log(artistHistoryCache);
         storeArtist();
-      }
+      } */
 
       populateMainInfo();
       $("#input").val("");
@@ -258,10 +270,9 @@ $(document).ready(function () {
   //populates a YouTube player in the main-content space
   function populateMainYoutube() {
     $.ajax({
-      url:
-        "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&kind=video&q=" +
-        artistObj.artist +
-        "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
+      url: "https://www.googleapis.com/youtube/v3/search?type=video&maxResults=5&q=" +
+      artistObj.artist +
+      "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
 
       method: "GET",
     }).then(function (response) {
