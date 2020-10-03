@@ -177,6 +177,7 @@ h4 {
 #history-btn,
 #tour-btn {
   transition: ease-in 0.2s;
+  color: black;
 }
 
 #youtube-btn:hover,
@@ -192,10 +193,7 @@ h4 {
   font-size: 20px;
 }
 
-#tour-btn{
-  color: black;
-  transition: ease-in 0.2s;
-}
+
 
 /* @media only screen and (min-height: 800px){
     .main-content{
