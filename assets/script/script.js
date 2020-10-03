@@ -187,7 +187,6 @@ $(document).ready(function () {
         storeArtist();
       }
 
-      // callYoutubeAPI();
       populateMainInfo();
       $("#input").val("");
     });
@@ -216,8 +215,12 @@ $(document).ready(function () {
       $(".main-content").append(
         "<br><h4>Upcoming Performances</h2><br><div id='artist-tour-pic'></div>",
         $("#artist-tour-pic").empty()
-      );
-      if (response !== undefined) {
+      ); if (response.length < 1) {
+        $(".main-content").append(
+          "<br><span>Sorry, no performances currently scheduled.</span>"
+        );
+        $("#artist-tour-pic").empy();
+      } else {
         for (var i = 0; i < response.length; i++) {
           tourObj = {
             image: response[0].artist.thumb_url,
@@ -255,25 +258,17 @@ $(document).ready(function () {
         $("#artist-tour-pic").append(
           "<img class='thumbnail' src='" + tourObj.image + "'>"
         );
-      } else {
-        $(".main-content").append(
-          "<br><span>Sorry, no performances currently scheduled.</span>"
-        );
-        $("#artist-tour-pic").empy();
       }
     });
   }
 
   //populates a YouTube player in the main-content space
   function populateMainYoutube() {
-    // callYoutubeAPI();
 
     $.ajax({
-      //***ISSUE!!*** url has nirvana hardcoded in and so the results are always nirvana no matter what the currentArtistName is
-      url:
-        "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&kind=video&q=" +
-        currentArtistName +
-        "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
+      url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&kind=video&q=" +
+      currentArtistName +
+      "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
       method: "GET",
     }).then(function (response) {
       console.log(response);
