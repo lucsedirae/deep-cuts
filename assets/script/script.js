@@ -3,6 +3,7 @@ var artistHistoryCache = [];
 var artistHistory = JSON.parse(localStorage.getItem("artistHistory")) || [];
 var tourObj = {};
 
+
 //initialization function
 $(document).ready(function () {
   //calls function that appends default HTML to DOM
@@ -66,28 +67,24 @@ $(document).ready(function () {
       // $("#history-list").empty
     });
   }
-  $(".trash").on("click", function () {
-    // alert("foo")
-    console.log($(this).data("i"));
-    console.log("foo");
-    // var storage = JSON.parse(localStorage.getItem("artistHistory"))
-    artistHistoryCache.splice($(this).data("i"), 1);
-    localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache));
-    populateMainHistory();
+  // $(".trash").on("click", function () {
+  //   // alert("foo")
+  //   console.log($(this).data("i"));
+  //   console.log("foo");
+  //   // var storage = JSON.parse(localStorage.getItem("artistHistory"))
+  //   artistHistoryCache.splice($(this).data("i"), 1);
+  //   localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache));
+  //   populateMainHistory();
+   
 
     //these can be used for a clear all button//
     // localStorage.clear()
     // $("#history-list").empty
-  });
+  // });
 
   //populateMainInfo replaces search html with Info html. Also called from nav icons
   function populateMainInfo() {
-    $(".main-content").empty();
-    $(".main-content").attr("style", "margin-top: 16rem !important");
-    wikipediaSearch();
-    populateMenu();
-    activateListeners();
-
+    
     //MUSICBRAINZ API
     //musicbrainz documentation link and call url (no api key required)
     //call url https://musicbrainz.org/ws/2/
@@ -103,8 +100,7 @@ $(document).ready(function () {
       //Index of results.artists can be iterated through at a later date to improve dynamics
 
       var resArt = results.artists[0];
-      console.log(resArt);
-
+    
       artistObj = {
         artist: resArt["name"],
         activeFrom: resArt["life-span"].begin,
@@ -112,21 +108,20 @@ $(document).ready(function () {
         genre: resArt.tags[0].name,
         origin: resArt["begin-area"].name + "," + resArt.area.name,
       };
+      //Moved these functions below the API call so I could grab the artistObj to pass into populateMenu function in order to have access to the artist name
+      $(".main-content").empty();
+      $(".main-content").attr("style", "margin-top: 16rem !important");
+      populateMenu(artistObj);
+      activateListeners();
 
-      //JD 10/2 added validation for artist active until result undefined
-      if (artistObj.activeTo === undefined) {
-        artistObj.activeTo = "current";
+      //conditional for artists that are still active
+      if(resArt["life-span"].end === undefined){
+        artistObj.activeTo = "Current";
       }
-
-      $(".main-content").append(
-        "<br><div class='row'></div><div class='col s12' id='info-box'>Name: " +
-          artistObj.artist +
-          "</div>"
-      );
       $(".main-content").append(
         "<br><div class='row'></div><div class='col s12' id='info-box'>Years active: " +
           artistObj.activeFrom +
-          " until " +
+          " - " +
           artistObj.activeTo +
           "</div>"
       );
@@ -183,7 +178,7 @@ $(document).ready(function () {
   //Populates main-content with upcoming tour date information
   function populateMainTour() {
     $(".main-content").empty();
-    populateMenu();
+    populateMenu(artistObj);
     activateListeners();
 
     //BANDSINTOWN API
@@ -203,14 +198,14 @@ $(document).ready(function () {
       console.log(response);
 
       $(".main-content").append(
-        "<br><h4>Upcoming Performances</h2><br><div id='artist-tour-pic'></div>",
+        "<br><h4 id='tour-header'>Upcoming Performances</h2><br><div id='artist-tour-pic'></div>",
         $("#artist-tour-pic").empty()
       );
       if (response.length < 1) {
         $(".main-content").append(
           "<br><span>Sorry, no performances currently scheduled.</span>"
         );
-        $("#artist-tour-pic").empy();
+        $("#artist-tour-pic").empty();
       } else {
         for (var i = 0; i < response.length; i++) {
           tourObj = {
@@ -298,11 +293,11 @@ $(document).ready(function () {
   }
 
   //Appends nav icons to DOM
-  function populateMenu() {
+  function populateMenu(artistObj) {
     $(".main-content")
       .hide()
       .append(
-        "<h1>" + currentArtistName + "</h1>",
+        "<h1>" + artistObj.artist + "</h1>",
         "<i class='fab fa-youtube fa-3x navi-btn' id='youtube-btn'></i></a>",
         "<i class='fas fa-info-circle fa-3x navi-btn' id='info-btn'></i></a>",
         "<i class='fas fa-calendar-alt fa-3x navi-btn' id='tour-btn'></i></a>",
