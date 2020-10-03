@@ -212,15 +212,15 @@ h4 {
 } */
 
 
-
+/* THIS IS FOR THE NAV */
 .nav {
   -webkit-transition: left 0.5s ease;
   -moz-transition: left 0.5s ease;
   -ms-transition: left 0.5s ease;
   -o-transition: left 0.5s ease;
   transition: left 0.5s ease;
-  background: #28dde0;
-  color: white;
+  background: #f2a441;
+  color: black;
   cursor: pointer;
   font-size: 2rem;
   height: 100vh;
