@@ -34,22 +34,9 @@ $(document).ready(function () {
     $(".main-content").append(
       "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>"
     );
-
     appendArtist();
-    // $(".trash").on("click", function() {
-    //   alert("foo")
-    //   console.log("foo")
-    //   var searchHistory = jQuery.data('i')
-    //   console.log(searchHistory)
-    //   artistHistoryCache.splice(searchHistory, 1)
-    // });
-
-    // $("data-button").on("click", function() {
-    //   jQuery.data('delete', artistHistoryCache.splice(i))
-    //  });
     $(".prev-search").on("click", function () {
       currentArtistName = $(this).text();
-      // console.log("test" + currentArtistName);
       populateMainInfo();
     });
   }
@@ -199,6 +186,9 @@ $(document).ready(function () {
     populateMenu();
     activateListeners();
 
+    //BANDSINTOWN API
+    //call url https://rest.bandsintown.com/artists/{{artist_name}}/?app_id=yOUrSuP3r3ven7aPp-id
+    //docs https://artists.bandsintown.com/support/public-api?_ga=2.110307469.924392.1601057589-666678079.1600528655
     $.ajax({
       url:
         "https://rest.bandsintown.com/artists/" +
@@ -215,7 +205,8 @@ $(document).ready(function () {
       $(".main-content").append(
         "<br><h4>Upcoming Performances</h2><br><div id='artist-tour-pic'></div>",
         $("#artist-tour-pic").empty()
-      ); if (response.length < 1) {
+      );
+      if (response.length < 1) {
         $(".main-content").append(
           "<br><span>Sorry, no performances currently scheduled.</span>"
         );
@@ -264,11 +255,11 @@ $(document).ready(function () {
 
   //populates a YouTube player in the main-content space
   function populateMainYoutube() {
-
     $.ajax({
-      url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&kind=video&q=" +
-      currentArtistName +
-      "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
+      url:
+        "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&kind=video&q=" +
+        currentArtistName +
+        "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
       method: "GET",
     }).then(function (response) {
       console.log(response);
