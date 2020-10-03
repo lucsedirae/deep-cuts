@@ -279,7 +279,7 @@ $(document).ready(function () {
       } else {
 
       $(".main-content").append(
-        "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
+          "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
           videoId +
           "'></iframe>"
       );
