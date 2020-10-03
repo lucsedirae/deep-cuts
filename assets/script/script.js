@@ -276,6 +276,15 @@ $(document).ready(function () {
           "<p>We apologize, no videos are returning for this artist</p>"
         );
       } else {
+<<<<<<< HEAD
+
+      $(".main-content").append(
+          "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
+          videoId +
+          "'></iframe>"
+      );
+    };})
+=======
         $(".main-content").append(
           "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
             videoId +
@@ -283,6 +292,7 @@ $(document).ready(function () {
         );
       }
     });
+>>>>>>> a2ca71540eff7c5c51c6ca61f1fb8bef93c897e9
     // $(".main-content").empty();
     // populateMenu();
     // activateListeners();
