@@ -8,7 +8,7 @@ var artistObj = {};
 //initialization function
 $(document).ready(function () {
   //calls function that appends default HTML to DOM
-  populateMainSearch();
+  populateMainSearch(artistObj);
 
   //when called, it sets a set of event listeners in place allowing the nav icons to fucntion
   function activateListeners() {
@@ -54,6 +54,8 @@ $(document).ready(function () {
           "><i class='' aria-hidden='true'></i></button></span>"
       );
     }
+
+    console.log(artistHistoryCache);
     $(".trash").on("click", function () {
       // alert("foo")
       console.log($(this).data("i"));
@@ -115,6 +117,14 @@ $(document).ready(function () {
       populateMenu(artistObj);
       activateListeners();
 
+      artistHistoryCache = artistHistory;
+      //validation to ensure there are no duplicates in artistHistory array
+      if (artistHistoryCache.indexOf(artistObj.artist) === -1) {
+        artistHistoryCache.push(artistObj.artist);
+        console.log(artistHistoryCache);
+        storeArtist();
+      }
+
       //conditional for artists that are still active
       if(resArt["life-span"].end === undefined){
         artistObj.activeTo = "Current";
@@ -164,12 +174,13 @@ $(document).ready(function () {
         return;
       }
 
-      artistHistoryCache = artistHistory;
+      /* artistHistoryCache = artistHistory;
       //validation to ensure there are no duplicates in artistHistory array
-      if (artistHistoryCache.indexOf(currentArtistName) === -1) {
-        artistHistoryCache.push(currentArtistName);
+      if (artistHistoryCache.indexOf(artistObj.artist) === -1) {
+        artistHistoryCache.push(artistObj.artist);
+        console.log(artistHistoryCache);
         storeArtist();
-      }
+      } */
 
       populateMainInfo();
       $("#input").val("");
