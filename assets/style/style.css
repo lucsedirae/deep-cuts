@@ -164,7 +164,7 @@ h4 {
 #youtube-btn,
 #info-btn,
 #search-nav-btn,
-#history-btn
+#history-btn,
 #tour-btn {
   transition: ease-in 0.2s;
 }
@@ -173,9 +173,18 @@ h4 {
 #info-btn:hover,
 #search-nav-btn:hover,
 #history-btn:hover,
-#tour-btn {
+#tour-btn:hover {
   transform: scale(1.1);
   color: #f2a441;
+}
+
+#tour-header{
+  font-size: 20px;
+}
+
+#tour-btn{
+  color: black;
+  transition: ease-in 0.2s;
 }
 
 /* @media only screen and (min-height: 800px){
