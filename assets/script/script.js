@@ -78,8 +78,8 @@ $(document).ready(function () {
 
   //populateMainInfo replaces search html with Info html. Also called from nav icons
   function populateMainInfo() {
-    $(".main-content").empty();
-    $(".main-content").attr("style", "margin-top: 16rem !important");
+    
+    
     wikipediaSearch();
     
     
@@ -110,7 +110,8 @@ $(document).ready(function () {
         origin: resArt["begin-area"].name + "," + resArt.area.name  
         
       };
-
+      $(".main-content").empty();
+      $(".main-content").attr("style", "margin-top: 16rem !important");
       populateMenu(artistObj);
       activateListeners();
 
