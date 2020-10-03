@@ -2,7 +2,7 @@
 var artistHistoryCache = [];
 var artistHistory = JSON.parse(localStorage.getItem("artistHistory")) || [];
 var tourObj = {};
-var artistObj = {};
+var artistObj = {}; 
 
 
 //initialization function
