@@ -1,5 +1,5 @@
 // var currentArtistName = $(".searchTerm").val();
-var currentArtistName = "Keller Williams";
+var currentArtistName = "";
 
 var artistList = [];
 var artistObj = {};
@@ -10,26 +10,6 @@ var youtubeURL =
   "https://www.googleapis.com/youtube/v3/search?video?maxResults=5&q=" +
   currentArtistName +
   "&key=AIzaSyBs1UbG6uKN4uWlNo0WeK40hCXno9YmAjI";
-
-//BANDSINTOWN API
-//bandsintown api url, api key & documentation link
-//call url https://rest.bandsintown.com/artists/{{artist_name}}/?app_id=yOUrSuP3r3ven7aPp-id
-//docs https://artists.bandsintown.com/support/public-api?_ga=2.110307469.924392.1601057589-666678079.1600528655
-// function callBandsInTownAPI() {
-//   $.ajax({
-//     url:
-//       "https://rest.bandsintown.com/artists/" +
-//       currentArtistName +
-//       "/events/?app_id=451417d0c04a068bd2475d36b0555961",
-
-//     // "https://cors-anywhere.herokuapp.com/https://rest.bandsintown.com/artists/" +
-//     // currentArtistName +
-//     // "/?app_id=451417d0c04a068bd2475d36b0555961",
-//     method: "GET",
-//   }).then(function (response) {
-//     console.log(response);
-//   });
-// }
 
 // Make sure the client is loaded and sign-in is complete before calling this method.
 function execute() {
@@ -80,8 +60,6 @@ function wikipediaSearch() {
       // console.log(error);
     });
 }
-
-
 
 //SPOTIFY/SHAZAM API
 //spotify api url
