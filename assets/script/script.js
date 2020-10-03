@@ -79,11 +79,6 @@ $(document).ready(function () {
   //populateMainInfo replaces search html with Info html. Also called from nav icons
   function populateMainInfo() {
     
-    
-    wikipediaSearch();
-    
-    
-
     //MUSICBRAINZ API
     //musicbrainz documentation link and call url (no api key required)
     //call url https://musicbrainz.org/ws/2/
@@ -99,9 +94,7 @@ $(document).ready(function () {
       //Index of results.artists can be iterated through at a later date to improve dynamics
       
       var resArt = results.artists[0];
-      console.log(resArt);
-      
-  
+    
       artistObj = {
         artist: resArt["name"],
         activeFrom: resArt["life-span"].begin,
@@ -110,23 +103,13 @@ $(document).ready(function () {
         origin: resArt["begin-area"].name + "," + resArt.area.name  
         
       };
+      //Moved these functions below the API call so I could grab the artistObj to pass into populateMenu function in order to have access to the artist name
       $(".main-content").empty();
       $(".main-content").attr("style", "margin-top: 16rem !important");
       populateMenu(artistObj);
       activateListeners();
 
-      
-
-      console.log(artistObj);
-
-      
-
-      /* $(".main-content").append(
-        "<br><div class='row'></div><div class='col s12' id='info-box'>Name: " +
-          artistObj.artist +
-          "</div>"
-      ); */
-
+      //conditional for artists that are still active
       if(resArt["life-span"].end === undefined){
         artistObj.activeTo = "Current";
       }
