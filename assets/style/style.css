@@ -84,7 +84,7 @@ body {
 }
 
 /* JD 9/30 Added cursor:pointer to nav-btns */
-.nav-btn {
+.navi-btn {
   cursor: pointer;
 }
 
@@ -106,6 +106,10 @@ h1 {
   font-family: "Orbitron", sans-serif;
   font-size: 40px;
   letter-spacing: 5px;
+}
+
+h4 {
+  font-family: "Orbitron", sans-serif;
 }
 
 #input {
@@ -133,33 +137,55 @@ h1 {
   box-shadow: 0px 0px 18px 2px #f2a441;
 }
 
-
-.home-btn{
-  font-size: 35px;
-  transition: ease-in .2s
+.trash {
+  display: inline-block;
+  cursor: pointer;
+  border: 0px solid #3498db;
+  background-color: transparent;
 }
 
-.home-btn:hover{
+.home-btn {
+  font-size: 35px;
+  transition: ease-in 0.2s;
+}
+
+.home-btn:hover {
   cursor: pointer;
   transform: scale(1.2);
   color: #f2a441;
 }
 
-#youtube-btn, #info-btn, #search-nav-btn, #history-btn{
-  transition: ease-in .2s;
+.thumbnail {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 1rem;
 }
 
-#youtube-btn:hover, #info-btn:hover, #search-nav-btn:hover, #history-btn:hover{
-  transform:scale(1.1);
-  color:#f2a441;
+#youtube-btn,
+#info-btn,
+#search-nav-btn,
+#history-btn,
+#tour-btn {
+  transition: ease-in 0.2s;
 }
 
+#youtube-btn:hover,
+#info-btn:hover,
+#search-nav-btn:hover,
+#history-btn:hover,
+#tour-btn:hover {
+  transform: scale(1.1);
+  color: #f2a441;
+}
 
+#tour-header{
+  font-size: 20px;
+}
 
-
-
-
-
+#tour-btn{
+  color: black;
+  transition: ease-in 0.2s;
+}
 
 /* @media only screen and (min-height: 800px){
     .main-content{
@@ -234,9 +260,13 @@ h1 {
   z-index: 2;
 }
 
-.nav-toggle:hover { opacity: 0.8; }
+.nav-toggle:hover {
+  opacity: 0.8;
+}
 
-.nav-toggle .nav-toggle-bar,  .nav-toggle .nav-toggle-bar::after,  .nav-toggle .nav-toggle-bar::before {
+.nav-toggle .nav-toggle-bar,
+.nav-toggle .nav-toggle-bar::after,
+.nav-toggle .nav-toggle-bar::before {
   position: absolute;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -248,20 +278,29 @@ h1 {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
   background: white;
-  content: '';
+  content: "";
   height: 0.4rem;
   width: 100%;
 }
 
-.nav-toggle .nav-toggle-bar { margin-top: 0; }
+.nav-toggle .nav-toggle-bar {
+  margin-top: 0;
+}
 
-.nav-toggle .nav-toggle-bar::after { margin-top: 0.8rem; }
+.nav-toggle .nav-toggle-bar::after {
+  margin-top: 0.8rem;
+}
 
-.nav-toggle .nav-toggle-bar::before { margin-top: -0.8rem; }
+.nav-toggle .nav-toggle-bar::before {
+  margin-top: -0.8rem;
+}
 
-.nav-toggle.expanded .nav-toggle-bar { background: transparent; }
+.nav-toggle.expanded .nav-toggle-bar {
+  background: transparent;
+}
 
-.nav-toggle.expanded .nav-toggle-bar::after, .nav-toggle.expanded .nav-toggle-bar::before {
+.nav-toggle.expanded .nav-toggle-bar::after,
+.nav-toggle.expanded .nav-toggle-bar::before {
   background: white;
   margin-top: 0;
 }
