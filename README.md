@@ -1,21 +1,21 @@
-# deep-cuts
-Working title for an app that lets you save musical artists locally and presents a listening guide to help explore their music
+# Pitch:
 
-Deep Cuts:
-Pitch:
-
-Deep Cuts is a music app where users are introduced to new artists via their top three songs on youtube, wikipedia page, spotify page, and tour dates.
+## Pitch is a music app where users are introduced to new artists via their top songs on youtube, background info, and tour dates.
 
 
-“A deep cut usually refers to non-radio singles by an artist (which tend to be often underplayed), and older songs. “ Unknown
+Pitch was created by music fans, for music fans. Whether you want to check out a new artist or follow one of your favorites, Pitch has compiled all the information you need in one place!
 
-Deep cuts was created by music fans, for music fans. Whether you want to check out a new artist or follow one of your “top five”, Pitch has compiled all the information you need on your favorite artists in one place. Pitch displays an artists top three music videos so you can experience their best sound. Afterwards, check out their spotify page without switching from app to app. Want to learn more about your favorite artists? Pitch has you covered with the latest, up to date information from wikipedia. Want to see a band live Pitch collects tour dates from artists around the world. 
+### Pitch displays an artists top  music videos so you can experience their best sound.
+ Using googles YouTube API.
+# imgYouTube
+ 
+ ### Learn more about an artist by checking out their info section.
+Using Music Brainz Api.
+ # imgInfo
 
+ ### Want to see a band live Pitch collects tour dates from artists around the world. 
+ Using Bands in Town API.
+ # imgtourDates
 
--spotify
+>“A deep cut usually refers to non-radio singles by an artist (which tend to be often >underplayed), and older songs. “ Unknown
 
--wikipedia 
-
--youtube
-
--tourdates
