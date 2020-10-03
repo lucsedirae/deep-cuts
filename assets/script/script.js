@@ -2,6 +2,7 @@
 var artistHistoryCache = [];
 var artistHistory = JSON.parse(localStorage.getItem("artistHistory")) || [];
 var tourObj = {};
+var artistObj = {};
 
 
 //initialization function
@@ -106,7 +107,7 @@ $(document).ready(function () {
         activeFrom: resArt["life-span"].begin,
         activeTo: resArt["life-span"].end,
         genre: resArt.tags[0].name,
-        origin: resArt["begin-area"].name + "," + resArt.area.name,
+        origin: resArt["begin-area"].name + "," + " " +  resArt.area.name  
       };
       //Moved these functions below the API call so I could grab the artistObj to pass into populateMenu function in order to have access to the artist name
       $(".main-content").empty();
@@ -118,20 +119,21 @@ $(document).ready(function () {
       if(resArt["life-span"].end === undefined){
         artistObj.activeTo = "Current";
       }
+
       $(".main-content").append(
-        "<br><div class='row'></div><div class='col s12' id='info-box'>Years active: " +
+        "<br><div class='row'></div><div class='col s6 offset-s3' id='info-box'>Years active : " +
           artistObj.activeFrom +
           " - " +
           artistObj.activeTo +
           "</div>"
       );
       $(".main-content").append(
-        "<br><div class='row'></div><div class='col s12' id='info-box'>Genre: " +
+        "<br><div class='row'></div><div class='col s6 offset-s3' id='info-box'>Genre : " +
           artistObj.genre +
           "</div>"
       );
       $(".main-content").append(
-        "<br><div class='row'></div><div class='col s12' id='info-box'>Origin: " +
+        "<br><div class='row'></div><div class='col s6 offset-s3' id='info-box'>Origin : " +
           artistObj.origin +
           "</div>"
       );
@@ -149,7 +151,7 @@ $(document).ready(function () {
         "<h1 id='site-header'>pitch<span><i class='fas fa-compact-disc'></i></span></h1>",
         "<h6>An intuitive guide to help you navigate the world of music</h6>",
         "<input type='text' class='searchTerm' id='input' placeholder='Enter Artist Name'/><br />",
-        "<a class='waves-effect waves-light btn-large search-btn'>Find Your Band!</a>"
+        "<a class='waves-effect waves-light btn-large search-btn'>Find A Band!</a>"
       )
       .fadeIn(800);
     $(".search-btn").on("click", function (event) {
@@ -178,7 +180,7 @@ $(document).ready(function () {
   //Populates main-content with upcoming tour date information
   function populateMainTour() {
     $(".main-content").empty();
-    populateMenu(artistObj);
+    populateMenu();
     activateListeners();
 
     //BANDSINTOWN API
@@ -187,7 +189,7 @@ $(document).ready(function () {
     $.ajax({
       url:
         "https://rest.bandsintown.com/artists/" +
-        currentArtistName +
+        artistObj.artist +
         "/events/?app_id=451417d0c04a068bd2475d36b0555961",
 
       // "https://cors-anywhere.herokuapp.com/https://rest.bandsintown.com/artists/" +
@@ -196,6 +198,8 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (response) {
       console.log(response);
+
+      $(".main-content").attr("style", "margin-top: 5rem !important");
 
       $(".main-content").append(
         "<br><h4 id='tour-header'>Upcoming Performances</h2><br><div id='artist-tour-pic'></div>",
@@ -251,10 +255,10 @@ $(document).ready(function () {
   //populates a YouTube player in the main-content space
   function populateMainYoutube() {
     $.ajax({
-      url:
-        "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&kind=video&q=" +
-        currentArtistName +
-        "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
+      url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&kind=video&q=" +
+      artistObj.artist +
+      "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
+
       method: "GET",
     }).then(function (response) {
       console.log(response);
@@ -293,7 +297,7 @@ $(document).ready(function () {
   }
 
   //Appends nav icons to DOM
-  function populateMenu(artistObj) {
+  function populateMenu() {
     $(".main-content")
       .hide()
       .append(
