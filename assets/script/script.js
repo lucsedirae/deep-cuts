@@ -233,7 +233,12 @@ $(document).ready(function () {
 
   //Populates main-content with upcoming tour date information
   function populateMainTour() {
+    
     $(".main-content").empty();
+    $("#main-content").removeClass("main-content").addClass("tour-content")
+    // $(".main-content").attr("style", "width:30rem !important");
+    $(".main-content").attr("style", "height:60rem !important");
+    // $(".main-content").attr("style", "overflow-y:auto !important");
     populateMenu();
     activateListeners();
 
@@ -253,14 +258,15 @@ $(document).ready(function () {
     }).then(function (response) {
       console.log(response);
 
-      $(".main-content").attr("style", "margin-top: 5rem !important");
+      $(".tour-content").attr("style", "margin-top: 5rem !important");
 
-      $(".main-content").append(
+      $(".tour-content").append(
         "<br><h4 id='tour-header'>Upcoming Performances</h2><br><div id='artist-tour-pic'></div>",
         $("#artist-tour-pic").empty()
       );
       if (response.length < 1) {
-        $(".main-content").append(
+
+        $(".tour-content").append(
           "<br><span>Sorry, no performances currently scheduled.</span>"
         );
         $("#artist-tour-pic").empty();
@@ -277,20 +283,20 @@ $(document).ready(function () {
           };
           console.log("Link: " + tourObj.locationVenue);
 
-          $(".main-content").append(
+          $(".tour-content").append(
             "<br><hr><span>Lineup: " + tourObj.lineup + "</span>"
           );
-          $(".main-content").append(
+          $(".tour-content").append(
             "<br><span>Location: " +
               tourObj.locationVenue +
               "</span><br><span>" +
               tourObj.locationCity +
               "</span>"
           );
-          $(".main-content").append(
+          $(".tour-content").append(
             "<br><span>Date: " + tourObj.date + "</span>"
           );
-          $(".main-content").append(
+          $(".tour-content").append(
             "<br><span>Tickets: " +
               tourObj.ticketStatus +
               "</span><br><span><a href='" +
