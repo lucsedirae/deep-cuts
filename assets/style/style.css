@@ -385,3 +385,16 @@ h4 {
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
+
+@media screen and (max-width: 800px) {
+  iframe {
+    width: 220px;
+    height: 170px;
+  }
+}
+
+@media screen and (max-width: 375px){
+  #main-content{
+    margin-top: 5rem;
+  }
+}
