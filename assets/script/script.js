@@ -198,6 +198,7 @@ $(document).ready(function () {
   //function is called during page initialization as well as on nav click
   function populateMainSearch() {
     $("#main-content").empty();
+    $("#main-content").addClass("main-content")
     $("#main-content").attr("style", "margin-top: 16rem !important");
     $("#main-content")
       .hide()
