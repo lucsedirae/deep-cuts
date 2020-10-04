@@ -128,7 +128,7 @@ $(document).ready(function () {
       };
       //Moved these functions below the API call so I could grab the artistObj to pass into populateMenu function in order to have access to the artist name
       $(".main-content").empty();
-      $(".main-content").attr("style", "margin-top: 16rem !important");
+      $(".main-content").attr("style", "margin-top: 8rem !important");
       populateMenu(artistObj);
       activateListeners();
       
@@ -198,7 +198,7 @@ $(document).ready(function () {
   //function is called during page initialization as well as on nav click
   function populateMainSearch() {
     $(".main-content").empty();
-    $(".main-content").attr("style", "margin-top: 16rem !important");
+    $(".main-content").attr("style", "margin-top: 14rem !important");
     $(".main-content")
       .hide()
       .append(
