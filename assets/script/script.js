@@ -233,7 +233,7 @@ $(document).ready(function () {
 
   //Populates main-content with upcoming tour date information
   function populateMainTour() {
-    
+    populateMenuTour()
     $(".main-content").empty();
     $("#main-content").removeClass("main-content").addClass("tour-content")
     // $(".main-content").attr("style", "width:30rem !important");
@@ -359,7 +359,7 @@ $(document).ready(function () {
 
   //Appends nav icons to DOM
   function populateMenu() {
-    $(".main-content")
+    $("#main-content")
       .hide()
       .append(
         "<h1>" + artistObj.artist + "</h1>",
@@ -371,7 +371,6 @@ $(document).ready(function () {
       )
       .fadeIn(800);
   }
-
   //stores artist list to local storage
   function storeArtist() {
     localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache));
