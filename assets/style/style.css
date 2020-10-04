@@ -1,3 +1,12 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 html {
   height: 100%;
 }
@@ -7,11 +16,9 @@ body {
 
   /* background-image:linear-gradient(purple, white); */
   /* JD reduced img quality to improve load time 9/29. New version is back3.jpg. Original back.jpg still in assets */
-  background-image: url(../images/back3.jpg);
+  background: url(../images/back3.jpg);
   background-position: center;
   background-size: cover;
-  
-  
 }
 
 #history-list {
@@ -24,15 +31,13 @@ body {
   overflow-x: auto;
   padding: 20px;
   text-align: center;
-  
 }
 
 .trash {
   white-space: nowrap;
-  cursor: pointer; 
-  border: 0px solid #3498db; 
+  cursor: pointer;
+  border: 0px solid #3498db;
   background-color: transparent;
-  
 }
 
 .prev-search {
@@ -47,20 +52,32 @@ body {
   font-size: 15px;
 }
 
-.prev-search:hover{
+.prev-search:hover {
   background-color: #f1b667;
-  
 }
-
 
 #info-box {
   margin-top: 1rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: bolder !important;
   box-shadow: 0px 0px 3px 2px black;
   border-radius: 8px;
   font-size: 17px;
+}
 
+#note-box {
+  margin-top: 1rem;
+  padding: 1rem;
+  height: 6rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: bolder !important;
+  box-shadow: 0px 0px 3px 2px black;
+  border-radius: 8px;
+  font-size: 17px;
+  background-color: whitesmoke;
+  text-align: center;
+  resize: none;
+  overflow-y: scroll;
 }
 
 #input {
@@ -72,7 +89,6 @@ body {
   font-weight: bold;
   margin: 20px;
   border-radius: 15px;
-  
 }
 
 /*Sets default value of card class to hidden */
@@ -91,12 +107,17 @@ body {
   margin-right: 1rem;
 }
 
-/* JD 9/30 Added cursor:pointer to nav-btns */
-.navi-btn {
+.navi-btn,
+#note-save-btn,
+#note-trash-btn .fa-github-square {
   cursor: pointer;
 }
 
-
+#note-save-btn,
+#note-trash-btn {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
 
 .search-btn {
   background-color: #f2a441 !important;
@@ -130,8 +151,6 @@ h4 {
   margin: 20px;
   border-radius: 6px;
 }
-
-
 
 .search-btn:hover {
   transform: scale(1.1);
@@ -189,11 +208,9 @@ h4 {
   color: #f2a441;
 }
 
-#tour-header{
+#tour-header {
   font-size: 20px;
 }
-
-
 
 /* @media only screen and (min-height: 800px){
     .main-content{
@@ -209,7 +226,25 @@ h4 {
   
 } */
 
-/* This is the hamburger Menu CSS 10/1 */
+/* THIS IS FOR THE NAV */
+
+#list{
+   font-size: 20px;
+   white-space: nowrap;
+   width: 90%;
+   line-height: 4rem;
+   
+  }
+
+  .nav-font{
+    font-family: "Orbitron", sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+  }
+  #about-drop-btn{
+    line-height: 6rem;
+    
+  }
 
 .nav {
   -webkit-transition: left 0.5s ease;
@@ -218,7 +253,7 @@ h4 {
   -o-transition: left 0.5s ease;
   transition: left 0.5s ease;
   background: rgba(226, 218, 210, 0.801);
-  color: white;
+  color: black;
   cursor: pointer;
   font-size: 2rem;
   height: 100vh;
@@ -226,18 +261,12 @@ h4 {
   padding: 6rem 2rem 2rem 2rem;
   position: fixed;
   top: 0;
-  width: 15rem;
+  width: 17rem;
   z-index: 1;
 }
 
-.nav.expanded { 
+.nav.expanded {
   left: 0;
-  background-color: rgba(226, 218, 210, 0.801);
-
-}
-
-.nav.expanded a{
-  color: black;
 }
 
 .nav ul {
@@ -250,11 +279,6 @@ h4 {
   margin: 0;
   padding: 0;
 }
-
-.nav-toggle expanded{
-  color: black;
-}
-
 .nav-toggle {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -264,7 +288,7 @@ h4 {
   left: 2rem;
   position: fixed;
   top: 2rem;
-  width: 2rem;
+  width: 3rem;
   z-index: 2;
 }
 
@@ -309,7 +333,7 @@ h4 {
 
 .nav-toggle.expanded .nav-toggle-bar::after,
 .nav-toggle.expanded .nav-toggle-bar::before {
-  background: white;
+  background: black;
   margin-top: 0;
 }
 

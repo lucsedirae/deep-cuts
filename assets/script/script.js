@@ -2,12 +2,20 @@
 var artistHistoryCache = [];
 var artistHistory = JSON.parse(localStorage.getItem("artistHistory")) || [];
 var tourObj = {};
-var artistObj = {}; 
-
+var artistObj = {};
 
 //initialization function
 $(document).ready(function () {
   //calls function that appends default HTML to DOM
+  populateMainSearch();
+  populateNav();
+  $("#youtube-drop-btn").on("click", populateMainYoutube);
+  $("#info-drop-btn").on("click", populateMainInfo);
+  $("#search-drop-btn").on("click", populateMainSearch);
+  $("#artist-drop-btn").on("click", populateMainHistory);
+  $("#calender-drop-btn").on("click", populateMainTour);
+  $("#about-drop-btn").on("click", populateMainAbout);
+
   populateMainSearch(artistObj);
 
   //when called, it sets a set of event listeners in place allowing the nav icons to fucntion
@@ -23,7 +31,6 @@ $(document).ready(function () {
   //populates main-content with a scrollable history list of previously searched artists
   function populateMainHistory() {
     $(".main-content").empty();
-
     $(".main-content").attr("style", "margin-top: 16rem !important");
     //Pass in "My Artists" as header for History Page : TK 10/1
     /* populateMenu(); */
@@ -78,16 +85,25 @@ $(document).ready(function () {
   //   artistHistoryCache.splice($(this).data("i"), 1);
   //   localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache));
   //   populateMainHistory();
-   
 
-    //these can be used for a clear all button//
-    // localStorage.clear()
-    // $("#history-list").empty
+  //these can be used for a clear all button//
+  // localStorage.clear()
+  // $("#history-list").empty
   // });
+
+  function populateMainAbout() {
+    $(".main-content").empty();
+    $(".main-content").prepend(
+      "<h1>About Us</h1>",
+      "<i class='fas fa-home home-btn'></i>",
+      "<hr><div class='row'><div class='col s2'></div><div class='col s8'><h1>pitch</h1><br><br><p>Pitch is an app that allows music enthusiasts to instantly research an artist and begin to explore their catalog.</p></div></div>",
+      "<hr><p>Pitch was created by:</p><br><ul><li>David Stinnett - <a href='https://github.com/serjykalstryke' class='fab fa-github-square fa-2x'></a></li><li>Mark Major - <a href='https://github.com/MarkMajorUR' class='fab fa-github-square fa-2x'></a></li><li>Tanner Kirkpatrick - <a href='https://github.com/twkirkpatrick' class='fab fa-github-square fa-2x'></a></li><li>Jon Deavers - <a href='https://github.com/lucsedirae' class='fab fa-github-square fa-2x'></a></li></ul>"
+    );
+    activateListeners();
+  }
 
   //populateMainInfo replaces search html with Info html. Also called from nav icons
   function populateMainInfo() {
-    
     //MUSICBRAINZ API
     //musicbrainz documentation link and call url (no api key required)
     //call url https://musicbrainz.org/ws/2/
@@ -100,16 +116,15 @@ $(document).ready(function () {
         "&fmt=json",
       method: "GET",
     }).then(function (results) {
-      //Index of results.artists can be iterated through at a later date to improve dynamics
-
+      console.log(results);
       var resArt = results.artists[0];
-    
+
       artistObj = {
         artist: resArt["name"],
         activeFrom: resArt["life-span"].begin,
         activeTo: resArt["life-span"].end,
         genre: resArt.tags[0].name,
-        origin: resArt["begin-area"].name + "," + " " +  resArt.area.name  
+        origin: resArt["begin-area"].name + "," + " " + resArt.area.name,
       };
       //Moved these functions below the API call so I could grab the artistObj to pass into populateMenu function in order to have access to the artist name
       $(".main-content").empty();
@@ -127,7 +142,7 @@ $(document).ready(function () {
       }
 
       //conditional for artists that are still active
-      if(resArt["life-span"].end === undefined){
+      if (resArt["life-span"].end === undefined) {
         artistObj.activeTo = "Current";
       }
 
@@ -148,6 +163,34 @@ $(document).ready(function () {
           artistObj.origin +
           "</div>"
       );
+      $(".main-content").append(
+        "<br><div class='row'></div><textarea class='col s6 offset-s3' id='note-box' placeholder='Write Listening Notes Here'></textarea></i>"
+      );
+      $(".main-content").append(
+        "<br><div class='row'></div><i class='fas fa-save fa-3x' id='note-save-btn'></i><i class='fa fa-trash fa-3x' id='note-trash-btn'>"
+      );
+
+      var savedNote = localStorage.getItem(currentArtistName + "-note:");
+      console.log(savedNote);
+
+      if (savedNote != []) {
+        $("#note-box").val(savedNote);
+      }
+
+      $("#note-save-btn").on("click", function () {
+        var artistNote = $("#note-box").val();
+        if (artistNote != "") {
+          localStorage.setItem(
+            currentArtistName + "-note:",
+            JSON.stringify(artistNote)
+          );
+        }
+      });
+
+      $("#note-trash-btn").on("click", function () {
+        localStorage.removeItem(currentArtistName + "-note:");
+        $("#note-box").val("");
+      });
     });
   }
 
@@ -188,7 +231,6 @@ $(document).ready(function () {
     });
   }
 
-  //JD 10/2 added MainTour function
   //Populates main-content with upcoming tour date information
   function populateMainTour() {
     $(".main-content").empty();
@@ -267,9 +309,10 @@ $(document).ready(function () {
   //populates a YouTube player in the main-content space
   function populateMainYoutube() {
     $.ajax({
-      url: "https://www.googleapis.com/youtube/v3/search?video?maxResults=2&kind=video&q=" +
-      artistObj.artist +
-      "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
+      url:
+        "https://www.googleapis.com/youtube/v3/search?type=video&maxResults=5&q=" +
+        artistObj.artist +
+        "&key=AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0",
 
       method: "GET",
     }).then(function (response) {
@@ -330,8 +373,12 @@ $(document).ready(function () {
 });
 
 // THIS IS JAVACRIPT FOR THE NAV MENTI
+function populateNav() {
+  $("body").prepend("<div id='dropDownMenu' class='row'></div>");
+  $("#dropDownMenu").append(
+    "<div class='col s3 drop'><div class='nav-toggle'><div class='nav-toggle-bar'></div></div><nav class='nav'> <ul class='col s12' id='list'><li id='youtube-drop-btn' class='fab fa-youtube yt'> <span class='nav-font'> YouTube</span></li><br/><li id='info-drop-btn'class='fas fa-info-circle'> <span class='nav-font'> Artist Info</span></li><br/><li id='calender-drop-btn' class='fas fa-calendar-alt'><span class='nav-font'> Tour Dates</span></li><br/><li id='artist-drop-btn' class='fas fa-list-alt'><span class='nav-font'> My Artists</span></li><br/><li id='search-drop-btn' class='fas fa-search'><span class='nav-font'> Search</span></li><li id='about-drop-btn' class='fas fa-question-circle'><span class='nav-font'> About</span></li></ul></nav></div>"
+  );
 
-(function () {
   var hamburger = {
     navToggle: document.querySelector(".nav-toggle"),
     nav: document.querySelector("nav"),
@@ -346,7 +393,5 @@ $(document).ready(function () {
   hamburger.navToggle.addEventListener("click", function (e) {
     hamburger.doToggle(e);
   });
-  hamburger.nav.addEventListener("click", function (e) {
-    hamburger.doToggle(e);
-  });
-});
+  // hamburger.nav.addEventListener('click', function(e) { hamburger.doToggle(e); });
+}
