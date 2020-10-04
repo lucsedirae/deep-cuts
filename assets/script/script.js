@@ -116,7 +116,8 @@ $(document).ready(function () {
       $(".main-content").attr("style", "margin-top: 16rem !important");
       populateMenu(artistObj);
       activateListeners();
-
+      
+      //moved the array push logic up here so it will grab the accurate artist name that is searched for 
       artistHistoryCache = artistHistory;
       //validation to ensure there are no duplicates in artistHistory array
       if (artistHistoryCache.indexOf(artistObj.artist) === -1) {
