@@ -30,17 +30,17 @@ $(document).ready(function () {
 
   //populates main-content with a scrollable history list of previously searched artists
   function populateMainHistory() {
-    $(".main-content").empty().hide().fadeIn(800);
-    $(".main-content").attr("style", "margin-top: 12rem !important");
+    $("#main-content").empty();
+    $("#main-content").attr("style", "margin-top: 10rem !important");
     //Pass in "My Artists" as header for History Page : TK 10/1
     /* populateMenu(); */
-    $(".main-content").prepend(
+    $("#main-content").prepend(
       "<h1>My Artists</h1>",
       "<i class='fas fa-home home-btn'></i>",
       "<p>This is your artist log.  Every artist that you search for will be saved to this page.  Click on the artist to view their information or delete the artist from the log by clicking the trash can icon.</p>"
     );
     activateListeners();
-    $(".main-content").append(
+    $("#main-content").append(
       "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>"
     );
     appendArtist();
@@ -92,8 +92,8 @@ $(document).ready(function () {
   // });
 
   function populateMainAbout() {
-    $(".main-content").empty();
-    $(".main-content").prepend(
+    $("#main-content").empty();
+    $("#main-content").prepend(
       "<h1>About Us</h1>",
       "<i class='fas fa-home home-btn'></i>",
       "<hr><div class='row'><div class='col s2'></div><div class='col s8'><h1>pitch</h1><br><br><p>Pitch is an app that allows music enthusiasts to instantly research an artist and begin to explore their catalog.</p></div></div>",
@@ -127,8 +127,10 @@ $(document).ready(function () {
         origin: resArt["begin-area"].name + "," + " " + resArt.area.name,
       };
       //Moved these functions below the API call so I could grab the artistObj to pass into populateMenu function in order to have access to the artist name
-      $(".main-content").empty();
-      $(".main-content").attr("style", "margin-top: 8rem !important");
+
+      $("#main-content").empty();
+      $("#main-content").attr("style", "margin-top: 10rem !important");
+
       populateMenu(artistObj);
       activateListeners();
       
@@ -146,27 +148,27 @@ $(document).ready(function () {
         artistObj.activeTo = "Current";
       }
 
-      $(".main-content").append(
+      $("#main-content").append(
         "<br><div class='row'></div><div class='col s6 offset-s3' id='info-box'>Years active : " +
           artistObj.activeFrom +
           " - " +
           artistObj.activeTo +
           "</div>"
       );
-      $(".main-content").append(
+      $("#main-content").append(
         "<br><div class='row'></div><div class='col s6 offset-s3' id='info-box'>Genre : " +
           artistObj.genre +
           "</div>"
       );
-      $(".main-content").append(
+      $("#main-content").append(
         "<br><div class='row'></div><div class='col s6 offset-s3' id='info-box'>Origin : " +
           artistObj.origin +
           "</div>"
       );
-      $(".main-content").append(
+      $("#main-content").append(
         "<br><div class='row'></div><textarea class='col s6 offset-s3' id='note-box' placeholder='Write Listening Notes Here'></textarea></i>"
       );
-      $(".main-content").append(
+      $("#main-content").append(
         "<br><div class='row'></div><i class='fas fa-save fa-3x' id='note-save-btn'></i><i class='fa fa-trash fa-3x' id='note-trash-btn'>"
       );
 
@@ -197,9 +199,11 @@ $(document).ready(function () {
   //populateMainSearch() populates the search section of the site. This is the default view on load and so
   //function is called during page initialization as well as on nav click
   function populateMainSearch() {
-    $(".main-content").empty();
-    $(".main-content").attr("style", "margin-top: 14rem !important");
-    $(".main-content")
+    $("#main-content").empty();
+    $("#main-content").addClass("main-content")
+    $("#main-content").attr("style", "margin-top: 16rem !important");
+    $("#main-content")
+
       .hide()
       .append(
         "<h1 id='site-header'>pitch<span><i class='fas fa-compact-disc'></i></span></h1>",
@@ -233,11 +237,11 @@ $(document).ready(function () {
 
   //Populates main-content with upcoming tour date information
   function populateMainTour() {
-    populateMenuTour()
-    $(".main-content").empty();
+    populateMenu()
+    $("#main-content").empty();
     $("#main-content").removeClass("main-content").addClass("tour-content")
     // $(".main-content").attr("style", "width:30rem !important");
-    $(".main-content").attr("style", "height:60rem !important");
+    $("#main-content").attr("style", "height:60rem !important");
     // $(".main-content").attr("style", "overflow-y:auto !important");
     populateMenu();
     activateListeners();
@@ -293,7 +297,16 @@ $(document).ready(function () {
               tourObj.locationCity +
               "</span>"
           );
-          $(".tour-content").append(
+              $(".main-content").empty();
+208
+ 
+    $(".main-content").attr("style", "margin-top: 14rem !important");
+209
+ 
+    $(".main-content")
+210
+ 
+$(".tour-content").append(
             "<br><span>Date: " + tourObj.date + "</span>"
           );
           $(".tour-content").append(
@@ -328,16 +341,16 @@ $(document).ready(function () {
       videoId = response.items[1].id.videoId;
       console.log(response);
       console.log("videoId: " + videoId);
-      $(".main-content").empty();
+      $("#main-content").empty();
       populateMenu();
       activateListeners();
       console.log("videoId: " + videoId);
       if (videoId === undefined) {
-        $(".main-content").append(
+        $("#main-content").append(
           "<p>We apologize, no videos are returning for this artist</p>"
         );
       } else {
-        $(".main-content").append(
+        $("#main-content").append(
           "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
             videoId +
             "'></iframe>"
