@@ -129,7 +129,8 @@ $(document).ready(function () {
       //Moved these functions below the API call so I could grab the artistObj to pass into populateMenu function in order to have access to the artist name
 
       $("#main-content").empty();
-      $("#main-content").attr("style", "margin-top: 16rem !important");
+      // $("#main-content").attr("style", "margin-top: 16rem !important");
+      $("#main-content").removeClass("main-content").addClass("tour-content")
 
       populateMenu(artistObj);
       activateListeners();
