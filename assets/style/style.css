@@ -1,6 +1,10 @@
 @keyframes fadeIn {
-  from {opacity: 0.2;}
-  to {opacity: 1;}
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 html {
@@ -27,15 +31,13 @@ body {
   overflow-x: auto;
   padding: 20px;
   text-align: center;
-  
 }
 
 .trash {
   white-space: nowrap;
-  cursor: pointer; 
-  border: 0px solid #3498db; 
+  cursor: pointer;
+  border: 0px solid #3498db;
   background-color: transparent;
-  
 }
 
 .prev-search {
@@ -50,26 +52,24 @@ body {
   font-size: 15px;
 }
 
-.prev-search:hover{
+.prev-search:hover {
   background-color: #f1b667;
-  
 }
 
 #info-box {
   margin-top: 1rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: bolder !important;
   box-shadow: 0px 0px 3px 2px black;
   border-radius: 8px;
   font-size: 17px;
-
 }
 
 #note-box {
   margin-top: 1rem;
   padding: 1rem;
   height: 6rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: bolder !important;
   box-shadow: 0px 0px 3px 2px black;
   border-radius: 8px;
@@ -78,7 +78,6 @@ body {
   text-align: center;
   resize: none;
   overflow-y: scroll;
-
 }
 
 #input {
@@ -90,7 +89,6 @@ body {
   font-weight: bold;
   margin: 20px;
   border-radius: 15px;
-  
 }
 
 /*Sets default value of card class to hidden */
@@ -109,12 +107,14 @@ body {
   margin-right: 1rem;
 }
 
-.navi-btn, #note-save-btn, #note-trash-btn .fa-github-square{
+.navi-btn,
+#note-save-btn,
+#note-trash-btn .fa-github-square {
   cursor: pointer;
 }
 
-
-#note-save-btn, #note-trash-btn {
+#note-save-btn,
+#note-trash-btn {
   margin-left: 1rem;
   margin-right: 1rem;
 }
@@ -208,11 +208,9 @@ h4 {
   color: #f2a441;
 }
 
-#tour-header{
+#tour-header {
   font-size: 20px;
 }
-
-
 
 /* @media only screen and (min-height: 800px){
     .main-content{
@@ -227,7 +225,6 @@ h4 {
     }
   
 } */
-
 
 /* THIS IS FOR THE NAV */
 .nav {
@@ -249,7 +246,9 @@ h4 {
   z-index: 1;
 }
 
-.nav.expanded { left: 0; }
+.nav.expanded {
+  left: 0;
+}
 
 .nav ul {
   position: absolute;
@@ -274,9 +273,13 @@ h4 {
   z-index: 2;
 }
 
-.nav-toggle:hover { opacity: 0.8; }
+.nav-toggle:hover {
+  opacity: 0.8;
+}
 
-.nav-toggle .nav-toggle-bar,  .nav-toggle .nav-toggle-bar::after,  .nav-toggle .nav-toggle-bar::before {
+.nav-toggle .nav-toggle-bar,
+.nav-toggle .nav-toggle-bar::after,
+.nav-toggle .nav-toggle-bar::before {
   position: absolute;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -288,20 +291,29 @@ h4 {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
   background: white;
-  content: '';
+  content: "";
   height: 0.4rem;
   width: 100%;
 }
 
-.nav-toggle .nav-toggle-bar { margin-top: 0; }
+.nav-toggle .nav-toggle-bar {
+  margin-top: 0;
+}
 
-.nav-toggle .nav-toggle-bar::after { margin-top: 0.8rem; }
+.nav-toggle .nav-toggle-bar::after {
+  margin-top: 0.8rem;
+}
 
-.nav-toggle .nav-toggle-bar::before { margin-top: -0.8rem; }
+.nav-toggle .nav-toggle-bar::before {
+  margin-top: -0.8rem;
+}
 
-.nav-toggle.expanded .nav-toggle-bar { background: transparent; }
+.nav-toggle.expanded .nav-toggle-bar {
+  background: transparent;
+}
 
-.nav-toggle.expanded .nav-toggle-bar::after, .nav-toggle.expanded .nav-toggle-bar::before {
+.nav-toggle.expanded .nav-toggle-bar::after,
+.nav-toggle.expanded .nav-toggle-bar::before {
   background: white;
   margin-top: 0;
 }
