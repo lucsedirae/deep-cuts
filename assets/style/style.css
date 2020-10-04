@@ -109,10 +109,10 @@ body {
   margin-right: 1rem;
 }
 
-/* JD 9/30 Added cursor:pointer to nav-btns */
-.navi-btn, #note-save-btn, #note-trash-btn {
+.navi-btn, #note-save-btn, #note-trash-btn .fa-github-square{
   cursor: pointer;
 }
+
 
 #note-save-btn, #note-trash-btn {
   margin-left: 1rem;
