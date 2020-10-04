@@ -376,7 +376,7 @@ $(document).ready(function () {
 function populateNav() {
   $("body").prepend("<div id='dropDownMenu' class='row'></div>");
   $("#dropDownMenu").append(
-    "<div class='col s3 drop'><div class='nav-toggle'><div class='nav-toggle-bar'></div></div><nav class='nav'> <ul class='col s12' id='list'><li id='youtube-drop-btn' class='fab fa-youtube yt'> <span class='nav-font'> YouTube</span></li><br/><li id='info-drop-btn'class='fas fa-info-circle'> <span class='nav-font'> Artist Info</span></li><br/><li id='calender-drop-btn' class='fas fa-calendar-alt'><span class='nav-font'> Tour Dates</span></li><br/><li id='artist-drop-btn' class='fas fa-list-alt'><span class='nav-font'> My Artists</span></li><br/><li id='search-drop-btn' class='fas fa-search'><span class='nav-font'> Search</span></li><li id='about-drop-btn' class='fas fa-question-circle'><span class='nav-font'> About</span></li></ul></nav></div>"
+    "<div class='col s3 drop'><div class='nav-toggle'><div class='nav-toggle-bar'></div></div><nav class='nav'> <ul class='col s12' id='list'><li id='youtube-drop-btn' class='fab fa-youtube yt'> <span class='nav-font'> YouTube</span></li><br/><li id='info-drop-btn'class='fas fa-info-circle'> <span class='nav-font'> Artist Info</span></li><br/><li id='calendar-drop-btn' class='fas fa-calendar-alt'><span class='nav-font'> Tour Dates</span></li><br/><li id='artist-drop-btn' class='fas fa-list-alt'><span class='nav-font'> My Artists</span></li><br/><li id='search-drop-btn' class='fas fa-search'><span class='nav-font'> Search</span></li><li id='about-drop-btn' class='fas fa-question-circle'><span class='nav-font'> About</span></li></ul></nav></div>"
   );
 
   var hamburger = {

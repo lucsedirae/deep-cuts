@@ -246,6 +246,15 @@ h4 {
     
   }
 
+  #youtube-drop-btn:hover,
+  #info-drop-btn:hover,
+  #calendar-drop-btn:hover,
+  #artist-drop-btn:hover,
+  #search-drop-btn:hover,
+  #about-drop-btn:hover{
+    color: #f2a441;
+  }
+
 .nav {
   -webkit-transition: left 0.5s ease;
   -moz-transition: left 0.5s ease;
