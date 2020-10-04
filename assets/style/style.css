@@ -235,13 +235,32 @@ h4 {
 } */
 
 /* THIS IS FOR THE NAV */
+
+#list{
+   font-size: 20px;
+   white-space: nowrap;
+   width: 90%;
+   line-height: 4rem;
+   
+  }
+
+  .nav-font{
+    font-family: "Orbitron", sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+  }
+  #about-drop-btn{
+    line-height: 6rem;
+    
+  }
+
 .nav {
   -webkit-transition: left 0.5s ease;
   -moz-transition: left 0.5s ease;
   -ms-transition: left 0.5s ease;
   -o-transition: left 0.5s ease;
   transition: left 0.5s ease;
-  background: #f2a441;
+  background: rgba(226, 218, 210, 0.801);
   color: black;
   cursor: pointer;
   font-size: 2rem;
@@ -250,7 +269,7 @@ h4 {
   padding: 6rem 2rem 2rem 2rem;
   position: fixed;
   top: 0;
-  width: 20rem;
+  width: 17rem;
   z-index: 1;
 }
 
@@ -277,7 +296,7 @@ h4 {
   left: 2rem;
   position: fixed;
   top: 2rem;
-  width: 3.6rem;
+  width: 3rem;
   z-index: 2;
 }
 
@@ -322,7 +341,7 @@ h4 {
 
 .nav-toggle.expanded .nav-toggle-bar::after,
 .nav-toggle.expanded .nav-toggle-bar::before {
-  background: white;
+  background: black;
   margin-top: 0;
 }
 
