@@ -1,3 +1,8 @@
+@keyframes fadeIn {
+  from {opacity: 0.2;}
+  to {opacity: 1;}
+}
+
 html {
   height: 100%;
 }
@@ -7,11 +12,9 @@ body {
 
   /* background-image:linear-gradient(purple, white); */
   /* JD reduced img quality to improve load time 9/29. New version is back3.jpg. Original back.jpg still in assets */
-  background-image: url(../images/back3.jpg);
+  background: url(../images/back3.jpg);
   background-position: center;
   background-size: cover;
-  
-  
 }
 
 #history-list {
@@ -52,7 +55,6 @@ body {
   
 }
 
-
 #info-box {
   margin-top: 1rem;
   font-family: 'Roboto', sans-serif;
@@ -60,6 +62,22 @@ body {
   box-shadow: 0px 0px 3px 2px black;
   border-radius: 8px;
   font-size: 17px;
+
+}
+
+#note-box {
+  margin-top: 1rem;
+  padding: 1rem;
+  height: 6rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bolder !important;
+  box-shadow: 0px 0px 3px 2px black;
+  border-radius: 8px;
+  font-size: 17px;
+  background-color: whitesmoke;
+  text-align: center;
+  resize: none;
+  overflow-y: scroll;
 
 }
 
@@ -92,11 +110,14 @@ body {
 }
 
 /* JD 9/30 Added cursor:pointer to nav-btns */
-.navi-btn {
+.navi-btn, #note-save-btn, #note-trash-btn {
   cursor: pointer;
 }
 
-
+#note-save-btn, #note-trash-btn {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
 
 .search-btn {
   background-color: #f2a441 !important;
@@ -130,8 +151,6 @@ h4 {
   margin: 20px;
   border-radius: 6px;
 }
-
-
 
 .search-btn:hover {
   transform: scale(1.1);
