@@ -19,6 +19,8 @@ body {
   background: url(../images/back3.jpg);
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
 }
 
 #history-list {
@@ -31,6 +33,7 @@ body {
   overflow-x: auto;
   padding: 20px;
   text-align: center;
+  margin: 2rem;
 }
 
 .trash {
@@ -164,6 +167,10 @@ h4 {
   border-radius: 10px;
   /* border: 2px solid #F2A441; */
   box-shadow: 0px 0px 30px 4px #f2a441, 0px 0px 20px 4px black;
+  width: 30rem;
+  height: 50rem;
+  overflow-y: auto;
+
 }
 
 .trash {
