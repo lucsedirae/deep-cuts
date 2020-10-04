@@ -233,7 +233,7 @@ $(document).ready(function () {
 
   //Populates main-content with upcoming tour date information
   function populateMainTour() {
-    populateMenuTour()
+    populateMenu()
     $(".main-content").empty();
     $("#main-content").removeClass("main-content").addClass("tour-content")
     // $(".main-content").attr("style", "width:30rem !important");
