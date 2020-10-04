@@ -14,6 +14,8 @@ $(document).ready(function () {
   $("#search-drop-btn").on("click", populateMainSearch);
   $("#artist-drop-btn").on("click", populateMainHistory);
   $("#calender-drop-btn").on("click", populateMainTour);
+  $("#about-drop-btn").on("click", populateMainAbout);
+
 
 
   populateMainSearch(artistObj);
@@ -90,6 +92,23 @@ $(document).ready(function () {
   // localStorage.clear()
   // $("#history-list").empty
   // });
+
+
+  function populateMainAbout() {
+      $(".main-content").empty();
+      $(".main-content").prepend(
+        "<h1>About Us</h1>",
+        "<i class='fas fa-home home-btn'></i>",
+        "<hr><div class='row'><div class='col s2'></div><div class='col s8'><h1>pitch</h1><br><br><p>Pitch is an app that allows music enthusiasts to instantly research an artist and begin to explore their catalog.</p></div></div>",
+        "<hr><p>Pitch was created by:</p><br><ul><li>David Stinnett - <a href='https://github.com/serjykalstryke' class='fab fa-github-square fa-2x'></a></li><li>Mark Major - <a href='https://github.com/MarkMajorUR' class='fab fa-github-square fa-2x'></a></li><li>Tanner Kirkpatrick - <a href='https://github.com/twkirkpatrick' class='fab fa-github-square fa-2x'></a></li><li>Jon Deavers - <a href='https://github.com/lucsedirae' class='fab fa-github-square fa-2x'></a></li></ul>",
+      activateListeners());
+  }
+
+
+
+
+
+
 
   //populateMainInfo replaces search html with Info html. Also called from nav icons
   function populateMainInfo() {
@@ -363,7 +382,7 @@ $(document).ready(function () {
 function populateNav() {
   $("body").prepend("<div id='dropDownMenu' class='row'></div>");
   $("#dropDownMenu").append(
-    "<div class='col s3'><div class='nav-toggle'><div class='nav-toggle-bar'></div></div><nav class='nav'> <ul class='col s12'><li id='youtube-drop-btn' class='fab fa-youtube'> YouTube</li><br/><li id='info-drop-btn'class='fas fa-info-circle'> Artist Info</li><br/><li id='calender-drop-btn' class='fas fa-calendar-alt'> Tour Dates</li><br/><li id='artist-drop-btn' class='fas fa-list-alt'> My Artists</li><br/><li id='search-drop-btn' class='fas fa-search'> Search</li></ul></nav></div>"
+    "<div class='col s3'><div class='nav-toggle'><div class='nav-toggle-bar'></div></div><nav class='nav'> <ul class='col s12'><li id='youtube-drop-btn' class='fab fa-youtube'> YouTube</li><br/><li id='info-drop-btn'class='fas fa-info-circle'> Artist Info</li><br/><li id='calender-drop-btn' class='fas fa-calendar-alt'> Tour Dates</li><br/><li id='artist-drop-btn' class='fas fa-list-alt'> My Artists</li><br/><li id='search-drop-btn' class='fas fa-search'> Search</li><li id='about-drop-btn' class='fas fa-question-circle'>About</li></ul></nav></div>"
   );
 
   var hamburger = {
