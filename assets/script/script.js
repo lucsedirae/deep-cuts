@@ -310,7 +310,7 @@ $(".tour-content").append(
           $(".tour-content").append(
             "<br><span>Tickets: " +
               tourObj.ticketStatus +
-              "</span><br><span><a href='" +
+              "</span><br><span class='ticket-link'><a href='" +
               tourObj.ticketLink +
               "'>Buy Tickets</a></span>"
           );
