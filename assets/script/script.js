@@ -30,8 +30,8 @@ $(document).ready(function () {
 
   //populates main-content with a scrollable history list of previously searched artists
   function populateMainHistory() {
-    $(".main-content").empty();
-    $(".main-content").attr("style", "margin-top: 16rem !important");
+    $(".main-content").empty().hide().fadeIn(800);
+    $(".main-content").attr("style", "margin-top: 12rem !important");
     //Pass in "My Artists" as header for History Page : TK 10/1
     /* populateMenu(); */
     $(".main-content").prepend(
