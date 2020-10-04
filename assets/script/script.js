@@ -30,8 +30,8 @@ $(document).ready(function () {
 
   //populates main-content with a scrollable history list of previously searched artists
   function populateMainHistory() {
-    $("#main-content").empty();
-    $("#main-content").attr("style", "margin-top: 10rem !important");
+    $("#main-content").empty().hide().fadeIn(800);
+    $("#main-content").attr("style", "margin-top: 9rem !important");
     //Pass in "My Artists" as header for History Page : TK 10/1
     /* populateMenu(); */
     $("#main-content").prepend(
@@ -129,7 +129,9 @@ $(document).ready(function () {
       //Moved these functions below the API call so I could grab the artistObj to pass into populateMenu function in order to have access to the artist name
 
       $("#main-content").empty();
-      $("#main-content").attr("style", "margin-top: 10rem !important");
+      // $("#main-content").attr("style", "margin-top: 16rem !important");
+      $("#main-content").removeClass("main-content").addClass("tour-content")
+      $("#main-content").attr("style", "margin-top: 9rem !important");
 
       populateMenu(artistObj);
       activateListeners();
@@ -200,7 +202,6 @@ $(document).ready(function () {
   //function is called during page initialization as well as on nav click
   function populateMainSearch() {
     $("#main-content").empty();
-    
     $("#main-content").addClass("main-content")
     $("#main-content").attr("style", "margin-top: 16rem !important");
     $("#main-content")
@@ -243,6 +244,7 @@ $(document).ready(function () {
     $("#main-content").removeClass("main-content").addClass("tour-content")
     // $(".main-content").attr("style", "width:30rem !important");
     $("#main-content").attr("style", "height:60rem !important");
+    
     // $(".main-content").attr("style", "overflow-y:auto !important");
     populateMenu();
     activateListeners();
@@ -263,7 +265,7 @@ $(document).ready(function () {
     }).then(function (response) {
       console.log(response);
 
-      $(".tour-content").attr("style", "margin-top: 5rem !important");
+      $(".tour-content").attr("style", "margin-top: 9rem !important");
 
       $(".tour-content").append(
         "<br><h4 id='tour-header'>Upcoming Performances</h2><br><div id='artist-tour-pic'></div>",
@@ -299,14 +301,9 @@ $(document).ready(function () {
               "</span>"
           );
               $(".main-content").empty();
-208
- 
-    $(".main-content").attr("style", "margin-top: 14rem !important");
-209
- 
-    $(".main-content")
-210
- 
+
+
+ 
 $(".tour-content").append(
             "<br><span>Date: " + tourObj.date + "</span>"
           );
