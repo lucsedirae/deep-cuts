@@ -186,6 +186,7 @@ $(document).ready(function () {
   //function is called during page initialization as well as on nav click
   function populateMainSearch() {
     $("#main-content").empty();
+    $("#main-content").removeClass("tour-content");
     $("#main-content").addClass("main-content");
     $("#main-content").attr("style", "margin-top: 16rem !important");
     $("#main-content")
@@ -255,7 +256,7 @@ $(document).ready(function () {
         for (var i = 0; i < response.length; i++) {
           tourObj = {
             image: response[0].artist.thumb_url,
-            lineup: response[i].lineup,
+            lineup: response[i].lineup[0],
             locationVenue: response[i].venue.name,
             locationCity: response[i].venue.location,
             date: moment(response[i].datetime).format("MM-DD-YYYY"),
@@ -268,7 +269,7 @@ $(document).ready(function () {
             "<br><hr><span><b>Lineup:</b> " + tourObj.lineup + "</span>"
           );
           $(".tour-content").append(
-            "<br><span>Location: " +
+            "<br><span><b>Location:</b> " +
               tourObj.locationVenue +
               "</span><br><span>" +
               tourObj.locationCity +
@@ -276,18 +277,11 @@ $(document).ready(function () {
           );
           $(".main-content").empty();
 
-<<<<<<< HEAD
-            
-
-
- 
-=======
->>>>>>> b2edd9f95f52ff38873071ad323cccba4adf22f0
           $(".tour-content").append(
-            "<br><span>Date: " + tourObj.date + "</span>"
+            "<br><span><b>Date:</b> " + tourObj.date + "</span>"
           );
           $(".tour-content").append(
-            "<br><span>Tickets: " +
+            "<br><span><b>Tickets:</b> " +
               tourObj.ticketStatus +
               "</span><br><span class='ticket-link'><a href='" +
               tourObj.ticketLink +

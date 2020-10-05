@@ -245,9 +245,7 @@ h4 {
     .main-content{
         margin-top: 250px;
     }
-
 }
-
 @media only screen and (max-height: 500px){
     .main-content{
         margin-top: 50px;
