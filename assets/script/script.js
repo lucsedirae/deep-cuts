@@ -297,6 +297,13 @@ $(document).ready(function () {
 
   //populates a YouTube player in the main-content space
   function populateMainYoutube() {
+    if (artistObj.artist == null) {
+      $("#main-content").append(
+        "<p>No artist was Selected</p>"
+      );
+      return;
+    }
+
     $.ajax({
       url:
         "https://www.googleapis.com/youtube/v3/search?type=video&maxResults=5&q=" +
