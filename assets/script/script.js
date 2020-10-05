@@ -8,6 +8,8 @@ var artistObj = {};
 $(document).ready(function () {
   //calls function that appends default HTML to DOM
   populateMainSearch();
+
+  //calls function that populates the dropdown menu
   populateNav();
   $("#youtube-drop-btn").on("click", populateMainYoutube);
   $("#info-drop-btn").on("click", populateMainInfo);
@@ -15,6 +17,7 @@ $(document).ready(function () {
   $("#artist-drop-btn").on("click", populateMainHistory);
   $("#calender-drop-btn").on("click", populateMainTour);
   $("#about-drop-btn").on("click", populateMainAbout);
+
 
   populateMainSearch(artistObj);
 
@@ -392,5 +395,4 @@ function populateNav() {
   hamburger.navToggle.addEventListener("click", function (e) {
     hamburger.doToggle(e);
   });
-  // hamburger.nav.addEventListener('click', function(e) { hamburger.doToggle(e); });
 }
