@@ -380,6 +380,11 @@ $(document).ready(function () {
     hamburger.navToggle.addEventListener("click", function (e) {
       hamburger.doToggle(e);
     });
+
+    $("#calendar-drop-btn").click(function(event) {
+      event.preventDefault();
+      populateMainTour();
+    })
   }
 
   //sets the history variables to storage on call
