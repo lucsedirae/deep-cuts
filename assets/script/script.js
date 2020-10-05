@@ -63,12 +63,11 @@ $(document).ready(function () {
   function populateMainAbout() {
     $("#main-content").empty().hide().fadeIn(800);
     $("#main-content").removeClass("tour-content").addClass("main-content");
-    $("#main-content").attr("style", "margin-top: 4rem !important");
+    $("#main-content").attr("style", "margin-top: 8rem !important");
     $("#main-content").prepend(
       "<h1>About Us</h1>",
-      "<i class='fas fa-home home-btn'></i>",
-      "<hr><div class='row'><div class='col s2'></div><div class='col s8'><h1>pitch</h1><br><br><p>Pitch is an app that allows music enthusiasts to instantly research an artist and begin to explore their catalog.</p></div></div>",
-      "<hr><p>Pitch was created by:</p><br><ul><li>David Stinnett - <a href='https://github.com/serjykalstryke' class='fab fa-github-square fa-2x'></a></li><li>Mark Major - <a href='https://github.com/MarkMajorUR' class='fab fa-github-square fa-2x'></a></li><li>Tanner Kirkpatrick - <a href='https://github.com/twkirkpatrick' class='fab fa-github-square fa-2x'></a></li><li>Jon Deavers - <a href='https://github.com/lucsedirae' class='fab fa-github-square fa-2x'></a></li></ul>"
+      "<hr><div class='row'><div class='col s2'></div><div class='col s8'><p class='about-page'>Have you ever been given a music recommendation from a friend only for it to get lost in the overwhelming abyss of today’s musical world?  As avid music listeners, we wanted a simple, concise platform to display and log our musical explorations. With Pitch, you receive accurate and up-to-date information on hundreds of artists, and are able to log them so you always have that artist readily available.  We hope Pitch helps you navigate the ever-growing world of music. </p></div></div>",
+      "<hr><p class='about-page'>Pitch was designed and built by:</p><ul><li><span class='dev-font'>David Stinnett</span><a href='https://github.com/serjykalstryke' class='fab fa-github-square fa-2x'></a></li><li><span class='dev-font'>Mark Major</span><a href='https://github.com/MarkMajorUR' class='fab fa-github-square fa-2x'></a></li><li><span class='dev-font'>Tanner Kirkpatrick</span><a href='https://github.com/twkirkpatrick' class='fab fa-github-square fa-2x'></a></li><li><span class='dev-font'>Jon Deavers</span><a href='https://github.com/lucsedirae' class='fab fa-github-square fa-2x'></a></li></ul>"
     );
     activateListeners();
   }
