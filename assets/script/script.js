@@ -383,10 +383,10 @@ $(document).ready(function () {
       hamburger.doToggle(e);
     });
 
-    $("#calendar-drop-btn").click(function(event) {
-      event.preventDefault();
-      populateMainTour();
-    })
+    // $("#calendar-drop-btn").click(function(event) {
+    //   event.preventDefault();
+    //   populateMainTour();
+    // })
   }
 
   //sets the history variables to storage on call
