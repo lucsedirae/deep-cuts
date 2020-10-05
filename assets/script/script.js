@@ -298,9 +298,11 @@ $(document).ready(function () {
   //populates a YouTube player in the main-content space
   function populateMainYoutube() {
     if (artistObj.artist == null) {
-      $("#main-content").append(
-        "<p>No artist was Selected</p>"
-      );
+      if(!$('#no-search').length) {
+        $("#main-content").append(
+          "<p id='no-search'>No artist was Selected</p>"
+        );
+      }
       return;
     }
 
