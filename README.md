@@ -1,13 +1,16 @@
 # Pitch:
 
 ## Pitch is a music app where users can research new artists via their public profile info, videos on youtube and tour dates.
-<br>
 “A deep cut usually refers to non-radio singles by an artist (which tend to be often underplayed), and older songs. Usually<br>
 fans who are really into the artist will know the tracks but not most casual listeners." -Nuhan B. Abid, thedailystar.net<br>
 <br>
 <br>
 Pitch was created by music fans, for music fans. Whether you want to check out a new artist or follow one of your favorites,<br>
 Pitch has compiled all the information you need in one place!
+<br>
+### Pitch was designed with a mobile-first philosophy.
+This means the UI is clean and intuitive. Every element is responsive and works fluidly on any device regardless<br>
+the screen size.
 <br>
 ![search screenshot](./assets/images/readme-screenshots/mobile-load.jpg)
 
