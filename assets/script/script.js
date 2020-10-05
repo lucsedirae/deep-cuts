@@ -15,7 +15,7 @@ $(document).ready(function () {
   $("#info-drop-btn").on("click", populateMainInfo);
   $("#search-drop-btn").on("click", populateMainSearch);
   $("#artist-drop-btn").on("click", populateMainHistory);
-  $("#calender-drop-btn").on("click", populateMainTour);
+  $("#calendar-drop-btn").on("click", populateMainTour);
   $("#about-drop-btn").on("click", populateMainAbout);  
 
   //calls function that appends default HTML to DOM
