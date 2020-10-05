@@ -1,4 +1,7 @@
 # Pitch:
+Deployed site:
+<br>
+(https://lucsedirae.github.io/deep-cuts/)
 
 ## Pitch is a music app where users can research new artists via their public profile info, videos on youtube and tour dates.
 “A deep cut usually refers to non-radio singles by an artist (which tend to be often underplayed), and older songs. Usually<br>
