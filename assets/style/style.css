@@ -19,6 +19,9 @@ body {
   background: url(../images/back3.jpg);
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  background-attachment: fixed;
 }
 
 #history-list {
@@ -31,6 +34,7 @@ body {
   overflow-x: auto;
   padding: 20px;
   text-align: center;
+  margin: 2rem;
 }
 
 .trash {
@@ -71,8 +75,8 @@ body {
   height: 6rem;
   font-family: "Roboto", sans-serif;
   font-weight: bolder !important;
-  box-shadow: 0px 0px 3px 2px black;
-  border-radius: 8px;
+  /* box-shadow: 0px 0px 3px 2px black; */
+  /* border-radius: 8px; */
   font-size: 17px;
   background-color: whitesmoke;
   text-align: center;
@@ -107,9 +111,13 @@ body {
   margin-right: 1rem;
 }
 
-.navi-btn,
-#note-save-btn,
-#note-trash-btn .fa-github-square {
+#note-save-btn, #note-trash-btn{
+  font-size: 2rem;
+}
+
+#note-save-btn:hover,
+#note-trash-btn:hover{
+  color: #f2a441;
   cursor: pointer;
 }
 
@@ -156,6 +164,20 @@ h4 {
   transform: scale(1.1);
 }
 
+
+.tour-content {
+  margin-top: 16rem !important;
+  color: rgb(29, 12, 12);
+  background-color: rgba(226, 218, 210, 0.801);
+  padding: 20px !important;
+  border-radius: 10px;
+  /* border: 2px solid #F2A441; */
+  box-shadow: 0px 0px 30px 4px #f2a441, 0px 0px 20px 4px black;
+  width: 30rem;
+  height: 40rem;
+  overflow-y: auto;
+}
+
 .main-content {
   margin-top: 16rem !important;
   color: rgb(29, 12, 12);
@@ -164,7 +186,13 @@ h4 {
   border-radius: 10px;
   /* border: 2px solid #F2A441; */
   box-shadow: 0px 0px 30px 4px #f2a441, 0px 0px 20px 4px black;
+  width: 30rem;
+  height: 22rem;
+  overflow-y: auto;
+
 }
+
+
 
 .trash {
   display: inline-block;
@@ -206,6 +234,7 @@ h4 {
 #tour-btn:hover {
   transform: scale(1.1);
   color: #f2a441;
+  cursor: pointer;
 }
 
 #tour-header {
@@ -227,22 +256,49 @@ h4 {
 } */
 
 /* THIS IS FOR THE NAV */
+
+#list{
+   font-size: 20px;
+   white-space: nowrap;
+   width: 90%;
+   line-height: 4rem;
+  }
+
+  .nav-font{
+    font-family: "Orbitron", sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+  }
+
+  #about-drop-btn{
+    line-height: 6rem;
+  }
+
+  #youtube-drop-btn:hover,
+  #info-drop-btn:hover,
+  #calendar-drop-btn:hover,
+  #artist-drop-btn:hover,
+  #search-drop-btn:hover,
+  #about-drop-btn:hover{
+    color: #f2a441;
+    cursor: pointer;
+  }
+
 .nav {
   -webkit-transition: left 0.5s ease;
   -moz-transition: left 0.5s ease;
   -ms-transition: left 0.5s ease;
   -o-transition: left 0.5s ease;
   transition: left 0.5s ease;
-  background: #f2a441;
+  background: rgba(226, 218, 210, 0.801);
   color: black;
-  cursor: pointer;
   font-size: 2rem;
   height: 100vh;
   left: -20rem;
   padding: 6rem 2rem 2rem 2rem;
   position: fixed;
   top: 0;
-  width: 20rem;
+  width: 17rem;
   z-index: 1;
 }
 
@@ -269,7 +325,7 @@ h4 {
   left: 2rem;
   position: fixed;
   top: 2rem;
-  width: 3.6rem;
+  width: 3rem;
   z-index: 2;
 }
 
@@ -314,7 +370,7 @@ h4 {
 
 .nav-toggle.expanded .nav-toggle-bar::after,
 .nav-toggle.expanded .nav-toggle-bar::before {
-  background: white;
+  background: black;
   margin-top: 0;
 }
 
@@ -328,4 +384,23 @@ h4 {
   -ms-transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
+}
+
+@media screen and (max-width: 800px) {
+  iframe {
+    width: 220px;
+    height: 170px;
+  }
+}
+
+@media screen and (max-width: 375px){
+  #main-content{
+    margin-top: 5rem;
+  }
+}
+
+@media only screen and (max-width: 400px){
+   #history-list{
+     width: 100%;
+   }
 }
