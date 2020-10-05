@@ -1,21 +1,24 @@
-/* var artistHistory = []; */
 var artistHistoryCache = [];
 var artistHistory = JSON.parse(localStorage.getItem("artistHistory")) || [];
 var tourObj = {};
 var artistObj = {};
+var currentArtistName = "";
+var videoId = "";
 
 //initialization function
 $(document).ready(function () {
-  //calls function that appends default HTML to DOM
-  populateMainSearch();
+  //setHistory is called to prevent history from populating with no data if it is called from drop-down
+  //before a artist is made current
+  setHistory();
   populateNav();
   $("#youtube-drop-btn").on("click", populateMainYoutube);
   $("#info-drop-btn").on("click", populateMainInfo);
   $("#search-drop-btn").on("click", populateMainSearch);
   $("#artist-drop-btn").on("click", populateMainHistory);
   $("#calender-drop-btn").on("click", populateMainTour);
-  $("#about-drop-btn").on("click", populateMainAbout);
+  $("#about-drop-btn").on("click", populateMainAbout);  
 
+  //calls function that appends default HTML to DOM
   populateMainSearch(artistObj);
 
   //when called, it sets a set of event listeners in place allowing the nav icons to fucntion
@@ -26,6 +29,46 @@ $(document).ready(function () {
     $("#history-btn").on("click", populateMainHistory);
     $("#tour-btn").on("click", populateMainTour);
     $(".home-btn").on("click", populateMainSearch);
+  }
+
+  //Saves artist to artist history array and then stores in localstorage
+  function appendArtist() {
+    for (var i = 0; i < artistHistoryCache.length; i++) {
+      $("#history-list").append(
+        "<div class='row'><li class='col s9 prev-search'>" +
+          artistHistoryCache[i] +
+          "</li>" +
+          "<span class='col s3'><button class='trash fa fa-trash' data-i=" +
+          i +
+          "><i class='' aria-hidden='true'></i></button></span></div>"
+      );
+    }
+
+    console.log(artistHistoryCache);
+    $(".trash").on("click", function () {
+      // alert("foo")
+      console.log($(this).data("i"));
+      console.log("foo");
+      artistHistoryCache.splice($(this).data("i"), 1);
+      localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache));
+      populateMainHistory();
+
+      //these can be used for a clear all button//
+      // localStorage.clear()
+      // $("#history-list").empty
+    });
+  }
+
+  //populates main-content with an about page
+  function populateMainAbout() {
+    $("#main-content").empty();
+    $("#main-content").prepend(
+      "<h1>About Us</h1>",
+      "<i class='fas fa-home home-btn'></i>",
+      "<hr><div class='row'><div class='col s2'></div><div class='col s8'><h1>pitch</h1><br><br><p>Pitch is an app that allows music enthusiasts to instantly research an artist and begin to explore their catalog.</p></div></div>",
+      "<hr><p>Pitch was created by:</p><br><ul><li>David Stinnett - <a href='https://github.com/serjykalstryke' class='fab fa-github-square fa-2x'></a></li><li>Mark Major - <a href='https://github.com/MarkMajorUR' class='fab fa-github-square fa-2x'></a></li><li>Tanner Kirkpatrick - <a href='https://github.com/twkirkpatrick' class='fab fa-github-square fa-2x'></a></li><li>Jon Deavers - <a href='https://github.com/lucsedirae' class='fab fa-github-square fa-2x'></a></li></ul>"
+    );
+    activateListeners();
   }
 
   //populates main-content with a scrollable history list of previously searched artists
@@ -41,65 +84,13 @@ $(document).ready(function () {
     );
     activateListeners();
     $("#main-content").append(
-      "<br><div class='col s4'></div><ul class='col s4' id='history-list'></ul>"
+      "<br><div class='col s3'></div><ul class='col s6' id='history-list'></ul>"
     );
     appendArtist();
     $(".prev-search").on("click", function () {
-      currentArtistName = $(this).text();
+        currentArtistName = $(this).text();
       populateMainInfo();
     });
-  }
-
-  function appendArtist() {
-    for (var i = 0; i < artistHistoryCache.length; i++) {
-      $("#history-list").append(
-        "<li class='prev-search'>" +
-          artistHistoryCache[i] +
-          "</li>" +
-          "<span><button class='trash fa fa-trash' data-i=" +
-          i +
-          "><i class='' aria-hidden='true'></i></button></span>"
-      );
-    }
-
-    console.log(artistHistoryCache);
-    $(".trash").on("click", function () {
-      // alert("foo")
-      console.log($(this).data("i"));
-      console.log("foo");
-      // var storage = JSON.parse(localStorage.getItem("artistHistory"))
-      artistHistoryCache.splice($(this).data("i"), 1);
-      localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache));
-      populateMainHistory();
-
-      //these can be used for a clear all button//
-      // localStorage.clear()
-      // $("#history-list").empty
-    });
-  }
-  // $(".trash").on("click", function () {
-  //   // alert("foo")
-  //   console.log($(this).data("i"));
-  //   console.log("foo");
-  //   // var storage = JSON.parse(localStorage.getItem("artistHistory"))
-  //   artistHistoryCache.splice($(this).data("i"), 1);
-  //   localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache));
-  //   populateMainHistory();
-
-  //these can be used for a clear all button//
-  // localStorage.clear()
-  // $("#history-list").empty
-  // });
-
-  function populateMainAbout() {
-    $("#main-content").empty();
-    $("#main-content").prepend(
-      "<h1>About Us</h1>",
-      "<i class='fas fa-home home-btn'></i>",
-      "<hr><div class='row'><div class='col s2'></div><div class='col s8'><h1>pitch</h1><br><br><p>Pitch is an app that allows music enthusiasts to instantly research an artist and begin to explore their catalog.</p></div></div>",
-      "<hr><p>Pitch was created by:</p><br><ul><li>David Stinnett - <a href='https://github.com/serjykalstryke' class='fab fa-github-square fa-2x'></a></li><li>Mark Major - <a href='https://github.com/MarkMajorUR' class='fab fa-github-square fa-2x'></a></li><li>Tanner Kirkpatrick - <a href='https://github.com/twkirkpatrick' class='fab fa-github-square fa-2x'></a></li><li>Jon Deavers - <a href='https://github.com/lucsedirae' class='fab fa-github-square fa-2x'></a></li></ul>"
-    );
-    activateListeners();
   }
 
   //populateMainInfo replaces search html with Info html. Also called from nav icons
@@ -126,24 +117,17 @@ $(document).ready(function () {
         genre: resArt.tags[0].name,
         origin: resArt["begin-area"].name + "," + " " + resArt.area.name,
       };
-      //Moved these functions below the API call so I could grab the artistObj to pass into populateMenu function in order to have access to the artist name
-
+      
+      //These listeners must be below the API call so they grab the artistObj to pass into populateMenu 
+      //function in order to have access to the artist name
       $("#main-content").empty();
       // $("#main-content").attr("style", "margin-top: 16rem !important");
-      $("#main-content").removeClass("main-content").addClass("tour-content")
+      $("#main-content").removeClass("main-content").addClass("tour-content");
       $("#main-content").attr("style", "margin-top: 9rem !important");
 
       populateMenu(artistObj);
       activateListeners();
-      
-      //moved the array push logic up here so it will grab the accurate artist name that is searched for 
-      artistHistoryCache = artistHistory;
-      //validation to ensure there are no duplicates in artistHistory array
-      if (artistHistoryCache.indexOf(artistObj.artist) === -1) {
-        artistHistoryCache.push(artistObj.artist);
-        console.log(artistHistoryCache);
-        storeArtist();
-      }
+      setHistory();
 
       //conditional for artists that are still active
       if (resArt["life-span"].end === undefined) {
@@ -202,10 +186,9 @@ $(document).ready(function () {
   //function is called during page initialization as well as on nav click
   function populateMainSearch() {
     $("#main-content").empty();
-    $("#main-content").addClass("main-content")
+    $("#main-content").addClass("main-content");
     $("#main-content").attr("style", "margin-top: 16rem !important");
     $("#main-content")
-
       .hide()
       .append(
         "<h1 id='site-header'>pitch<span><i class='fas fa-compact-disc'></i></span></h1>",
@@ -224,14 +207,6 @@ $(document).ready(function () {
         return;
       }
 
-      /* artistHistoryCache = artistHistory;
-      //validation to ensure there are no duplicates in artistHistory array
-      if (artistHistoryCache.indexOf(artistObj.artist) === -1) {
-        artistHistoryCache.push(artistObj.artist);
-        console.log(artistHistoryCache);
-        storeArtist();
-      } */
-
       populateMainInfo();
       $("#input").val("");
     });
@@ -239,12 +214,12 @@ $(document).ready(function () {
 
   //Populates main-content with upcoming tour date information
   function populateMainTour() {
-    populateMenu()
+    populateMenu();
     $("#main-content").empty();
-    $("#main-content").removeClass("main-content").addClass("tour-content")
+    $("#main-content").removeClass("main-content").addClass("tour-content");
     // $(".main-content").attr("style", "width:30rem !important");
     $("#main-content").attr("style", "height:60rem !important");
-    
+
     // $(".main-content").attr("style", "overflow-y:auto !important");
     populateMenu();
     activateListeners();
@@ -272,7 +247,6 @@ $(document).ready(function () {
         $("#artist-tour-pic").empty()
       );
       if (response.length < 1) {
-
         $(".tour-content").append(
           "<br><span>Sorry, no performances currently scheduled.</span>"
         );
@@ -300,12 +274,15 @@ $(document).ready(function () {
               tourObj.locationCity +
               "</span>"
           );
-              $(".main-content").empty();
+          $(".main-content").empty();
 
+<<<<<<< HEAD
             
 
 
  
+=======
+>>>>>>> b2edd9f95f52ff38873071ad323cccba4adf22f0
           $(".tour-content").append(
             "<br><span>Date: " + tourObj.date + "</span>"
           );
@@ -336,7 +313,6 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (response) {
       console.log(response);
-      //JD 9/29
       //retrieves video id from response obj
       videoId = response.items[1].id.videoId;
       console.log(response);
@@ -357,15 +333,6 @@ $(document).ready(function () {
         );
       }
     });
-    // $(".main-content").empty();
-    // populateMenu();
-    // activateListeners();
-    // console.log("videoId: " + videoId);
-    // $(".main-content").append(
-    //   "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
-    //   videoId +
-    //   "'></iframe>"
-    // );
     // TK 9/30 -- added a style attribute to knock the .main-content DIV up a bit
     $(".main-content").attr("style", "margin-top: 9rem !important");
   }
@@ -384,32 +351,51 @@ $(document).ready(function () {
       )
       .fadeIn(800);
   }
+
+  // THIS IS JAVACRIPT FOR THE NAV MENTI
+  function populateNav() {
+    $("body").prepend("<div id='dropDownMenu' class='row'></div>");
+    $("#dropDownMenu").append(
+      "<div class='col s3 drop'><div class='nav-toggle'><div class='nav-toggle-bar'></div></div><nav class='nav'> <ul class='col s12' id='list'><li id='youtube-drop-btn' class='fab fa-youtube yt'> <span class='nav-font'> YouTube</span></li><br/><li id='info-drop-btn'class='fas fa-info-circle'> <span class='nav-font'> Artist Info</span></li><br/><li id='calendar-drop-btn' class='fas fa-calendar-alt'><span class='nav-font'> Tour Dates</span></li><br/><li id='artist-drop-btn' class='fas fa-list-alt'><span class='nav-font'> My Artists</span></li><br/><li id='search-drop-btn' class='fas fa-search'><span class='nav-font'> Search</span></li><li id='about-drop-btn' class='fas fa-question-circle'><span class='nav-font'> About</span></li></ul></nav></div>"
+    );
+
+    var hamburger = {
+      navToggle: document.querySelector(".nav-toggle"),
+      nav: document.querySelector("nav"),
+
+      doToggle: function (e) {
+        e.preventDefault();
+        this.navToggle.classList.toggle("expanded");
+        this.nav.classList.toggle("expanded");
+      },
+    };
+
+    hamburger.navToggle.addEventListener("click", function (e) {
+      hamburger.doToggle(e);
+    });
+  }
+
+  //sets the history variables to storage on call
+  function setHistory(){
+    //copied 8 following lines from populate main info as a workaround until this is functionized
+    artistHistoryCache = artistHistory;
+    //validation to ensure there are no duplicates in artistHistory array
+    if (artistHistoryCache.indexOf(artistObj.artist) === -1) {
+      artistHistoryCache.push(artistObj.artist);
+      console.log(artistHistoryCache);
+      storeArtist();
+    }
+    
+    for (var j = 0; j < artistHistoryCache.length; j++) {
+      if ((artistHistoryCache[j] === undefined) || (artistHistoryCache[j] === null)) {
+        artistHistoryCache.splice(j, 1);
+      }
+    }
+    
+  }
+
   //stores artist list to local storage
   function storeArtist() {
     localStorage.setItem("artistHistory", JSON.stringify(artistHistoryCache));
   }
 });
-
-// THIS IS JAVACRIPT FOR THE NAV MENTI
-function populateNav() {
-  $("body").prepend("<div id='dropDownMenu' class='row'></div>");
-  $("#dropDownMenu").append(
-    "<div class='col s3 drop'><div class='nav-toggle'><div class='nav-toggle-bar'></div></div><nav class='nav'> <ul class='col s12' id='list'><li id='youtube-drop-btn' class='fab fa-youtube yt'> <span class='nav-font'> YouTube</span></li><br/><li id='info-drop-btn'class='fas fa-info-circle'> <span class='nav-font'> Artist Info</span></li><br/><li id='calendar-drop-btn' class='fas fa-calendar-alt'><span class='nav-font'> Tour Dates</span></li><br/><li id='artist-drop-btn' class='fas fa-list-alt'><span class='nav-font'> My Artists</span></li><br/><li id='search-drop-btn' class='fas fa-search'><span class='nav-font'> Search</span></li><li id='about-drop-btn' class='fas fa-question-circle'><span class='nav-font'> About</span></li></ul></nav></div>"
-  );
-
-  var hamburger = {
-    navToggle: document.querySelector(".nav-toggle"),
-    nav: document.querySelector("nav"),
-
-    doToggle: function (e) {
-      e.preventDefault();
-      this.navToggle.classList.toggle("expanded");
-      this.nav.classList.toggle("expanded");
-    },
-  };
-
-  hamburger.navToggle.addEventListener("click", function (e) {
-    hamburger.doToggle(e);
-  });
-  // hamburger.nav.addEventListener('click', function(e) { hamburger.doToggle(e); });
-}
