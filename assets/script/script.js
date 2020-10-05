@@ -61,7 +61,9 @@ $(document).ready(function () {
 
   //populates main-content with an about page
   function populateMainAbout() {
-    $("#main-content").empty();
+    $("#main-content").empty().hide().fadeIn(800);
+    $("#main-content").removeClass("tour-content").addClass("main-content");
+    $("#main-content").attr("style", "margin-top: 4rem !important");
     $("#main-content").prepend(
       "<h1>About Us</h1>",
       "<i class='fas fa-home home-btn'></i>",
