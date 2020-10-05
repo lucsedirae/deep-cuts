@@ -17,5 +17,6 @@ Using Music Brainz Api.
  Using Bands in Town API.
  # imgtourDates
 
+### Save your favorite bands in the app to easily access them and write down any thoughts you have.
 >“A deep cut usually refers to non-radio singles by an artist (which tend to be often >underplayed), and older songs. “ Unknown
 
