@@ -7,7 +7,7 @@ Pitch was created by music fans, for music fans. Whether you want to check out a
 
 ### Pitch displays an artists top  music videos so you can experience their best sound.
  Using googles YouTube API.
-# imgYouTube
+![youtube screenshot](./assets/images/readme-screenshots/youtube.jpg)
  
  ### Learn more about an artist by checking out their info section.
 Using Music Brainz Api.
