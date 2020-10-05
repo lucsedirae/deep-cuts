@@ -15,7 +15,7 @@ $(document).ready(function () {
   $("#info-drop-btn").on("click", populateMainInfo);
   $("#search-drop-btn").on("click", populateMainSearch);
   $("#artist-drop-btn").on("click", populateMainHistory);
-  $("#calendar-drop-btn").on("click", populateMainTour);
+  $("#calender-drop-btn").on("click", populateMainTour);
   $("#about-drop-btn").on("click", populateMainAbout);  
 
   //calls function that appends default HTML to DOM
@@ -38,7 +38,7 @@ $(document).ready(function () {
         "<div class='row'><li class='col s9 prev-search'>" +
           artistHistoryCache[i] +
           "</li>" +
-          "<span class='col s3'><button class='trash fa fa-trash' data-i=" +
+          "<span class='col s3 trash-btn'><button class='trash fa fa-trash' data-i=" +
           i +
           "><i class='' aria-hidden='true'></i></button></span></div>"
       );
@@ -306,15 +306,6 @@ $(document).ready(function () {
 
   //populates a YouTube player in the main-content space
   function populateMainYoutube() {
-    if (artistObj.artist == null) {
-      if(!$('#no-search').length) {
-        $("#main-content").append(
-          "<p id='no-search'>No artist was Selected</p>"
-        );
-      }
-      return;
-    }
-
     $.ajax({
       url:
         "https://www.googleapis.com/youtube/v3/search?type=video&maxResults=5&q=" +
@@ -384,11 +375,6 @@ $(document).ready(function () {
     hamburger.navToggle.addEventListener("click", function (e) {
       hamburger.doToggle(e);
     });
-
-    // $("#calendar-drop-btn").click(function(event) {
-    //   event.preventDefault();
-    //   populateMainTour();
-    // })
   }
 
   //sets the history variables to storage on call
