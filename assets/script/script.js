@@ -281,17 +281,17 @@ $(document).ready(function () {
         for (var i = 0; i < response.length; i++) {
           tourObj = {
             image: response[0].artist.thumb_url,
-            lineup: response[i].lineup[0],
+            lineup: response[i].lineup,
             locationVenue: response[i].venue.name,
             locationCity: response[i].venue.location,
-            date: response[i].datetime,
+            date: moment(response[i].datetime).format("MM-DD-YYYY"),
             ticketStatus: response[i].offers[0].status,
             ticketLink: response[i].offers[0].url,
           };
           console.log("Link: " + tourObj.locationVenue);
 
           $(".tour-content").append(
-            "<br><hr><span>Lineup: " + tourObj.lineup + "</span>"
+            "<br><hr><span><b>Lineup:</b> " + tourObj.lineup + "</span>"
           );
           $(".tour-content").append(
             "<br><span>Location: " +
@@ -302,9 +302,11 @@ $(document).ready(function () {
           );
               $(".main-content").empty();
 
+            
+
 
  
-$(".tour-content").append(
+          $(".tour-content").append(
             "<br><span>Date: " + tourObj.date + "</span>"
           );
           $(".tour-content").append(
