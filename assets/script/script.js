@@ -7,18 +7,18 @@ var videoId = "";
 
 //initialization function
 $(document).ready(function () {
-  //calls function that appends default HTML to DOM
-  populateMainSearch();
-
-  //calls function that populates the dropdown menu
+  //setHistory is called to prevent history from populating with no data if it is called from drop-down
+  //before a artist is made current
+  setHistory();
   populateNav();
   $("#youtube-drop-btn").on("click", populateMainYoutube);
   $("#info-drop-btn").on("click", populateMainInfo);
   $("#search-drop-btn").on("click", populateMainSearch);
   $("#artist-drop-btn").on("click", populateMainHistory);
   $("#calender-drop-btn").on("click", populateMainTour);
-  $("#about-drop-btn").on("click", populateMainAbout);
+  $("#about-drop-btn").on("click", populateMainAbout);  
 
+  //calls function that appends default HTML to DOM
   populateMainSearch(artistObj);
 
   //when called, it sets a set of event listeners in place allowing the nav icons to fucntion
@@ -88,7 +88,7 @@ $(document).ready(function () {
     );
     appendArtist();
     $(".prev-search").on("click", function () {
-      currentArtistName = $(this).text();
+        currentArtistName = $(this).text();
       populateMainInfo();
     });
   }
@@ -117,8 +117,9 @@ $(document).ready(function () {
         genre: resArt.tags[0].name,
         origin: resArt["begin-area"].name + "," + " " + resArt.area.name,
       };
-      //Moved these functions below the API call so I could grab the artistObj to pass into populateMenu function in order to have access to the artist name
-
+      
+      //These listeners must be below the API call so they grab the artistObj to pass into populateMenu 
+      //function in order to have access to the artist name
       $("#main-content").empty();
       // $("#main-content").attr("style", "margin-top: 16rem !important");
       $("#main-content").removeClass("main-content").addClass("tour-content");
@@ -126,15 +127,7 @@ $(document).ready(function () {
 
       populateMenu(artistObj);
       activateListeners();
-
-      //moved the array push logic up here so it will grab the accurate artist name that is searched for
-      artistHistoryCache = artistHistory;
-      //validation to ensure there are no duplicates in artistHistory array
-      if (artistHistoryCache.indexOf(artistObj.artist) === -1) {
-        artistHistoryCache.push(artistObj.artist);
-        console.log(artistHistoryCache);
-        storeArtist();
-      }
+      setHistory();
 
       //conditional for artists that are still active
       if (resArt["life-span"].end === undefined) {
@@ -213,14 +206,6 @@ $(document).ready(function () {
       if (currentArtistName === "") {
         return;
       }
-
-      /* artistHistoryCache = artistHistory;
-      //validation to ensure there are no duplicates in artistHistory array
-      if (artistHistoryCache.indexOf(artistObj.artist) === -1) {
-        artistHistoryCache.push(artistObj.artist);
-        console.log(artistHistoryCache);
-        storeArtist();
-      } */
 
       populateMainInfo();
       $("#input").val("");
@@ -321,7 +306,6 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (response) {
       console.log(response);
-      //JD 9/29
       //retrieves video id from response obj
       videoId = response.items[1].id.videoId;
       console.log(response);
@@ -342,15 +326,6 @@ $(document).ready(function () {
         );
       }
     });
-    // $(".main-content").empty();
-    // populateMenu();
-    // activateListeners();
-    // console.log("videoId: " + videoId);
-    // $(".main-content").append(
-    //   "<br><br><iframe width='420' height='345' src='https://www.youtube.com/embed/" +
-    //   videoId +
-    //   "'></iframe>"
-    // );
     // TK 9/30 -- added a style attribute to knock the .main-content DIV up a bit
     $(".main-content").attr("style", "margin-top: 9rem !important");
   }
@@ -391,6 +366,25 @@ $(document).ready(function () {
     hamburger.navToggle.addEventListener("click", function (e) {
       hamburger.doToggle(e);
     });
+  }
+
+  //sets the history variables to storage on call
+  function setHistory(){
+    //copied 8 following lines from populate main info as a workaround until this is functionized
+    artistHistoryCache = artistHistory;
+    //validation to ensure there are no duplicates in artistHistory array
+    if (artistHistoryCache.indexOf(artistObj.artist) === -1) {
+      artistHistoryCache.push(artistObj.artist);
+      console.log(artistHistoryCache);
+      storeArtist();
+    }
+    
+    for (var j = 0; j < artistHistoryCache.length; j++) {
+      if ((artistHistoryCache[j] === undefined) || (artistHistoryCache[j] === null)) {
+        artistHistoryCache.splice(j, 1);
+      }
+    }
+    
   }
 
   //stores artist list to local storage
