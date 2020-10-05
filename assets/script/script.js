@@ -202,6 +202,11 @@ $(document).ready(function () {
     $(".search-btn").on("click", function (event) {
       event.preventDefault();
 
+      // unhide navbar
+      if ($('.nav-toggle').hasClass('hide')) {
+        $('.nav-toggle').removeClass('hide');
+      }
+
       //var currentArtistName stores user input
       //NOTE: this var is declared and initially defined in the api-calls.js
       currentArtistName = $(".searchTerm").val();
@@ -299,6 +304,15 @@ $(document).ready(function () {
 
   //populates a YouTube player in the main-content space
   function populateMainYoutube() {
+    if (artistObj.artist == null) {
+      if(!$('#no-search').length) {
+        $("#main-content").append(
+          "<p id='no-search'>No artist was Selected</p>"
+        );
+      }
+      return;
+    }
+
     $.ajax({
       url:
         "https://www.googleapis.com/youtube/v3/search?type=video&maxResults=5&q=" +
@@ -351,7 +365,7 @@ $(document).ready(function () {
   function populateNav() {
     $("body").prepend("<div id='dropDownMenu' class='row'></div>");
     $("#dropDownMenu").append(
-      "<div class='col s3 drop'><div class='nav-toggle'><div class='nav-toggle-bar'></div></div><nav class='nav'> <ul class='col s12' id='list'><li id='youtube-drop-btn' class='fab fa-youtube yt'> <span class='nav-font'> YouTube</span></li><br/><li id='info-drop-btn'class='fas fa-info-circle'> <span class='nav-font'> Artist Info</span></li><br/><li id='calendar-drop-btn' class='fas fa-calendar-alt'><span class='nav-font'> Tour Dates</span></li><br/><li id='artist-drop-btn' class='fas fa-list-alt'><span class='nav-font'> My Artists</span></li><br/><li id='search-drop-btn' class='fas fa-search'><span class='nav-font'> Search</span></li><li id='about-drop-btn' class='fas fa-question-circle'><span class='nav-font'> About</span></li></ul></nav></div>"
+      "<div class='col s3 drop'><div class='nav-toggle hide'><div class='nav-toggle-bar'></div></div><nav class='nav'> <ul class='col s12' id='list'><li id='youtube-drop-btn' class='fab fa-youtube yt'> <span class='nav-font'> YouTube</span></li><br/><li id='info-drop-btn'class='fas fa-info-circle'> <span class='nav-font'> Artist Info</span></li><br/><li id='calendar-drop-btn' class='fas fa-calendar-alt'><span class='nav-font'> Tour Dates</span></li><br/><li id='artist-drop-btn' class='fas fa-list-alt'><span class='nav-font'> My Artists</span></li><br/><li id='search-drop-btn' class='fas fa-search'><span class='nav-font'> Search</span></li><li id='about-drop-btn' class='fas fa-question-circle'><span class='nav-font'> About</span></li></ul></nav></div>"
     );
 
     var hamburger = {
@@ -368,6 +382,11 @@ $(document).ready(function () {
     hamburger.navToggle.addEventListener("click", function (e) {
       hamburger.doToggle(e);
     });
+
+    $("#calendar-drop-btn").click(function(event) {
+      event.preventDefault();
+      populateMainTour();
+    })
   }
 
   //sets the history variables to storage on call
