@@ -15,7 +15,7 @@ $(document).ready(function () {
   $("#info-drop-btn").on("click", populateMainInfo);
   $("#search-drop-btn").on("click", populateMainSearch);
   $("#artist-drop-btn").on("click", populateMainHistory);
-  $("#calender-drop-btn").on("click", populateMainTour);
+  $("#calendar-drop-btn").on("click", populateMainTour);
   $("#about-drop-btn").on("click", populateMainAbout);  
 
   //calls function that appends default HTML to DOM
@@ -61,12 +61,13 @@ $(document).ready(function () {
 
   //populates main-content with an about page
   function populateMainAbout() {
-    $("#main-content").empty();
+    $("#main-content").empty().hide().fadeIn(800);
+    $("#main-content").removeClass("tour-content").addClass("main-content");
+    $("#main-content").attr("style", "margin-top: 8rem !important");
     $("#main-content").prepend(
       "<h1>About Us</h1>",
-      "<i class='fas fa-home home-btn'></i>",
-      "<hr><div class='row'><div class='col s2'></div><div class='col s8'><h1>pitch</h1><br><br><p>Pitch is an app that allows music enthusiasts to instantly research an artist and begin to explore their catalog.</p></div></div>",
-      "<hr><p>Pitch was created by:</p><br><ul><li>David Stinnett - <a href='https://github.com/serjykalstryke' class='fab fa-github-square fa-2x'></a></li><li>Mark Major - <a href='https://github.com/MarkMajorUR' class='fab fa-github-square fa-2x'></a></li><li>Tanner Kirkpatrick - <a href='https://github.com/twkirkpatrick' class='fab fa-github-square fa-2x'></a></li><li>Jon Deavers - <a href='https://github.com/lucsedirae' class='fab fa-github-square fa-2x'></a></li></ul>"
+      "<hr><div class='row'><div class='col s2'></div><div class='col s8'><p class='about-page'>Have you ever been given a music recommendation from a friend only for it to get lost in the overwhelming abyss of today’s musical world?  As avid music listeners, we wanted a simple, concise platform to display and log our musical explorations. With Pitch, you receive accurate and up-to-date information on hundreds of artists, and are able to log them so you always have that artist readily available.  We hope Pitch helps you navigate the ever-growing world of music. </p></div></div>",
+      "<hr><p class='about-page'>Pitch was designed and built by:</p><ul><li><span class='dev-font'>David Stinnett</span><a href='https://github.com/serjykalstryke' class='fab fa-github-square fa-2x'></a></li><li><span class='dev-font'>Mark Major</span><a href='https://github.com/MarkMajorUR' class='fab fa-github-square fa-2x'></a></li><li><span class='dev-font'>Tanner Kirkpatrick</span><a href='https://github.com/twkirkpatrick' class='fab fa-github-square fa-2x'></a></li><li><span class='dev-font'>Jon Deavers</span><a href='https://github.com/lucsedirae' class='fab fa-github-square fa-2x'></a></li></ul>"
     );
     activateListeners();
   }
@@ -186,6 +187,7 @@ $(document).ready(function () {
   //function is called during page initialization as well as on nav click
   function populateMainSearch() {
     $("#main-content").empty();
+    $("#main-content").removeClass("tour-content");
     $("#main-content").addClass("main-content");
     $("#main-content").attr("style", "margin-top: 16rem !important");
     $("#main-content")
@@ -258,17 +260,17 @@ $(document).ready(function () {
             lineup: response[i].lineup[0],
             locationVenue: response[i].venue.name,
             locationCity: response[i].venue.location,
-            date: response[i].datetime,
+            date: moment(response[i].datetime).format("MM-DD-YYYY"),
             ticketStatus: response[i].offers[0].status,
             ticketLink: response[i].offers[0].url,
           };
           console.log("Link: " + tourObj.locationVenue);
 
           $(".tour-content").append(
-            "<br><hr><span>Lineup: " + tourObj.lineup + "</span>"
+            "<br><hr><span><b>Lineup:</b> " + tourObj.lineup + "</span>"
           );
           $(".tour-content").append(
-            "<br><span>Location: " +
+            "<br><span><b>Location:</b> " +
               tourObj.locationVenue +
               "</span><br><span>" +
               tourObj.locationCity +
@@ -277,10 +279,10 @@ $(document).ready(function () {
           $(".main-content").empty();
 
           $(".tour-content").append(
-            "<br><span>Date: " + tourObj.date + "</span>"
+            "<br><span><b>Date:</b> " + tourObj.date + "</span>"
           );
           $(".tour-content").append(
-            "<br><span>Tickets: " +
+            "<br><span><b>Tickets:</b> " +
               tourObj.ticketStatus +
               "</span><br><span class='ticket-link'><a href='" +
               tourObj.ticketLink +
