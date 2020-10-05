@@ -1,6 +1,6 @@
 # Pitch:
 
-## Pitch is a music app where users are introduced to new artists via their top songs on youtube, background info, and tour dates.
+## Pitch is a music app where users can research new artists via their public profile info, videos on youtube and tour dates.
 <br>
 “A deep cut usually refers to non-radio singles by an artist (which tend to be often underplayed), and older songs. Usually<br>
 fans who are really into the artist will know the tracks but not most casual listeners." -Nuhan B. Abid, thedailystar.net<br>
@@ -8,6 +8,8 @@ fans who are really into the artist will know the tracks but not most casual lis
 <br>
 Pitch was created by music fans, for music fans. Whether you want to check out a new artist or follow one of your favorites,<br>
 Pitch has compiled all the information you need in one place!
+<br>
+![search screenshot](./assets/images/readme-screenshots/mobile-load.jpg)
 
 ### Pitch displays an artist's music video so you can sample their sound.
  Using Googles YouTube API the developers of Pitch are able to provide a sample of the artist's online presence.<br>
@@ -25,7 +27,7 @@ These notes are stored locally and are recalled when that artist's info page is 
 <br>
 ![artist info screenshot](./assets/images/readme-screenshots/info.jpg)
 
- ### Want to see a band live Pitch collects tour dates from artists around the world. 
+ ### Want to see a band live? Pitch collects tour dates from artists around the world. 
  Using BandsInTown API Pitch will search for any upcoming performances scheduled for the artist and display them with<br>
  venue information, location, date and links to buy tickets.
  <br>
