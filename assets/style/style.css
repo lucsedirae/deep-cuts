@@ -60,7 +60,8 @@ body {
   border: 1px solid black;
   margin-bottom: 10px;
   font-family: "Orbitron", sans-serif;
-  font-size: 15px;
+  font-size: 1rem;
+  word-wrap: normal;
 }
 
 .prev-search:hover {

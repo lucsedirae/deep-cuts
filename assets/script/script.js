@@ -16,7 +16,7 @@ $(document).ready(function () {
   $("#search-drop-btn").on("click", populateMainSearch);
   $("#artist-drop-btn").on("click", populateMainHistory);
   $("#calendar-drop-btn").on("click", populateMainTour);
-  $("#about-drop-btn").on("click", populateMainAbout);  
+  $("#about-drop-btn").on("click", populateMainAbout);
 
   //calls function that appends default HTML to DOM
   populateMainSearch(artistObj);
@@ -89,7 +89,7 @@ $(document).ready(function () {
     );
     appendArtist();
     $(".prev-search").on("click", function () {
-        currentArtistName = $(this).text();
+      currentArtistName = $(this).text();
       populateMainInfo();
     });
   }
@@ -118,8 +118,8 @@ $(document).ready(function () {
         genre: resArt.tags[0].name,
         origin: resArt["begin-area"].name + "," + " " + resArt.area.name,
       };
-      
-      //These listeners must be below the API call so they grab the artistObj to pass into populateMenu 
+
+      //These listeners must be below the API call so they grab the artistObj to pass into populateMenu
       //function in order to have access to the artist name
       $("#main-content").empty();
       // $("#main-content").attr("style", "margin-top: 16rem !important");
@@ -212,13 +212,11 @@ $(document).ready(function () {
       populateMainInfo();
       $("#input").val("");
 
-      
-
       // unhide navbar items after search
-      if (!(currentArtistName == '')) {
-        $('#youtube-drop-btn').removeClass('hide');
-        $('#info-drop-btn').removeClass('hide');
-        $('#calendar-drop-btn').removeClass('hide');
+      if (!(currentArtistName == "")) {
+        $("#youtube-drop-btn").removeClass("hide");
+        $("#info-drop-btn").removeClass("hide");
+        $("#calendar-drop-btn").removeClass("hide");
       }
     });
   }
@@ -309,7 +307,7 @@ $(document).ready(function () {
   //populates a YouTube player in the main-content space
   function populateMainYoutube() {
     if (artistObj.artist == null) {
-      if(!$('#no-search').length) {
+      if (!$("#no-search").length) {
         $("#main-content").append(
           "<p id='no-search'>No artist was Selected</p>"
         );
@@ -391,7 +389,7 @@ $(document).ready(function () {
   }
 
   //sets the history variables to storage on call
-  function setHistory(){
+  function setHistory() {
     //copied 8 following lines from populate main info as a workaround until this is functionized
     artistHistoryCache = artistHistory;
     //validation to ensure there are no duplicates in artistHistory array
@@ -400,13 +398,15 @@ $(document).ready(function () {
       console.log(artistHistoryCache);
       storeArtist();
     }
-    
+
     for (var j = 0; j < artistHistoryCache.length; j++) {
-      if ((artistHistoryCache[j] === undefined) || (artistHistoryCache[j] === null)) {
+      if (
+        artistHistoryCache[j] === undefined ||
+        artistHistoryCache[j] === null
+      ) {
         artistHistoryCache.splice(j, 1);
       }
     }
-    
   }
 
   //stores artist list to local storage
