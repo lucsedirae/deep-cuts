@@ -37,7 +37,7 @@ body {
   overflow-x: auto;
   padding: 20px;
   text-align: center;
-  margin: 2rem;
+  
 }
 
 .trash {
@@ -136,6 +136,7 @@ body {
   background-color: #f2a441 !important;
   text-transform: none;
   border-radius: 15px;
+  z-index: 0;
 }
 
 .record {
@@ -193,6 +194,7 @@ h4 {
   width: 30rem;
   /* height: 22rem; */
   overflow-y: auto;
+  z-index: -1;
 
 }
 
