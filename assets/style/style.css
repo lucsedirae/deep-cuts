@@ -251,20 +251,6 @@ h4 {
   font-size: 20px;
 }
 
-/* @media only screen and (min-height: 800px){
-    .main-content{
-        margin-top: 250px;
-    }
-}
-@media only screen and (max-height: 500px){
-    .main-content{
-        margin-top: 50px;
-    }
-  
-} */
-
-/* THIS IS FOR THE NAV */
-
 #list{
    font-size: 20px;
    white-space: nowrap;

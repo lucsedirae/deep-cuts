@@ -313,6 +313,8 @@ $(document).ready(function () {
       return;
     }
 
+    //YouTube API documentation: https://developers.google.com/youtube/v3
+    // YouTube API key: AIzaSyBEOnsYq-1ABWL0cFlSSxxdAJkBHAwcOO0
     $.ajax({
       url:
         "https://www.googleapis.com/youtube/v3/search?type=video&maxResults=5&q=" +
