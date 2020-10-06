@@ -60,7 +60,8 @@ body {
   border: 1px solid black;
   margin-bottom: 10px;
   font-family: "Orbitron", sans-serif;
-  font-size: 15px;
+  font-size: 1rem;
+  word-wrap: normal;
 }
 
 .prev-search:hover {
@@ -255,20 +256,6 @@ h4 {
   font-size: 20px;
 }
 
-/* @media only screen and (min-height: 800px){
-    .main-content{
-        margin-top: 250px;
-    }
-}
-@media only screen and (max-height: 500px){
-    .main-content{
-        margin-top: 50px;
-    }
-  
-} */
-
-/* THIS IS FOR THE NAV */
-
 #list{
    font-size: 20px;
    white-space: nowrap;
@@ -397,6 +384,11 @@ h4 {
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
+
+.hide {
+  display: none;
+}
+
 
 @media screen and (max-width: 800px) {
   iframe {
