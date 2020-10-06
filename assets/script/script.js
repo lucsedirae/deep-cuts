@@ -212,6 +212,8 @@ $(document).ready(function () {
       populateMainInfo();
       $("#input").val("");
 
+      
+
       // unhide navbar items after search
       if (!(currentArtistName == '')) {
         $('#youtube-drop-btn').removeClass('hide');
