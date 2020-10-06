@@ -405,13 +405,13 @@ h4 {
   }
 }
 
-@media screen and (max-width: 375px){
+@media screen and (max-width: 600px){
   #main-content{
-    margin-top: 5rem;
+    margin-top: 1rem;
   }
 }
 
-@media only screen and (max-width: 400px){
+@media only screen and (max-width: 600px){
    #history-list{
      width: 100%;
    }
